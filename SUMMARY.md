@@ -10,7 +10,7 @@
 * [Java](java/README.md)
   * [1. Get started](java/1.-get-started.md)
   * [2. Fundamentals](java/untitled.md)
-  * 3. Essential Classes
+  * [3. Essential Classes](java/3.-essential-classes/README.md)
     * [Concurrency](java/3.-essential-classes/concurrency.md)
 * [Algorithms and Data Structures](data-structure-and-algorithms/README.md)
   * [1. Fundamental](data-structure-and-algorithms/1.-fundamental/README.md)
