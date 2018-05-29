@@ -16,3 +16,13 @@ Java platform gives you the following features:
 * User Interface Toolkits: The JavaFX, Swing, and Java 2D toolkits make it possible to create sophisticated Graphical User Interfaces \(**GUIs**\).
 * Integration Libraries
 
+Java Standard Edition: [http://www.oracle.com/technetwork/java/javase/downloads/index.html](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
+
+Which Java package do I need?
+
+Software Developers: **JDK** \(Java SE Development Kit\). For Java Developers. Includes a complete **JRE** plus tools for developing, debugging, and monitoring Java applications.
+
+Administrators running applications on a server: **Server JRE**. For deploying Java applications on servers. Includes tools for JVM monitoring and tools commonly required for server applications.
+
+End user running Java on a desktop: **JRE** \(Java Runtime Environment\). Contains everything required to run Java applications on your system.
+
