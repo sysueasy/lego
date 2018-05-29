@@ -111,5 +111,41 @@ When wait is invoked, the thread releases the lock and suspends execution. At so
 
 Let's use guarded blocks to create a **Producer-Consumer** application.
 
+## Immutable Objects
 
+Immutable objects are particularly useful in concurrent applications. Maximum reliance on immutable objects is widely accepted as a sound strategy for creating simple, reliable code.
+
+## High Level Concurrency Objects
+
+### Lock Objects
+
+Lock objects work very much like the implicit locks used by synchronized code. As with implicit locks, only one thread can own a Lock object at a time. Lock objects also support a wait/notify mechanism, through their associated Condition objects.
+
+### Executors
+
+In all of the previous examples, there's a close connection between the task being done by a new thread, as defined by its Runnable object, and the thread itself, as defined by a Thread object. This works well for small applications, but in large-scale applications, it makes sense to separate thread management and creation from the rest of the application. Objects that encapsulate these functions are known as executors.
+
+Most of the executor implementations in java.util.concurrent use **thread pools**, which consist of **worker threads**. This kind of thread exists separately from the Runnable and Callable tasks it executes and is often used to execute multiple tasks. Using worker threads minimizes the overhead due to thread creation. Thread objects use a significant amount of memory, and in a large-scale application, allocating and deallocating many thread objects creates a significant memory management overhead.
+
+One common type of thread pool is the **fixed thread pool**. An important advantage of the fixed thread pool is that applications using it degrade gracefully. To understand this, consider a web server application where each HTTP request is handled by a separate thread. If the application simply creates a new thread for every new HTTP request, and the system receives more requests than it can handle immediately, the application will suddenly stop responding to all requests when the overhead of all those threads exceed the capacity of the system.
+
+The **fork/join** framework is an implementation of the _ExecutorService_ interface that helps you take advantage of multiple processors.
+
+### Concurrent Collections
+
+**BlockingQueue** defines a first-in-first-out data structure that blocks or times out when you attempt to add to a full queue, or retrieve from an empty queue.
+
+ConcurrentMap is a subinterface of java.util.Map that defines useful atomic operations. Making these operations atomic helps avoid synchronization. The standard general-purpose implementation of ConcurrentMap is **ConcurrentHashMap**, which is a concurrent analog of **HashMap**.
+
+ConcurrentNavigableMap is a subinterface of ConcurrentMap that supports approximate matches. The standard general-purpose implementation of ConcurrentNavigableMap is **ConcurrentSkipListMap**, which is a concurrent analog of **TreeMap**.
+
+All of these collections help avoid Memory Consistency Errors by defining a happens-before relationship between an operation that adds an object to the collection with subsequent operations that access or remove that object.
+
+### Atomic Variables
+
+The [java.util.concurrent.atomic](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/atomic/package-summary.html) package defines classes that support atomic operations on single variables.
+
+### Concurrent Random Numbers
+
+In JDK 7, java.util.concurrent includes a convenience class, **ThreadLocalRandom**, for applications that expect to use random numbers from multiple threads or ForkJoinTasks.
 

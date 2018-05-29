@@ -12,6 +12,7 @@
   * [2. Fundamentals](java/untitled.md)
   * [3. Essential Classes](java/3.-essential-classes/README.md)
     * [Concurrency](java/3.-essential-classes/concurrency.md)
+    * [Regular Expressions](java/3.-essential-classes/regular-expressions.md)
 * [Algorithms and Data Structures](data-structure-and-algorithms/README.md)
   * [1. Fundamental](data-structure-and-algorithms/1.-fundamental/README.md)
     * [1.1 Basic Programming Model](data-structure-and-algorithms/1.-fundamental/1.1-basic-programming-model.md)
