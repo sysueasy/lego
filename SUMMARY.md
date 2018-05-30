@@ -37,7 +37,7 @@
 * Database
 * iOS Development
   * Objective-C
-  * Swift notes
+  * [Swift notes](ios-development/swift-notes.md)
   * [User Interface](ios-development/user-interface/README.md)
     * [UIScrollView](ios-development/user-interface/uiscrollview.md)
   * [App Search Programming Guide](ios-development/app-search/README.md)
