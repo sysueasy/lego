@@ -45,5 +45,6 @@
   * Local and Remote Notification
   * [J2OBJC](ios-development/j2objc.md)
 * [Crytography](crytography.md)
-* [Profile](profile.md)
+* [Payment](payment/README.md)
+  * [NFC](payment/nfc.md)
 
