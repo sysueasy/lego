@@ -59,7 +59,15 @@ In addition, the NFC Forum announced the initial set of **four tag formats** tha
 
 With the iOS 11 release, Apple took NFC beyond just payments by allowing the iPhone to scan NFC tags. However, there were a number of restrictions. Firstly, an App was required. There was no native NFC tag scanning. Secondly, the App needed to be open. Thirdly, the App **only had access to the NDEF data space on the chip**. In simple terms that means that the App could only read the main memory space on the chip and not access more advanced features such as counters or security settings. Additionally, Apps **could not write** to the tags, they could only read.
 
+## Felica
 
+[https://www.sony.net/Products/felica/about/scheme.html](https://www.sony.net/Products/felica/about/scheme.html)
 
+FeliCa is certified by ISO/IEC 15408 EAL4, which assures the security and reliability of the FeliCa system. 
 
+The transaction process \(including secure encryption\) between the reader/writer and the IC card is completed within 0.1 second:
+
+1. Card detection
+2. Mutual Authentication
+3. Data read/write
 
