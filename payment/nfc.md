@@ -55,3 +55,11 @@ In addition, the NFC Forum announced the initial set of **four tag formats** tha
 
   106kbit/s and 424kbit/s.
 
+## NFC: in iOS 11
+
+With the iOS 11 release, Apple took NFC beyond just payments by allowing the iPhone to scan NFC tags. However, there were a number of restrictions. Firstly, an App was required. There was no native NFC tag scanning. Secondly, the App needed to be open. Thirdly, the App **only had access to the NDEF data space on the chip**. In simple terms that means that the App could only read the main memory space on the chip and not access more advanced features such as counters or security settings. Additionally, Apps **could not write** to the tags, they could only read.
+
+
+
+
+
