@@ -46,7 +46,7 @@ In addition, the NFC Forum announced the initial set of **four tag formats** tha
 
 * Type 1 is based on ISO 14443 A and is currently available exclusively from Innovision Research & Technology \(TopazTM\). It has a 96-byte memory capacity.
 * Type 2 is also based on ISO 14443 A and is currently exclusively available from Philips \(MIFARE UltraLight\). It has half the memory capacity of Type 1 tags.
-* Type 3 is based on **FeliCa** and is currently exclusively available from **Sony**. It has a larger memory \(currently **2kbyte**\) and operates at a higher data rate \(**212kbit/s**\).
+* Type 3 is based on **FeliCa** and is currently exclusively available from **Sony**. It has a larger memory \(currently 2kbyte\) and operates at a higher data rate \(212kbit/s\).
 * Type 4 is fully compatible with ISO 14443A/B and is available from a number of
 
   manufacturers, including Philips \(typical product example is MIFARE DESFire\).
