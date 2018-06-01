@@ -1,6 +1,4 @@
-# 2. Fundamentals
-
-## Object-oriented Programming
+# 2. Object-oriented Programming
 
 Real-world objects share two characteristics: They all have **state** and **behavior**.
 
