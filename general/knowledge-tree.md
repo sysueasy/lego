@@ -10,7 +10,7 @@
 专业必修课类：
 
 * Software Engineering
-* Programming in High Level Languages
+* [Programming in High Level Languages](../java/)
 * [Data Structures and Algorithms](../data-structure-and-algorithms/)
 * Operating Systems
 * [Database Systems](../database.md)
