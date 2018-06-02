@@ -2,10 +2,24 @@
 
 * General
 * [General](general/README.md)
-  * [Discussion](general/discussion.md)
   * [Version Number](general/version-number.md)
   * [Open Source License](general/open-source-license.md)
   * [2018 Stackoverflow Insights](general/2018.md)
+  * [Crytography](general/crytography.md)
+  * Industry News
+    * [NFC](general/payment/nfc.md)
+* [Apple Inc](ios-development/README.md)
+  * Objective-C
+  * [Swift](ios-development/swift-notes.md)
+  * [J2OBJC](ios-development/j2objc.md)
+  * iOS Application
+    * Local and Remote Notification
+    * [App Search Programming Guide](ios-development/ios-application/app-search/README.md)
+      * [Support Universal Links](ios-development/ios-application/app-search/support-universal-links.md)
+    * [User Interface](ios-development/ios-application/user-interface/README.md)
+      * [UIScrollView](ios-development/ios-application/user-interface/uiscrollview.md)
+    * [Core Data](ios-development/ios-application/core-data.md)
+* Google LLC
 * [Java](java/README.md)
   * [1. Fundamentals](java/1.-get-started.md)
   * [2. Object-oriented Programming](java/untitled.md)
@@ -37,20 +51,5 @@
 * Computer Network
 * Software Engineering
   * [SDLC](sdlc/sdlc.md)
-  * Best Practices
-* [Apple Inc](ios-development/README.md)
-  * Objective-C
-  * [Swift notes](ios-development/swift-notes.md)
-  * iOS Application
-    * Local and Remote Notification
-    * [App Search Programming Guide](ios-development/ios-application/app-search/README.md)
-      * [Support Universal Links](ios-development/ios-application/app-search/support-universal-links.md)
-    * [User Interface](ios-development/ios-application/user-interface/README.md)
-      * [UIScrollView](ios-development/ios-application/user-interface/uiscrollview.md)
-    * [Core Data](ios-development/ios-application/core-data.md)
-  * [J2OBJC](ios-development/j2objc.md)
-* [Crytography](crytography.md)
-* Payment
-  * [NFC](payment/nfc.md)
 * Project Management
 

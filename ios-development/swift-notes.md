@@ -1,4 +1,4 @@
-# Swift notes
+# Swift
 
 18 years before today:
 
