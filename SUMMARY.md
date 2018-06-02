@@ -48,8 +48,8 @@
     * [4.1 Undirected Graphs](data-structure-and-algorithms/4.-graphs/4.1-undirected-graphs.md)
   * [5. String](data-structure-and-algorithms/5.-string/README.md)
     * [5.3 Substring Search](data-structure-and-algorithms/5.-string/5.3-substring-search.md)
-* Database Systems
-* Computer Networks
+* [Database Systems](database.md)
+* [Computer Networks](untitled.md)
 * Software Engineering
   * [SDLC](sdlc/sdlc.md)
 * System Analysis and Design
