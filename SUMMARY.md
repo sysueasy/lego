@@ -38,13 +38,14 @@
 * [Apple Inc](ios-development/README.md)
   * Objective-C
   * [Swift notes](ios-development/swift-notes.md)
-  * [User Interface](ios-development/user-interface/README.md)
-    * [UIScrollView](ios-development/user-interface/uiscrollview.md)
-  * [App Search Programming Guide](ios-development/app-search/README.md)
-    * [Support Universal Links](ios-development/app-search/support-universal-links.md)
-  * Local and Remote Notification
+  * iOS Application
+    * Local and Remote Notification
+    * [App Search Programming Guide](ios-development/ios-application/app-search/README.md)
+      * [Support Universal Links](ios-development/ios-application/app-search/support-universal-links.md)
+    * [User Interface](ios-development/ios-application/user-interface/README.md)
+      * [UIScrollView](ios-development/ios-application/user-interface/uiscrollview.md)
+    * [Core Data](ios-development/ios-application/core-data.md)
   * [J2OBJC](ios-development/j2objc.md)
-  * [Core Data](ios-development/core-data.md)
 * [Crytography](crytography.md)
 * [Payment](payment/README.md)
   * [NFC](payment/nfc.md)
