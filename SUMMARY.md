@@ -35,7 +35,7 @@
   * [5. String](data-structure-and-algorithms/5.-string/README.md)
     * [5.3 Substring Search](data-structure-and-algorithms/5.-string/5.3-substring-search.md)
 * Database
-* iOS Development
+* [Apple Inc](ios-development/README.md)
   * Objective-C
   * [Swift notes](ios-development/swift-notes.md)
   * [User Interface](ios-development/user-interface/README.md)
@@ -44,6 +44,7 @@
     * [Support Universal Links](ios-development/app-search/support-universal-links.md)
   * Local and Remote Notification
   * [J2OBJC](ios-development/j2objc.md)
+  * [Core Data](ios-development/core-data.md)
 * [Crytography](crytography.md)
 * [Payment](payment/README.md)
   * [NFC](payment/nfc.md)
