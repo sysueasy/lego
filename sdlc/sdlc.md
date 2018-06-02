@@ -1,4 +1,4 @@
-# Software Development Life Cycle
+# SDLC
 
 ## Overall Stage
 

@@ -6,7 +6,6 @@
   * [Version Number](general/version-number.md)
   * [Open Source License](general/open-source-license.md)
   * [2018 Stackoverflow Insights](general/2018.md)
-* [Software Development Life Cycle](sdlc.md)
 * [Java](java/README.md)
   * [1. Fundamentals](java/1.-get-started.md)
   * [2. Object-oriented Programming](java/untitled.md)
@@ -35,6 +34,10 @@
   * [5. String](data-structure-and-algorithms/5.-string/README.md)
     * [5.3 Substring Search](data-structure-and-algorithms/5.-string/5.3-substring-search.md)
 * Database
+* Computer Network
+* Software Engineering
+  * [SDLC](sdlc/sdlc.md)
+  * Best Practices
 * [Apple Inc](ios-development/README.md)
   * Objective-C
   * [Swift notes](ios-development/swift-notes.md)
@@ -47,6 +50,7 @@
     * [Core Data](ios-development/ios-application/core-data.md)
   * [J2OBJC](ios-development/j2objc.md)
 * [Crytography](crytography.md)
-* [Payment](payment/README.md)
+* Payment
   * [NFC](payment/nfc.md)
+* Project Management
 
