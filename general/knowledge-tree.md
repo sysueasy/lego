@@ -13,7 +13,7 @@
 * [Programming in High Level Languages](../java/)
 * [Data Structures and Algorithms](../data-structure-and-algorithms/)
 * Operating Systems
-* [Database Systems](../database.md)
+* [Database Systems](../database/)
 * [Computer Networks](../untitled.md)
 * Principles of Compiler Construction
 * System Analysis and Design

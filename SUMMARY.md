@@ -48,7 +48,10 @@
     * [4.1 Undirected Graphs](data-structure-and-algorithms/4.-graphs/4.1-undirected-graphs.md)
   * [5. String](data-structure-and-algorithms/5.-string/README.md)
     * [5.3 Substring Search](data-structure-and-algorithms/5.-string/5.3-substring-search.md)
-* [Database Systems](database.md)
+* [Database Systems](database/README.md)
+  * [1. Introduce](database/1.-introduce.md)
+  * [2. Structured Query Language](database/2.-structured-query-language.md)
+  * 3. Relational Model and Normalization
 * [Computer Networks](untitled.md)
 * Software Engineering
   * [SDLC](sdlc/sdlc.md)
