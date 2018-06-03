@@ -6,7 +6,7 @@ Characteristics of Relations:
 
 * Rows contain data about an entity.
 * Columns contain data about attributes of the entities.
-* All entries in a column are of the same kind. \(**domain integrity constraint**\)
+* All entries in a column are of the same kind.
 * Each column has a unique name.
 * Cells of the table hold a single value.
 * The order of the columns/rows is unimportant.
@@ -20,7 +20,7 @@ Some SQL statements do produce tables with duplicate rows. Such row duplication
 
 * \(relation, attribute, tuple\)
 * \(table, column, row\)
-* \(file, field, record\)
+* \(file, field, record\)\(legacy\)
 
 ## Functional Dependency
 
@@ -47,4 +47,44 @@ When designing a database, one of the candidate keys is selected to be the **pri
 A primary key, must have unique data values inserted into every row of the table. This is named the **entity integrity constraint**.
 
 A **surrogate key** is an artificial column that is added to a table to serve as the primary key.
+
+A **foreign key** is a column or composite of columns that is the primary key of a table otherthan the one in which it appears.
+
+We have defined three constraints so far:
+
+* Domain integrity constraint: all of the values in a column are of the same kind.
+* Entity integrity constraint: a primary key must have unique data values inserted into every row of the table.
+* Referential integrity constraint: the value of a foreign key matches a valid value of a primary key.
+
+These 3 constraints are to create **database integrity**.
+
+## Normal Forms
+
+Relations are categorized into **normal forms** based on the kinds of problems that they have. To understand normal forms, we need first to define **modification anomalies**.
+
+* deletion anomaly: When we delete one   row, the structure of this table forces us to lose facts about two different things.
+*  insertion anomaly: The structure of   this table forces us to enter facts about two entities when we just want to enter facts about one.
+* update anomaly: changing existing data creates a data inconsistency to other rows.
+
+Normalization theory can be divided into three major categories:
+
+![](../.gitbook/assets/screen-shot-2018-06-03-at-15.28.36.png)
+
+Most modification anomalies occur because of problems with functional dependencies. BCNF will eliminate all anomalies due to functional dependencies.
+
+Some anomalies arise because of another kind of dependency called a **multivalued dependency**. Those anomalies can be eliminated by 4NF.
+
+The third source of anomalies is esoteric. These problems involve specific, rare, and even strange data constraints. Accordingly, we will not discuss them in this text.
+
+### From 1NF to BCNF
+
+For practical purposes, we will define **1NF** as it is used in this book as a table that: \(1\) Meets the set of conditions for a relation, and \(2\) Has a defined primary key.
+
+A relation is in **2NF** if and only if it’s in 1NF and all non-key attributes are determined by the entire primary key. This means that if the primary key is a composite primary key, then no non-key attribute can be determined by only part of the key.
+
+A relation is in **3NF** if and only if it’s in 2NF and there are no non-key attributes determined by another non-key attribute \(transitive dependency, if `A->B` and `B->C`, THEN `A->C`\).
+
+A relation is in **BCNF** if and only if it is in 3NF and every determinant is a candidate key. The only way a relation in 3NF requiring further normalization to get it into BCNF is if it has _overlapping composite candidate keys_.
+
+Instead of progressively testing a relation for 1NF, 2NF, 3NF, and BCNF, which referred as “Step-by-Step” method, you can eliminate such problems by simply designing \(or redesigning\) your tables so that every determinant is a candidate key, referred as “Straight-to-BCNF” or “**general normalization**” method \(we prefer!\).
 
