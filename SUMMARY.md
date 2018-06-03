@@ -52,7 +52,7 @@
   * [1. Introduce](database/1.-introduce.md)
   * [2. Structured Query Language](database/2.-structured-query-language.md)
   * [3. Relational Model and Normalization](database/untitled.md)
-  * 5. ER Relationship Model
+  * [5. ER Relationship Model](database/5.-er-relationship-model.md)
 * [Computer Networks](untitled.md)
 * Software Engineering
   * [SDLC](sdlc/sdlc.md)
