@@ -52,6 +52,7 @@
   * [1. Introduce](database/1.-introduce.md)
   * [2. Structured Query Language](database/2.-structured-query-language.md)
   * [3. Relational Model and Normalization](database/untitled.md)
+  * 4. Database Design Using Normalization
 * [Computer Networks](untitled.md)
 * Software Engineering
   * [SDLC](sdlc/sdlc.md)

@@ -88,3 +88,9 @@ A relation is in **BCNF** if and only if it is in 3NF and every determinant is 
 
 Instead of progressively testing a relation for 1NF, 2NF, 3NF, and BCNF, which referred as “Step-by-Step” method, you can eliminate such problems by simply designing \(or redesigning\) your tables so that every determinant is a candidate key, referred as “Straight-to-BCNF” or “**general normalization**” method \(we prefer!\).
 
+### 4NF
+
+A **multivalued dependency** occurs when a determinant is matched with a particular set of values: If each value of A will be paired with more than one values of B then we can say that B is multivalue dependent upon A and it is written as A-&gt;-&gt;B.
+
+When you put multivalued dependencies into a table of their own, they disappear. The result is just a table with _two columns_; the primary key also the only candidate key is the composite of those two columns. When multivalued dependencies have been isolated in this way, the table is said to be in **4NF**.
+
