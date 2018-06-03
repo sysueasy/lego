@@ -1,3 +1,9 @@
+---
+description: >-
+  The premise of Chapters 3 and 4 is that you have received one or more tables
+  of data from some source that are to be stored in a new database.
+---
+
 # 3. Relational Model and Normalization
 
 A **relation** is a special case of a table. All relations are tables, but not all tables are relations.
@@ -43,8 +49,6 @@ In general, a **key** is a combination of one or more columns that is used to id
 A **candidate key** is a determinant that determines all of the other columns in a relation. Candidate keys identify a _unique_ row in a relation.
 
 When designing a database, one of the candidate keys is selected to be the **primary key**. A table has only one primary key. The primary key can have one column, or it can be a composite.
-
-A primary key, must have unique data values inserted into every row of the table. This is named the **entity integrity constraint**.
 
 A **surrogate key** is an artificial column that is added to a table to serve as the primary key.
 
@@ -93,4 +97,31 @@ Instead of progressively testing a relation for 1NF, 2NF, 3NF, and BCNF, which r
 A **multivalued dependency** occurs when a determinant is matched with a particular set of values: If each value of A will be paired with more than one values of B then we can say that B is multivalue dependent upon A and it is written as A-&gt;-&gt;B.
 
 When you put multivalued dependencies into a table of their own, they disappear. The result is just a table with _two columns_; the primary key also the only candidate key is the composite of those two columns. When multivalued dependencies have been isolated in this way, the table is said to be in **4NF**.
+
+## Database Design Using Normalization
+
+When someone gives you a set of tables and asks you to construct a database to store them, your first step should be to assess the tables’ structure and content. The next steps depend on whether you are creating an updatable database or a read-only database.
+
+Before we begin, let’s first review the advantages and disadvantages of normalization: On the positiveside, 
+
+* eliminates modification anomalies
+* reduces data duplication
+* Single table queries will run faster
+
+On the negative side,
+
+* more complicated SQL required for multi-table subqueries and joins
+* to read two or more   tables can mean slower application processing
+
+### Design a updatable database
+
+Choosing Not to Use BCNF: Although in most cases the tables in an updatable database should be placed in BCNF, in some situations BCNF is just _too pure_. If the data are never modified \(e.g ZIP Code for Cities\) and if data inconsistencies will be easily corrected viathe normal operation of business activity, then you may choose not to place the table into BCNF.
+
+Unlike functional dependencies, the anomalies from multivalued dependencies are so **serious** that multivalued dependencies should always be eliminated. Unlike BCNF, there is no gray area.
+
+### Design a read-only database
+
+Read-only databases are used in **business intelligence** \(BI\) systems for producing information for assessment, analysis, planning, and control.
+
+Often the data for a read-only database are extracted from operational databases. If a database is never updated, then no modification anomalies can occur. In almost all cases, normalization of the tables in a read-only database is a **bad** idea, you will need to **denormalize**, or join, the data prior to storage.
 
