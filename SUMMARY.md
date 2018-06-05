@@ -56,6 +56,6 @@
 * [Computer Networks](untitled.md)
 * Software Engineering
   * [SDLC](sdlc/sdlc.md)
-* System Analysis and Design
+* [System Analysis and Design](system-analysis-and-design.md)
 * Project Management
 
