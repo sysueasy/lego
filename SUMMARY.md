@@ -54,8 +54,7 @@
   * [3. Relational Model and Normalization](database/untitled.md)
   * [5. ER Relationship Model](database/5.-er-relationship-model.md)
 * [Computer Networks](untitled.md)
-* Software Engineering
-  * [SDLC](sdlc/sdlc.md)
-* [System Analysis and Design](system-analysis-and-design.md)
+* [System Analysis and Design](system-analysis-and-design/README.md)
+  * [1. Introduction](system-analysis-and-design/1.-introduction.md)
 * Project Management
 
