@@ -58,4 +58,5 @@
   * [1. Introduction](system-analysis-and-design/1.-introduction.md)
   * [2. Systems Analysis Activities](system-analysis-and-design/2.-systems-analysis-activities.md)
   * [3. System Design Activities](system-analysis-and-design/3.-system-design-activities.md)
+  * [4. Project Management](system-analysis-and-design/4.-project-management.md)
 
