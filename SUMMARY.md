@@ -20,6 +20,7 @@
     * [User Interface](ios-development/ios-application/user-interface/README.md)
       * [UIScrollView](ios-development/ios-application/user-interface/uiscrollview.md)
     * [Core Data](ios-development/ios-application/core-data.md)
+  * [iOS App Architecture](ios-development/ios-app-architecture.md)
 * [Google LLC](google-llc.md)
 * [Java](java/README.md)
   * [1. Fundamentals](java/1.-get-started.md)
