@@ -16,6 +16,8 @@
     * [User Notifications](ios-development/ios-application/local-and-remote-notification.md)
     * [Core Data](ios-development/ios-application/core-data.md)
     * [User Interface](ios-development/ios-application/user-interface.md)
+    * [URL Loading System](ios-development/ios-application/url-loading-system.md)
+  * [XCode](ios-development/xcode.md)
 * [Google LLC](google-llc.md)
 * [Java](java/README.md)
   * [1. Fundamentals](java/1.-get-started.md)
