@@ -12,7 +12,7 @@ The basis of NFC technology is the international standard ISO/IEC 18092 \(NFCIP-
 
 In the NFC Forum specifications, the **Type-A** and **Type-B** communication technologies specified in the contactless IC card international standard **ISO/IEC 14443** are called **NFC-A** and **NFC-B**, respectively. The FeliCa communication technology, based on the Japanese Industrial Standard JIS X 6319.4, is called **NFC-F**. NFC Forum develops specifications to realize global compatibility and consistent handling of these technologies.
 
-![ID-1 \(credit card-sized form\)](../../.gitbook/assets/index_02.jpg)
+![ID-1 \(credit card-sized form\)](../.gitbook/assets/index_02.jpg)
 
 NFC-F, the FeliCa communication technology, is defined as one of the communication methods specified in NFCIP-1 and by the NFC Forum. As a result, all NFC devices support NFC-F communication.
 
@@ -28,7 +28,7 @@ Three key areas of application for NFC:
 
 ## NFC: device operates in 3 modes
 
-![](../../.gitbook/assets/forum_01.jpg)
+![](../.gitbook/assets/forum_01.jpg)
 
 In **Card Emulation** mode, the NFC-enabled device communicates with an external reader much like a traditional contactless smart card.
 
@@ -38,7 +38,7 @@ In **reader/writer** mode, the NFC-enabled device is capable of reading NFC Foru
 
 ## NFC: 4 tag types each device has to support
 
-![](../../.gitbook/assets/forum_02.jpg)
+![](../.gitbook/assets/forum_02.jpg)
 
 In June 2006, the NFC Forum introduced standardized technology architecture, initial specifications and tag formats for NFC-compliant devices. These include Data Exchange Format \(**NDEF**\), and three initial Record Type Definition \(**RTD**\) specifications for smart poster, text and Internet resource reading applications.
 
