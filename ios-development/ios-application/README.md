@@ -6,7 +6,7 @@ Core App: [https://developer.apple.com/documentation/uikit/core\_app](https://de
 
 ## App Launch
 
-[UIKit -&gt; Core App -&gt; Life Cycle -&gt; Responding to the launch of your app -&gt; About the app launch sequence](https://developer.apple.com/documentation/uikit/core_app/managing_your_app_s_life_cycle/responding_to_the_launch_of_your_app/about_the_app_launch_sequence)
+Ref: [About the app launch sequence](https://developer.apple.com/documentation/uikit/core_app/managing_your_app_s_life_cycle/responding_to_the_launch_of_your_app/about_the_app_launch_sequence)
 
 ![](../../.gitbook/assets/76e68c08-6b09-4bac-8a00-44df7a097a43.png)
 
