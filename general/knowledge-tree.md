@@ -14,7 +14,7 @@
 * [Data Structures and Algorithms](../data-structure-and-algorithms/)
 * Operating Systems
 * [Database Systems](../database/)
-* [Computer Networks](../untitled.md)
+* [Computer Networks](../untitled/)
 * Principles of Compiler Construction
 * System Analysis and Design
 
