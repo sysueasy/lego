@@ -20,5 +20,7 @@ Government request circumstances can vary from:
 
 Private party request circumstances generally relate to instances where private litigants\(诉讼当事人\) are involved in either civil or criminal proceedings\(民事或刑事诉讼程序\).
 
-Any government agency seeking customer content from Apple must obtain a search warrant\(搜查令\) issued upon a showing of probable cause.
+Any government agency seeking customer content from Apple must obtain a search warrant\(搜查令\) issued upon a showing of probable cause. If we determine a request does not have a valid legal basis, or if we consider it to be unclear, inappropriate or over-broad, we challenge or reject it.
+
+When we receive an account request seeking our customers’ personal information, we notify the customer that we have received a request concerning their personal data except where we are explicitly prohibited by the legal process, by a court order Apple receives, or by applicable law.
 
