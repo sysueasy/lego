@@ -125,29 +125,7 @@ Polymorphism: Subclasses of a class can define their own unique behaviors and ye
 
 The Java virtual machine \(JVM\) calls the appropriate method for the object that is referred to in each variable. It does not call the method that is defined by the variable's type.
 
-## Exception
 
-In Java, code that might throw certain exceptions must be enclosed by either of the following:
 
-A try statement that catches the exception:
 
-```java
-try {
-
-} catch (ExceptionType name) {
-
-} catch (ExceptionType name) {
-
-} finally {
-
-}
-```
-
-A method that specifies that it can throw the exception:
-
-```java
-// add a throws clause to the method declaration
-public void writeList() throws IOException {
-}
-```
 

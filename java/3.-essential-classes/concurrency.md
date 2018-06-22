@@ -1,4 +1,4 @@
-# 3. Concurrency
+# Concurrency
 
 The Java platform is designed from the ground up to support concurrent programming. Since version 5.0, the Java platform has also included high-level concurrency APIs in the java.util.concurrent packages.
 
