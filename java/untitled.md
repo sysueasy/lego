@@ -15,9 +15,7 @@ class MyClass extends MySuperClass implements YourInterface {
 }
 ```
 
-A **final** method cannot be overridden in a subclass. Methods called from constructors should generally be declared final.
-
-A class that is declared **final** cannot be subclassed. This is particularly useful, for example, when creating an immutable class like the String class.
+A **final** method cannot be overridden in a subclass. Methods called from constructors should generally be declared final. A class that is declared **final** cannot be subclassed. This is particularly useful, for example, when creating an immutable class like the String class.
 
 A **package** is a **namespace** that organizes a set of related classes and interfaces. Conceptually you can think of packages as being similar to different folders on your computer. 
 
@@ -44,25 +42,16 @@ At the member level—**public**, **private**, **protected**, or _package-privat
 
 ## Nested Classes
 
-Nested classes are divided into two categories: static and non-static. Nested classes that are declared static are called **static nested classes**. Non-static nested classes are called **inner classes**.
+Nested class is a way of logically **grouping** classes that are only used in only one other class. Nested classes that are declared static are called **static nested classes**. Non-static nested classes are called **inner classes**.
 
-Nested class is a way of logically **grouping** classes that are only used in only one other class.
+Java doesn't allow you to create top-level static classes; only nested \(inner\) static classes. The static inner class acts like an _entirely separate class_. We don't need an instance of the outer class to create an object of a static inner class. The only exception to static classes acting like completely separate classes to their enclosing classes, is that static inner classes can access static data members of the enclosing class -- or call static methods, for that matter.
 
-### static nested classes
+A nested class is a **member** of its enclosing class. Non-static nested classes \(inner classes\) have access to other members of the enclosing class, even if they are declared private. There are two additional types of inner classes. You can declare an inner class within the body of a method. These classes are known as **local classes**. You can also declare an inner class within the body of a method without naming the class. These classes are known as **anonymous classes**.
 
-Java doesn't allow you to create top-level static classes; only nested \(inner\) static classes.
-
-The static inner class acts like an entirely separate class. We don't need an instance of the outer class to create an object of a static inner class. The only exception to static classes acting like completely separate classes to their enclosing classes, is that static inner classes can access static data members of the enclosing class -- or call static methods, for that matter.
-
-### inner classes
-
-A nested class is a **member** of its enclosing class. Non-static nested classes \(inner classes\) have access to other members of the enclosing class, even if they are declared private.
-
-\*There are two additional types of inner classes. You can declare an inner class within the body of a method. These classes are known as **local classes**. You can also declare an inner class within the body of a method without naming the class. These classes are known as **anonymous classes**.
-
-### shadowing
+If a declaration of a type in a particular scope has the same name as another declaration in the enclosing scope, then the declaration **shadows** the declaration of the enclosing scope. You cannot refer to a shadowed declaration by its name alone:
 
 ```java
+// shadowing
 public class ShadowTest {
     public int x = 0;
     class FirstLevel {
@@ -81,7 +70,7 @@ public class ShadowTest {
 
 The predefined annotation types defined in _java.lang_ are **@Deprecated**, **@Override**, and **@SuppressWarnings**.
 
-**Annotation types** are a form of **interface**:
+Annotation types are a form of interface:
 
 ```java
 @interface ClassPreamble {
@@ -92,7 +81,6 @@ The predefined annotation types defined in _java.lang_ are **@Deprecated**, **@O
    String lastModifiedBy() default "N/A";
    String[] reviewers();
 }
-
 @ClassPreamble (
    author = "John Doe",
    date = "3/17/2002",
@@ -101,20 +89,15 @@ The predefined annotation types defined in _java.lang_ are **@Deprecated**, **@O
    lastModifiedBy = "Jane Doe",
    reviewers = {"Alice", "Bob", "Cindy"}
 )
-public class Generation3List extends Generation2List {
-// class code goes here
-}
 ```
 
 Annotations that apply to other annotations are called **meta-annotations**.
-
-To make the information in @ClassPreamble appear in Javadoc-generated documentation, you must annotate the @ClassPreamble definition with the **@Documented** annotation.
 
 ## Interfaces
 
 Interfaces are "contracts". In Java, an interface is a **reference type**. Interfaces cannot be instantiated—they can only be implemented by classes or extended by other interfaces.
 
-The interface body can contain **abstract methods**, **default methods**, and **static methods**. An abstract method within an interface is followed by a semicolon, but no braces \(an abstract method does not contain an implementation\). Default methods are defined with the default modifier, and static methods with the static keyword. All abstract, default, and static methods in an interface are implicitly public, so you can omit the public modifier.
+The interface body can contain **abstract methods**, \*default methods, and \*static methods. An abstract method within an interface is followed by a semicolon, but no braces \(an abstract method does not contain an implementation\). Default methods are defined with the default modifier, and static methods with the static keyword. All abstract, default, and static methods in an interface are implicitly public, so you can omit the public modifier.
 
 An interface can contain **constant** declarations. All constant values defined in an interface are implicitly public, static, and final.
 
@@ -138,13 +121,33 @@ public class TestBikes {
 }
 ```
 
-Polymorphism: Subclasses of a class can define their own unique behaviors and yet share some of the same functionality of the parent class - in this case, by using
-
-```java
-super.printDescription();
-```
+Polymorphism: Subclasses of a class can define their own unique behaviors and yet share some of the same functionality of the parent class - in this case, by using `super.printDescription();`
 
 The Java virtual machine \(JVM\) calls the appropriate method for the object that is referred to in each variable. It does not call the method that is defined by the variable's type.
 
+## Exception
 
+In Java, code that might throw certain exceptions must be enclosed by either of the following:
+
+A try statement that catches the exception:
+
+```java
+try {
+
+} catch (ExceptionType name) {
+
+} catch (ExceptionType name) {
+
+} finally {
+
+}
+```
+
+A method that specifies that it can throw the exception:
+
+```java
+// add a throws clause to the method declaration
+public void writeList() throws IOException {
+}
+```
 
