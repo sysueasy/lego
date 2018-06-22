@@ -150,12 +150,12 @@ Abstract classes cannot be instantiated, but they can be subclassed. When an abs
 Methods in an interface \(see the Interfaces section\) that are not declared as default or static are _implicitly_ abstract, so the abstract modifier is not used with interface methods.
 {% endhint %}
 
-Abstract classes are similar to interfaces. However, with abstract classes, you can declare fields that are not static and final, and define public, protected, and private concrete methods. In addition, you can extend only one class, whether or not it is abstract, whereas you can implement any number of interfaces.
+Abstract classes are similar to interfaces. However, with abstract classes, you can declare fields that are not static and final, and define public, protected, and private **concrete** methods. In addition, you can extend only one class, whether or not it is abstract, whereas you can implement any number of interfaces.
 
 Consider using abstract classes if:
 
 * You want to share code among several closely related classes. 
-* You expect that classes that extend your abstract class have many common methods or fields
+* You expect that classes that extend your abstract class have many common methods or fields.
 * You want to declare non-static or non-final fields. 
 
 Consider using interfaces if:
