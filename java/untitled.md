@@ -95,9 +95,24 @@ Annotations that apply to other annotations are called **meta-annotations**.
 
 ## Interfaces
 
-Interfaces are "contracts". In Java, an interface is a **reference type**. Interfaces cannot be instantiated—they can only be implemented by classes or extended by other interfaces.
+There are situations when it is important for disparate groups of programmers to agree to a "contract" that spells out how their software interacts. Each group should be able to write their code without any knowledge of how the other group's code is written. Generally speaking, interfaces are such contracts.
 
-The interface body can contain **abstract methods**, \*default methods, and \*static methods. An abstract method within an interface is followed by a semicolon, but no braces \(an abstract method does not contain an implementation\). Default methods are defined with the default modifier, and static methods with the static keyword. All abstract, default, and static methods in an interface are implicitly public, so you can omit the public modifier.
+For example, automobile manufacturers may write software that operates the automobile—stop, start, accelerate, and so forth.
+
+```java
+public interface OperateCar {
+   // constant declarations, if any
+   // method signatures
+   boolean stop();
+   boolean start();
+}
+```
+
+The other parties can then write software that **invokes** the methods described in the interface to command the car. Neither group needs to know how the other group's software is implemented. This example shows an interface being used as an industry standard _Application Programming Interface_ \(API\).
+
+In Java, an interface is a **reference type**. Interfaces cannot be instantiated—they can only be implemented by classes or extended by other interfaces.
+
+The interface body contains **abstract methods**. An abstract method within an interface is followed by a semicolon, but no braces \(an abstract method does not contain an implementation\). All methods in an interface are implicitly public, so you can omit the public modifier.
 
 An interface can contain **constant** declarations. All constant values defined in an interface are implicitly public, static, and final.
 
@@ -125,7 +140,29 @@ Polymorphism: Subclasses of a class can define their own unique behaviors and ye
 
 The Java virtual machine \(JVM\) calls the appropriate method for the object that is referred to in each variable. It does not call the method that is defined by the variable's type.
 
+## Abstract Classes
 
+An abstract method is a method that is declared without an implementation \(without braces, and followed by a semicolon\). An **abstract class** is a class that is declared abstract—it may or may not include abstract methods. If a class includes abstract methods, then the class itself must be declared abstract.
 
+Abstract classes cannot be instantiated, but they can be subclassed. When an abstract class is subclassed, the subclass usually provides implementations for all of the abstract methods in its parent class.
 
+{% hint style="info" %}
+Methods in an interface \(see the Interfaces section\) that are not declared as default or static are _implicitly_ abstract, so the abstract modifier is not used with interface methods.
+{% endhint %}
+
+Abstract classes are similar to interfaces. However, with abstract classes, you can declare fields that are not static and final, and define public, protected, and private concrete methods. In addition, you can extend only one class, whether or not it is abstract, whereas you can implement any number of interfaces.
+
+Consider using abstract classes if:
+
+* You want to share code among several closely related classes. 
+* You expect that classes that extend your abstract class have many common methods or fields
+* You want to declare non-static or non-final fields. 
+
+Consider using interfaces if:
+
+* You expect that unrelated classes would implement your interface.
+* You want to specify the behavior of a particular data type, but not concerned about who implements its behavior.
+* You want to take advantage of multiple inheritance of type.
+
+An example of a class in the JDK use both abstract classes and interfaces; the **HashMap** class implements several interfaces and also extends the abstract class AbstractMap.
 
