@@ -54,6 +54,37 @@ struct Size {
 let twoByTwo = Size(width: 2.0, height: 2.0)
 ```
 
+Swift defines two kinds of initializers for **class** types to help ensure all stored properties receive an initial value. These are known as designated initializers and convenience initializers.
+
+A **designated** initializer fully initializes all properties introduced by that class and calls an appropriate superclass initializer to continue the initialization process up the superclass chain. Classes tend to have very few designated initializers, and it is quite common for a class to have only one.
+
+**Convenience** initializers are secondary initializers that call a designated initializer from the same class with some of the parameters set to default values.
+
+```swift
+class Food {
+    var name: String 
+    init(name: String) { //designated
+        self.name = name 
+    } 
+    convenience init() { //convenience
+        self.init(name: "[Unnamed]") 
+    } 
+}
+```
+
+```swift
+class RecipeIngredient: Food { 
+    var quantity: Int 
+    init(name: String, quantity: Int) { 
+        self.quantity = quantity //new property introduced in subclass
+        super.init(name: name) //delegates up
+    } 
+    override convenience init(name: String) { 
+        self.init(name: name, quantity: 1) 
+    }
+}
+```
+
 ## Auto Reference Counting
 
 In most cases, this means that memory management “just works” in Swift. Every time you create a new instance of a class, ARC allocates a chunk of memory to store information about that instance. When an instance is no longer needed, ARC frees up the memory used by that instance so that the memory can be used for other purposes instead.
