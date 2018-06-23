@@ -25,12 +25,22 @@ enum Barcode {
 
 ## Initialization
 
-Swift initializers do not return a value. When you assign a default value to a stored property, or set its initial value within an initializer, the value of that property is set directly, without calling any **property observers**. 
+Unlike Objective-C initializers, Swift initializers do not return a value. When you assign a default value to a stored property, or set its initial value within an initializer, the value of that property is set directly, without calling any **property observers**. 
 
 ```swift
 init() { 
 // perform some initialization here
 }
+```
+
+**Structure** types automatically receive a memberwise initializer if they do not define any of their own custom initializers. Unlike a default initializer, the structure receives a memberwise initializer even if it has stored properties that do not have default values.
+
+```swift
+struct Size { 
+    var width: Double
+    var height: Double 
+}
+let twoByTwo = Size(width: 2.0, height: 2.0)
 ```
 
 Swift provides a **default initializer** for any structure or class that provides default values for all of its properties and does not provide at least one initializer itself. The default initializer simply creates a new instance with all of its properties set to their default values.
@@ -44,21 +54,11 @@ class ShoppingListItem {
 var item = ShoppingListItem()
 ```
 
-**Structure** types automatically receive a memberwise initializer if they do not define any of their own custom initializers. Unlike a default initializer, the structure receives a memberwise initializer even if it has stored properties that do not have default values.
-
-```swift
-struct Size { 
-    var width: Double
-    var height: Double 
-}
-let twoByTwo = Size(width: 2.0, height: 2.0)
-```
-
 Swift defines two kinds of initializers for **class** types to help ensure all stored properties receive an initial value. These are known as designated initializers and convenience initializers.
 
-A **designated** initializer fully initializes all properties introduced by that class and calls an appropriate superclass initializer to continue the initialization process up the superclass chain. Classes tend to have very few designated initializers, and it is quite common for a class to have only one.
+A **designated** initializer fully initializes all properties introduced by that class and calls an appropriate superclass initializer to continue the initialization process up the **superclass chain**. Classes tend to have very few designated initializers, and it is quite common for a class to have only one.
 
-**Convenience** initializers are secondary initializers that call a designated initializer from the same class with some of the parameters set to default values.
+Initializers can call other initializers to perform part of an instance’s initialization. This process, known as initializer delegation, avoids duplicating code across multiple initializers. **Convenience** initializers are secondary initializers that call a designated initializer from the same class with some of the parameters set to default values.
 
 ```swift
 class Food {
@@ -72,12 +72,34 @@ class Food {
 }
 ```
 
+Swift applies the following three rules for delegation calls between initializers:
+
+* A designated initializer must call a designated initializer from its immediate superclass.
+* A convenience initializer must call another initializer from the same class.
+* A convenience initializer must ultimately call a designated initializer.
+
+![](../../.gitbook/assets/initializerdelegation01_2x.png)
+
+Class initialization in Swift is a two-phase process. In the first phase, each stored property is assigned an initial value by the class that introduced it. The second phase is the opportunity to customize its stored properties further \(optional\).
+
+Swift’s **two-phase initialization** is similar Objective-C. The main difference is that during phase 1, Objective-C assigns zero or null values to every property. Swift’s initialization flow is more flexible in that it lets you set custom initial values.
+
+Swift performs four helpful safety-checks to make sure that two-phase initialization is completed, otherwise you will get _compile error_:
+
+* A designated initializer must ensure that all of the properties introduced by its class are initialized before it delegates up to a superclass initializer.
+* A designated initializer must delegate up to a superclass initializer before assigning a value to an inherited property.
+* A convenience initializer must delegate to another initializer before assigning a value to any property.
+* An initializer cannot call any instance methods, read the values of any instance properties, or refer to self as a value until after the first phase of initialization is complete.
+
+Once the top of the superclass chain is reached, and the final class in the chain has ensured that all of its stored properties have a value, the instance’s memory is considered to be fully initialized, and phase 1 is complete. Then in phase 2, working back down from the top of the chain, each designated initializer in the chain has the option to customize the instance further. Initializers are now able to access self and can modify its properties, call its instance methods, and so on.
+
 ```swift
 class RecipeIngredient: Food { 
     var quantity: Int 
     init(name: String, quantity: Int) { 
         self.quantity = quantity //new property introduced in subclass
         super.init(name: name) //delegates up
+        self.name = self.name + "Ingredient" //assigning new value to an inherited property.
     } 
     override convenience init(name: String) { 
         self.init(name: name, quantity: 1) 
