@@ -18,13 +18,6 @@
 * Principles of Compiler Construction
 * System Analysis and Design
 
-公共必修课类：
-
-* 中国文明
-* 人文基础与经典阅读
-* 全球视野
-* 科技经济社会
-
 Master Degree:
 
 * eCommerce Project
