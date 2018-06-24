@@ -53,6 +53,7 @@
   * [1. Introduction](computer-networks/1.-introduction.md)
   * [2. Application Layer](computer-networks/2.-application-layer.md)
   * [3. Transport Layer](computer-networks/3.-transport-layer.md)
+  * [8. Network Security](computer-networks/8.-network-security.md)
 * [System Analysis and Design](system-analysis-and-design/README.md)
   * [1. Introduction](system-analysis-and-design/1.-introduction.md)
   * [2. Systems Analysis Activities](system-analysis-and-design/2.-systems-analysis-activities.md)
