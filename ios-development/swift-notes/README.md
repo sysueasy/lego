@@ -216,7 +216,7 @@ class CreditCard {
 }
 ```
 
-However, there is a third scenario, in which both properties should always have a value, and neither property should ever be nil once initialization is complete. In this scenario, it’s useful to combine an unowned property on one class with an implicitly unwrapped optional property on the other class.
+However, there is a third scenario, in which both properties should always have a value, and neither property should ever be nil once initialization is complete. In this scenario, it’s useful to combine an unowned property on one class with an [implicitly unwrapped optional](./#implicitly-unwrapped-optionals) property on the other class.
 
 ```swift
 class Country {
