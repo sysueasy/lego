@@ -116,7 +116,7 @@ class RecipeIngredient: Food {
 }
 ```
 
-Unlike subclasses in Objective-C, Swift subclasses do not inherit their superclass initializers by default. However, if you provide default values for any new properties you introduce in a subclass, then:
+Unlike subclasses in Objective-C, Swift subclasses do not **inherit** their superclass initializers by default. However, if you provide default values for any new properties you introduce in a subclass, then:
 
 * If your subclass doesn’t define any designated initializers, it automatically inherits all of its superclass designated initializers.
 * If your subclass provides an implementation of all of its superclass designated initializers—either by inheriting them as per rule 1, or by providing a custom implementation—then it automatically inherits all of the superclass convenience initializers.
@@ -135,7 +135,7 @@ You do not have to provide an explicit implementation of a required initializer 
 
 ## Auto Reference Counting
 
-In most cases, this means that memory management “just works” in Swift. Every time you create a new instance of a class, ARC allocates a chunk of memory to store information about that instance. When an instance is no longer needed, ARC frees up the memory used by that instance so that the memory can be used for other purposes instead.
+In most cases, memory management “just works” in Swift. Every time you create a new instance of a class, ARC allocates a chunk of memory to store information about that instance. When an instance is no longer needed, ARC frees up the memory used by that instance so that the memory can be used for other purposes instead.
 
 Whenever you assign a class instance to a property, constant, or variable, that makes a strong reference to the instance. ARC will not deallocate an instance as long as at least one active reference to that instance still exists.
 
@@ -150,6 +150,82 @@ Use an unowned reference only when you are sure that the reference always refers
 {% hint style="info" %}
 Compared with system that use garbage collection, with ARC, values are deallocated as soon as their last strong reference is removed.
 {% endhint %}
+
+A situation where two properties, both of which are allowed to be nil, is best resolved with a weak reference.
+
+```swift
+class Person {
+    let name: String
+    init(name: String) { self.name = name }
+    var apartment: Apartment?
+}
+
+class Apartment {
+    let unit: String
+    init(unit: String) { self.unit = unit }
+    weak var tenant: Person?
+}
+```
+
+A situation where one property that is allowed to be nil and another property that cannot be nil is best resolved with an unowned reference.
+
+```swift
+class Customer {
+    let name: String
+    var card: CreditCard?
+    init(name: String) {
+        self.name = name
+    }
+}
+
+class CreditCard {
+    let number: UInt64
+    unowned let customer: Customer
+    init(number: UInt64, customer: Customer) {
+        self.number = number
+        self.customer = customer
+    }
+}
+```
+
+However, there is a third scenario, in which both properties should always have a value, and neither property should ever be nil once initialization is complete. In this scenario, it’s useful to combine an unowned property on one class with an implicitly unwrapped optional property on the other class.
+
+```swift
+class Country {
+    let name: String
+    var capitalCity: City! //default nil
+    init(name: String, capitalName: String) {
+    //as described in Two-Phase Initialization
+        self.name = name //phase 1 completed
+        //in phase 2, can start to reference the implicit self
+        self.capitalCity = City(name: capitalName, country: self) 
+    }
+}
+
+class City {
+    let name: String
+    unowned let country: Country
+    init(name: String, country: Country) {
+        self.name = name
+        self.country = country
+    }
+}
+```
+
+A strong reference cycle can also occur if you assign a **closure** to a property of a class instance, and the body of that closure captures the instance. You resolve a strong reference cycle between a closure and a class instance by defining a **capture list** as part of the closure’s definition.
+
+```swift
+lazy var someClosure: (Int, String) -> String = {
+    [unowned self, weak delegate = self.delegate!] (index: Int, stringToProcess: String) -> String in
+    // closure body goes here
+}
+```
+
+Define a capture in a closure as an **unowned** reference when the closure and the instance it captures will always refer to each other, and will always be deallocated at the same time. Conversely, define a capture as a **weak** reference when the captured reference may become nil at some point in the future.
+
+## Memory Safety
+
+
 
 
 
