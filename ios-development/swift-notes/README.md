@@ -1,5 +1,11 @@
 # Swift
 
+## Value and Reference Type
+
+Ref: [https://developer.apple.com/swift/blog/?id=10](https://developer.apple.com/swift/blog/?id=10)
+
+Types in Swift fall into one of two categories: first, “**value types**”, where each instance keeps a unique copy of its data, usually defined as a `struct`, `enum`, or tuple. The second, “**reference types**”, where instances share a single copy of the data, and the type is usually defined as a class.
+
 ## Implicitly Unwrapped Optionals
 
 Sometimes it’s clear from a program’s structure that an optional will always have a value, after that value is first set. In these cases, it’s useful to remove the need to check and unwrap the optional’s value every time it’s accessed. 
@@ -7,6 +13,12 @@ Sometimes it’s clear from a program’s structure that an optional will always
 For example: `var capitalCity: City!`means that the `capitalCity` property has a default value of nil, like any other optional, but can be accessed without the need to unwrap its value.
 
 Don’t use an implicitly unwrapped optional when there’s a possibility of a variable becoming nil at a later point.
+
+## In-Out Parameters
+
+Function parameters are constants by default. If you want a function to modify a parameter’s value, and you want those changes to persist after the function call has ended, define that parameter as an in-out parameter instead.
+
+You place an ampersand \(&\) directly before a variable’s name when you pass it as an argument to an in-out parameter, to indicate that it can be modified by the function: `swapTwoInts(&someInt, &anotherInt)`
 
 ## Enumerations
 
@@ -20,6 +32,22 @@ If you are familiar with C, you will know that C enumerations assign related nam
 enum Barcode {
     case upc(Int, Int, Int, Int)
     case qrCode(String)
+}
+```
+
+## Methods
+
+Structures and enumerations are [value types](./#value-and-reference-type). By default, the properties of a value type cannot be modified from within its instance methods.
+
+However, if you need to modify the properties of your structure or enumeration within a particular method, you can opt in to **mutating** behavior for that method.
+
+```swift
+struct Point {
+    var x = 0.0, y = 0.0
+    mutating func moveBy(x deltaX: Double, y deltaY: Double) {
+        x += deltaX
+        y += deltaY
+    }
 }
 ```
 
@@ -225,7 +253,27 @@ Define a capture in a closure as an **unowned** reference when the closure and t
 
 ## Memory Safety
 
+A conflicting access to memory can occur when different parts of your code are trying to access the same location in memory at the same time. Multiple accesses to a location in memory at the same time can produce unpredictable or inconsistent behavior.
 
+The conflicting access discussed here can even happen on a single thread and doesn’t involve concurrent or multithreaded code. For example:
 
+```swift
+var stepSize = 1
+func increment(_ number: inout Int) {
+    number += stepSize
+}
+increment(&stepSize)
+```
 
+Specifically, a conflict occurs if you have two accesses that meet all of the following conditions: At least one is a write access. They access the same location in memory. Their durations overlap.
+
+An access is _instantaneous_ if it’s not possible for other code to run after that access starts but before it ends. Most memory access is instantaneous. However, there are several ways to access memory, called _long-term_ accesses, that span the execution of other code.
+
+A function has long-term write access to all of its [in-out parameters](./#in-out-parameters). 
+
+A [mutating](./#methods) method on a structure has write access to self for the duration of the method call.
+
+[Value types](./#value-and-reference-type) are made up of individual constituent values, mutating any piece of the value mutates the whole value, meaning read or write access to one of the properties requires read or write access to the whole value.
+
+If the compiler can’t prove the access is safe, it doesn’t allow the access.
 
