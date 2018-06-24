@@ -93,6 +93,10 @@ Swift performs four helpful safety-checks to make sure that two-phase initializa
 
 Once the top of the superclass chain is reached, and the final class in the chain has ensured that all of its stored properties have a value, the instance’s memory is considered to be fully initialized, and phase 1 is complete. Then in phase 2, working back down from the top of the chain, each designated initializer in the chain has the option to customize the instance further. Initializers are now able to access self and can modify its properties, call its instance methods, and so on.
 
+When you write a subclass initializer that matches a superclass _designated_ initializer, you are effectively providing an **override** of that designated initializer. This is true even if you are overriding an automatically provided default initializer.
+
+Conversely, if you write a subclass initializer that matches a superclass _convenience_ initializer, that superclass convenience initializer can never be called directly by your subclass. As a result, you do not write the override modifier.
+
 ```swift
 class RecipeIngredient: Food { 
     var quantity: Int 
@@ -101,11 +105,33 @@ class RecipeIngredient: Food {
         super.init(name: name) //delegates up
         self.name = self.name + "Ingredient" //assigning new value to an inherited property.
     } 
+    /* You always write the override modifier 
+    when overriding a superclass designated initializer, 
+    even if your subclass’s implementation of the initializer 
+    is a convenience initializer.
+    */
     override convenience init(name: String) { 
         self.init(name: name, quantity: 1) 
     }
 }
 ```
+
+Unlike subclasses in Objective-C, Swift subclasses do not inherit their superclass initializers by default. However, if you provide default values for any new properties you introduce in a subclass, then:
+
+* If your subclass doesn’t define any designated initializers, it automatically inherits all of its superclass designated initializers.
+* If your subclass provides an implementation of all of its superclass designated initializers—either by inheriting them as per rule 1, or by providing a custom implementation—then it automatically inherits all of the superclass convenience initializers.
+
+Write the **required** modifier before the definition of a class initializer to indicate that every subclass of the class must implement that initializer:
+
+```swift
+class SomeClass {
+    required init() {
+        // initializer implementation goes here
+    }
+}
+```
+
+You do not have to provide an explicit implementation of a required initializer if you can satisfy the requirement with an inherited initializer.
 
 ## Auto Reference Counting
 
