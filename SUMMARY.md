@@ -11,7 +11,7 @@
   * [Swift](ios-development/swift-notes/README.md)
     * [Sample Code](ios-development/swift-notes/sample-code.md)
   * [J2OBJC](ios-development/j2objc.md)
-  * [iOS Application](ios-development/ios-application/README.md)
+  * [Application](ios-development/ios-application/README.md)
     * [User Notifications](ios-development/ios-application/local-and-remote-notification.md)
     * [Core Data](ios-development/ios-application/core-data.md)
     * [User Interface](ios-development/ios-application/user-interface.md)

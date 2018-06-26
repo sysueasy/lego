@@ -1,6 +1,8 @@
 # URL Loading System
 
-Ref: [https://developer.apple.com/documentation/foundation/url\_loading\_system](https://developer.apple.com/documentation/foundation/url_loading_system)
+Ref: [URL Loading System](https://developer.apple.com/documentation/foundation/url_loading_system)
+
+[Alamofire](https://github.com/Alamofire/Alamofire) is an HTTP networking library written in Swift.
 
 The URL Loading System provides access to resources identified by URLs, using standard protocols like https or custom protocols you create. Loading is performed **asynchronously**, so your app can remain responsive and handle incoming data or errors as they arrive.
 
@@ -34,17 +36,24 @@ func startLoad() {
 }
 ```
 
-You use a [`URLSession`](https://developer.apple.com/documentation/foundation/urlsession) instance to create one or more [`URLSessionTask`](https://developer.apple.com/documentation/foundation/urlsessiontask) instances, which can fetch and return data to your app, download files, or upload data and files to remote locations. To configure a session, you use a [`URLSessionConfiguration`](https://developer.apple.com/documentation/foundation/urlsessionconfiguration) object, which controls behavior like how to use caches and cookies, or whether to allow connections on a cellular network.
+1. First Step
 
-You can use one session repeatedly to create tasks. For example, a web browser might have separate sessions for regular and private browsing use.
+1.1  You use a [`URLSession`](https://developer.apple.com/documentation/foundation/urlsession) instance to create one or more [`URLSessionTask`](https://developer.apple.com/documentation/foundation/urlsessiontask) instances, which can _fetch and return data to your app, download files, or upload data and files_ to remote locations. To configure a session, you use a [`URLSessionConfiguration`](https://developer.apple.com/documentation/foundation/urlsessionconfiguration) object, which controls behavior like how to use caches and cookies, or whether to allow connections on a cellular network.
 
-Each session is associated with a **delegate** to receive periodic updates \(or errors\). The default delegate calls a completion handler block that you provide; if you choose to provide your own custom delegate, this block is not called.
+2. Request and Response
 
-You can configure a session to run in the **background**, so that while the app is suspended, the system can download data on its behalf and wake up the app to deliver the results.
+2.1 [`URLRequest`](https://developer.apple.com/documentation/foundation/urlrequest) encapsulates two basic data elements of a load request: the URL to load, and the [**policy**](https://developer.apple.com/documentation/foundation/nsurlrequest/cachepolicy) to use when consulting the URL content cache made available by the implementation.
 
+2.2 The related [`HTTPURLResponse`](https://developer.apple.com/documentation/foundation/httpurlresponse) class is a commonly used subclass of `URLResponse` whose objects represent a response to an HTTP URL load request and store additional protocol-specific information such as the response headers. Whenever you make an HTTP request, the `URLResponse` object you get back is actually an instance of the [`HTTPURLResponse`](https://developer.apple.com/documentation/foundation/httpurlresponse) class.
 
+3. Cache Behaviour
 
+The [`URLCache`](https://developer.apple.com/documentation/foundation/urlcache) class is used for caching responses from network resources. Your app can directly access the shared cache instance by using the shared property of `URLCache`. Or, you can create your own caches for different purposes, setting distinct caches on your [`URLSessionConfiguration`](https://developer.apple.com/documentation/foundation/urlsessionconfiguration) objects.
 
+4. Authentication and Credentials
 
+When your app makes a request with a [`URLSessionTask`](https://developer.apple.com/documentation/foundation/urlsessiontask), the server may respond with one or more demands for credentials before continuing. The session task attempts to handle this for you. If it can’t, it calls your session’s delegate to handle the challenges. If you don’t implement a delegate, your request may be denied by the server, and you receive a response with HTTP status code 401 \(Forbidden\) instead of the data you expect.  
+  
+  
 
 
