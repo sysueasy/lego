@@ -37,7 +37,7 @@ enum Barcode {
 
 ## Methods
 
-Structures and enumerations are [value types](./#value-and-reference-type). By default, the properties of a value type cannot be modified from within its instance methods.
+Structures and enumerations are [value types](swift-notes.md#value-and-reference-type). By default, the properties of a value type cannot be modified from within its instance methods.
 
 However, if you need to modify the properties of your structure or enumeration within a particular method, you can opt in to **mutating** behavior for that method.
 
@@ -106,7 +106,7 @@ Swift applies the following three rules for delegation calls between initializer
 * A convenience initializer must call another initializer from the same class.
 * A convenience initializer must ultimately call a designated initializer.
 
-![](../../.gitbook/assets/initializerdelegation01_2x.png)
+![](../.gitbook/assets/initializerdelegation01_2x.png)
 
 Class initialization in Swift is a two-phase process. In the first phase, each stored property is assigned an initial value by the class that introduced it. The second phase is the opportunity to customize its stored properties further \(optional\).
 
@@ -216,7 +216,7 @@ class CreditCard {
 }
 ```
 
-However, there is a third scenario, in which both properties should always have a value, and neither property should ever be nil once initialization is complete. In this scenario, it’s useful to combine an unowned property on one class with an [implicitly unwrapped optional](./#implicitly-unwrapped-optionals) property on the other class.
+However, there is a third scenario, in which both properties should always have a value, and neither property should ever be nil once initialization is complete. In this scenario, it’s useful to combine an unowned property on one class with an [implicitly unwrapped optional](swift-notes.md#implicitly-unwrapped-optionals) property on the other class.
 
 ```swift
 class Country {
@@ -269,11 +269,11 @@ Specifically, a conflict occurs if you have two accesses that meet all of the fo
 
 An access is _instantaneous_ if it’s not possible for other code to run after that access starts but before it ends. Most memory access is instantaneous. However, there are several ways to access memory, called _long-term_ accesses, that span the execution of other code.
 
-A function has long-term write access to all of its [in-out parameters](./#in-out-parameters). 
+A function has long-term write access to all of its [in-out parameters](swift-notes.md#in-out-parameters). 
 
-A [mutating](./#methods) method on a structure has write access to self for the duration of the method call.
+A [mutating](swift-notes.md#methods) method on a structure has write access to self for the duration of the method call.
 
-[Value types](./#value-and-reference-type) are made up of individual constituent values, mutating any piece of the value mutates the whole value, meaning read or write access to one of the properties requires read or write access to the whole value.
+[Value types](swift-notes.md#value-and-reference-type) are made up of individual constituent values, mutating any piece of the value mutates the whole value, meaning read or write access to one of the properties requires read or write access to the whole value.
 
 If the compiler can’t prove the access is safe, it doesn’t allow the access.
 
