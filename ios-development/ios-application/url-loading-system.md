@@ -1,8 +1,9 @@
 # URL Loading System
 
-Ref: [URL Loading System](https://developer.apple.com/documentation/foundation/url_loading_system)
+* Ref: [URL Loading System](https://developer.apple.com/documentation/foundation/url_loading_system)
+* Ref: [Alamofire](https://github.com/Alamofire/Alamofire) is an HTTP networking library written in Swift.
 
-[Alamofire](https://github.com/Alamofire/Alamofire) is an HTTP networking library written in Swift.
+## Overview
 
 The URL Loading System provides access to resources identified by URLs, using standard protocols like https or custom protocols you create. Loading is performed **asynchronously**, so your app can remain responsive and handle incoming data or errors as they arrive.
 
