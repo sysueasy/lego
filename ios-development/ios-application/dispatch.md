@@ -4,7 +4,7 @@
 
 Execute code **concurrently** on **multicore** hardware by submitting work to **dispatch queues** managed by the system. **GCD** \(**Grand Central Dispatch**\), operating at the system level, can better accommodate the needs of all running applications, matching them to the available system resources in a balanced fashion.
 
-GCD provides and manages FIFO queues to which your application can submit tasks in the form of block objects. Work submitted to dispatch queues are executed on a **pool of threads** fully managed by the system. GCD is **thread-safe**.
+GCD provides and manages FIFO queues to which your application can submit tasks in the form of block objects. Work submitted to dispatch queues are executed on a **pool of threads** fully managed by the system. _No guarantee_ is made as to the thread on which a task executes.
 
 Each work item can be executed either **synchronously** or **asynchronously**. When a work item is executed synchronously with the sync method, the program waits until execution finishes before the method call returns. When a work item is executed asynchronously with the async method, the method call **returns** immediately.
 
@@ -82,6 +82,16 @@ let queue = DispatchQueue.global()
 queue.async(execute: workItem)
 workItem.notify(queue: DispatchQueue.main) {
     // work item has been done
+}
+```
+
+Like [immutable object](../../java/concurrency.md#immutable-objects) in Java, constants in Swift is read-only and thread-safe. However, collection types like `Array` and `Dictionary` are not thread-safe when declared mutable. There's no such concern in a serial dispatch queue because tasks are executed one by one. But thread interference and memory consistency errors can occur is a concurrent dispatch queue.
+
+You set `.barrier` flag to a `DispatchWorkItem` before submit it to a concurrent queue to indicate that it should be the only item executed on the specified queue for that particular time.
+
+```swift
+let workItem = DispatchWorkItem(flags: [.barrier]) {
+    // do something
 }
 ```
 

@@ -92,7 +92,7 @@ The invocation of `Object.wait` does not return until another thread has issued 
 
 ### Immutable Objects
 
-Immutable objects are particularly useful in concurrent applications. Maximum reliance on immutable objects is widely accepted as a sound strategy for creating simple, reliable code.
+Immutable objects are particularly useful in concurrent applications. Since they cannot change state, they cannot be corrupted by thread interference or observed in an inconsistent state. Maximum reliance on immutable objects is widely accepted as a sound strategy for creating simple, reliable code.
 
 ## High Level Concurrency Objects
 
