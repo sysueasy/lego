@@ -15,6 +15,7 @@
     * [Core Data](ios-development/ios-application/core-data.md)
     * [Dispatch](ios-development/ios-application/dispatch.md)
     * [URL Loading System](ios-development/ios-application/url-loading-system.md)
+    * [Protocol and Delegate](ios-development/ios-application/protocol-and-delegate.md)
   * [XCode](ios-development/xcode.md)
   * [User Interface](ios-development/user-interface.md)
 * [Google LLC](google-llc/README.md)

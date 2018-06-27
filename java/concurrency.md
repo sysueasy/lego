@@ -10,6 +10,8 @@ However, what the user sees as a single application may in fact be a set of coop
 
 **Threads** exist within a process — every process has at least one. From the application programmer's point of view, you start with just one thread, called the **main** thread. This thread has the ability to create additional threads.
 
+Single-core devices can achieve concurrency through **time-slicing**. They would run one thread, perform a context switch, then run another thread. Multi-core devices on the other hand, execute multiple threads at the same time via **parallelism**.
+
 ## Thread Objects
 
 There are two basic strategies for using Java Thread objects to create a concurrent application:

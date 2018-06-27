@@ -7,7 +7,7 @@
 
 The URL Loading System provides access to resources identified by URLs, using standard protocols like https or custom protocols you create. Loading is performed **asynchronously**, so your app can remain responsive and handle incoming data or errors as they arrive.
 
-The completion handler is called on a different Grand Central Dispatch queue than the one that created the task. Therefore, any work that uses data or error to update the UI should be explicitly placed on the main queue, as shown here.
+The _completion_ _handler_ is called on a different Grand Central Dispatch queue than the one that created the task. Therefore, any work that uses data or error to update the UI should be explicitly placed on the main queue, as shown here.
 
 ```swift
 func startLoad() {
