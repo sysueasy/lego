@@ -1,6 +1,7 @@
 # URL Loading System
 
 * Ref: [URL Loading System](https://developer.apple.com/documentation/foundation/url_loading_system)
+* Ref: [Working with JSON in Swift](https://developer.apple.com/swift/blog/?id=37)
 * Ref: [Alamofire](https://github.com/Alamofire/Alamofire) is an HTTP networking library written in Swift.
 
 ## Overview

@@ -85,7 +85,9 @@ workItem.notify(queue: DispatchQueue.main) {
 }
 ```
 
-Like [immutable object](../../java/concurrency.md#immutable-objects) in Java, constants in Swift is read-only and thread-safe. However, collection types like `Array` and `Dictionary` are not thread-safe when declared mutable. There's no such concern in a serial dispatch queue because tasks are executed one by one. But thread interference and memory consistency errors can occur is a concurrent dispatch queue.
+To cancel a work item is simple: `workItem.cancel()`, be aware that you can only cancel an item before it reaches the head of a queue and starts executing.
+
+Like [immutable object](../../java/concurrency.md#immutable-objects) in Java, constants in Swift is read-only and thread-safe. However, collection types like `Array` and `Dictionary` are not thread-safe when declared mutable. There's no such concern in a serial dispatch queue because tasks are executed one by one. But thread interference and memory consistency errors can occur in a concurrent dispatch queue.
 
 You set `.barrier` flag to a `DispatchWorkItem` before submit it to a concurrent queue to indicate that it should be the only item executed on the specified queue for that particular time.
 
@@ -114,10 +116,27 @@ Of course, tasks running on the main thread have always the highest priority, as
 
 [`DispatchGroup`](https://developer.apple.com/documentation/dispatch/dispatchgroup) allows for aggregate synchronization of work. You can use them to submit multiple different work items and track when they all complete, even though they might run on different queues. This behavior can be helpful when progress can’t be made until all of the specified tasks are complete.
 
+```swift
+let group = DispatchGroup()
+group.enter()
+URLSession.shared.dataTask(with: url) { 
+    data, response, error in
+    // do something
+    group.leave()
+}
+group.notify(queue: .main) { // all task completed
+    self.updateUI()
+}
+```
+
 ## Reference
 
 * [https://developer.apple.com/documentation/dispatch](https://developer.apple.com/documentation/dispatch)
 * Java [Concurrency](../../java/concurrency.md)
 * [https://www.appcoda.com/grand-central-dispatch/](https://www.appcoda.com/grand-central-dispatch/)
-* [https://www.raywenderlich.com/148513/grand-central-dispatch-tutorial-swift-3-part-1](https://www.raywenderlich.com/148513/grand-central-dispatch-tutorial-swift-3-part-1)
+* [https://www.raywenderlich.com/148513/grand-central-dispatch-tutorial-swift-3-part-1](https://www.raywenderlich.com/148513/grand-central-dispatch-tutorial-swift-3-part-1%20
+  )
+* [https://www.raywenderlich.com/148515/grand-central-dispatch-tutorial-swift-3-part-2](https://www.raywenderlich.com/148515/grand-central-dispatch-tutorial-swift-3-part-2)
+
+
 
