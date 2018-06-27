@@ -13,17 +13,43 @@ Each work item can be executed either **synchronously** or **asynchronously**. W
 
 A dispatch queue can be either **serial**, so that work items are executed _one at a time_, or it can be **concurrent**, so that work items are _dequeued in order,_ but _run all at once and can finish in any order_. Both serial and concurrent queues process work items in first in, first-out \(FIFO\) order.
 
-When an app launches, the system automatically creates a special queue called the **main** _queue_. Work items enqueued to the main queue execute serially on your app’s **main thread**. Attempting to **synchronously** execute a work item on the main queue results in **dead-lock**. In addition to the serial main queue, the system also creates a number of **global concurrent dispatch queues**. You can access the global concurrent queue that best matches a specified quality of service:
+When an app launches, the system automatically creates a special queue called the **main** _queue_. Work items enqueued to the main queue execute serially on your app’s **main thread**. Attempting to **synchronously** execute a work item on the main queue results in **deadlock**. In addition to the serial main queue, the system also creates a number of **global concurrent dispatch queues**. You can access the global concurrent queue that best matches a specified quality of service:
 
 ```swift
 let queue = DispatchQueue.global(qos: .default)
 ```
 
-## Classes
+## DispatchQueue
 
 [`DispatchQueue`](https://developer.apple.com/documentation/dispatch/dispatchqueue) manages the execution of work items. Each work item submitted to a queue is processed on a **pool of threads** managed by the system.
 
+To create a queue is as simple as:
+
+```swift
+let queue = DispatchQueue(label: "com.yianzhou.whatsnew")
+```
+
+A string **label** to attach to the queue to _uniquely_ identify it in debugging tools such as _Instruments_, _sample_, _stackshots_, and _crash reports_. Because applications, libraries, and frameworks can all create their own dispatch queues, a _reverse-DNS naming style_ \(com.example.myqueue\) is recommended.
+
+Any pending blocks submitted to a queue _hold a reference_ to that queue, so the queue is not deallocated until all pending blocks have completed.
+
+### Sync
+
+Submits a block to a dispatch queue for synchronous execution and waits until that block completes. This function does not return until the block has finished. As an optimization, this function invokes the block on the current thread when possible. Calling this function and targeting the current queue results in **deadlock**.
+
+```swift
+queue.sync {
+    // do sth
+}
+```
+
+Unlike with _async_, no `retain` is performed on the target queue. Because calls to this function are synchronous, it "borrows" the reference of the caller. Moreover, no `copy` is performed on the block.
+
+## DispatchWorkItem
+
 [`DispatchWorkItem`](https://developer.apple.com/documentation/dispatch/dispatchworkitem) encapsulates work that can be performed. Work items allow you to configure properties of individual work units, for the purposes of waiting for their completion, getting notified about their completion, and/or canceling them. A work item can be dispatched onto a `DispatchQueue` and within a `DispatchGroup`. A `DispatchWorkItem` can also be set as a `DispatchSource` event, registration, or cancel handler.
+
+## DispatchQoS
 
 [`DispatchQoS`](https://developer.apple.com/documentation/dispatch/dispatchqos) encapsulates quality of service classes. A **quality of service** \(QoS\) class categorizes work to be performed on a `DispatchQueue`. By specifying a QoS to work, you indicate its importance, and the system prioritizes it and schedules it accordingly. 
 
