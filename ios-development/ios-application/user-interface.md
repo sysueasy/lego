@@ -66,8 +66,6 @@ You should not call `layoutSubviews()` directly. If you want to force a layout u
 
 ### The View Drawing Cycle
 
-View drawing occurs on an as-needed basis. When a view is first shown, or when all or part of it becomes visible due to layout changes, the system asks the view to draw its contents.
-
 The default implementation of `draw(_:)` does nothing. Subclasses that use technologies such as Core Graphics and UIKit to draw their view’s content should override this method and implement their drawing code there. You do not need to override this method if your view sets its content in other ways. For example, you do not need to override this method if your view just displays a background color or if your view sets its content directly using the underlying layer object.
 
 UIKit creates and configures a graphics context for drawing and adjusts the transform of that context so that its origin matches the origin of your view’s bounds rectangle. You can get a reference to the graphics context using the [`UIGraphicsGetCurrentContext()`](https://developer.apple.com/documentation/uikit/1623918-uigraphicsgetcurrentcontext) function, but do not establish a strong reference to the graphics context because it can change between calls to the `draw(_:)` method.
@@ -76,9 +74,9 @@ You should limit any drawing to the rectangle specified in the `rect` parameter.
 
 This method is called when a view is first displayed or when an event occurs that invalidates a visible part of the view. You should never call this method directly yourself. To invalidate part of your view, and thus cause that portion to be redrawn, call the [`setNeedsDisplay()`](https://developer.apple.com/documentation/uikit/uiview/1622437-setneedsdisplay) instead. These methods let the system know that it should update the view during the next drawing cycle.
 
-## Core Animation
+## CALayer
 
-Core Animation provides high frame rates and smooth animations without burdening the CPU and slowing down your app. Most of the work required to draw each frame of an animation is done for you.
+**Core Animation** provides high frame rates and smooth animations without burdening the CPU and slowing down your app. Most of the work required to draw each frame of an animation is done for you.
 
 Layers are often used to provide the backing store for views but can also be used without a view to display content. 
 
@@ -90,8 +88,24 @@ A layer’s main job is to manage the visual content that you provide but the la
 
 If the layer object was created by a view, the view typically assigns itself as the layer’s **delegate** automatically, and you should not change that relationship.
 
+[`masksToBounds`](https://developer.apple.com/documentation/quartzcore/calayer/1410896-maskstobounds) A Boolean indicating whether sublayers are clipped to the layer’s bounds. Animatable.
+
+[`cornerRadius`](https://developer.apple.com/documentation/quartzcore/calayer/1410818-cornerradius) Setting the radius to a value greater than 0.0 causes the layer to begin drawing rounded corners on its background. By default, the corner radius does not apply to the image in the layer’s contents property; it applies only to the background color and border of the layer. However, setting the masksToBounds property to **true** causes the content to be clipped to the rounded corners.
+
+## UIBlurEffect
+
+```swift
+let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
+let blurEffectView = UIVisualEffectView(effect: blurEffect)
+blurEffectView.frame = self.bounds
+blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+self.addSubview(blurEffectView)
+```
+
 ## Reference
 
 * Design: [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/)
 * Ref: [https://gist.github.com/bwhiteley/049e4bede49e71a6d2e2](https://gist.github.com/bwhiteley/049e4bede49e71a6d2e2)
+
+
 
