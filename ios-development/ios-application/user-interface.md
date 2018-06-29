@@ -90,22 +90,8 @@ A layer’s main job is to manage the visual content that you provide but the la
 
 If the layer object was created by a view, the view typically assigns itself as the layer’s **delegate** automatically, and you should not change that relationship.
 
-
-
 ## Reference
 
 * Design: [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/)
 * Ref: [https://gist.github.com/bwhiteley/049e4bede49e71a6d2e2](https://gist.github.com/bwhiteley/049e4bede49e71a6d2e2)
-
-## Scrolling Vertically
-
-First, add a new View Controller. In the **Size Inspector** replace Fixed with **Freeform** for the Simulated Size, and enter a width of 340 and a height of 800. You’ll notice the layout of the controller gets narrower and longer, simulating the behavior of a long vertical content.
-
-Add a Scroll View. Add **top, bottom, leading, trailing** with constants of 0.
-
-Add a View as a child of the Scroll View, and rename its storyboard Label to Container View. Add top, leading, trailing constraints and height constraint to 1000 \(temporary\).
-
-Add child views into ContainerView, add a constraint between the last child view and the ContainerView's bottom.
-
-Fix the auto layout error and finish.
 
