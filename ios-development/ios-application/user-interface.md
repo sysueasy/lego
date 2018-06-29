@@ -76,6 +76,22 @@ You should limit any drawing to the rectangle specified in the `rect` parameter.
 
 This method is called when a view is first displayed or when an event occurs that invalidates a visible part of the view. You should never call this method directly yourself. To invalidate part of your view, and thus cause that portion to be redrawn, call the [`setNeedsDisplay()`](https://developer.apple.com/documentation/uikit/uiview/1622437-setneedsdisplay) instead. These methods let the system know that it should update the view during the next drawing cycle.
 
+## Core Animation
+
+Core Animation provides high frame rates and smooth animations without burdening the CPU and slowing down your app. Most of the work required to draw each frame of an animation is done for you.
+
+Layers are often used to provide the backing store for views but can also be used without a view to display content. 
+
+```swift
+let layer = self.view.layer // the view's core animation layer used for rendering
+```
+
+A layer’s main job is to manage the visual content that you provide but the layer itself has visual attributes that can be set, such as a background color, border, and shadow. In addition to managing visual content, the layer also maintains information about the geometry of its content \(such as its position, size, and transform\) that is used to present that content onscreen. Modifying the properties of the layer is how you initiate **animations** on the layer’s content or geometry.
+
+If the layer object was created by a view, the view typically assigns itself as the layer’s **delegate** automatically, and you should not change that relationship.
+
+
+
 ## Reference
 
 * Design: [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/)
