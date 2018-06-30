@@ -7,7 +7,6 @@
   * [Open Source License](general/open-source-license.md)
   * [Insights](general/2018.md)
   * [NFC](general/nfc.md)
-  * [Resume](general/resume.md)
 * [Apple Inc](ios-development/README.md)
   * [Swift](ios-development/swift-notes.md)
   * [Objective-C](ios-development/j2objc.md)
