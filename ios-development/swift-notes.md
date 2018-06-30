@@ -161,6 +161,20 @@ class SomeClass {
 
 You do not have to provide an explicit implementation of a required initializer if you can satisfy the requirement with an inherited initializer.
 
+## Protocol
+
+A _protocol_ defines a blueprint of **methods**, **properties**, and other requirements that suit a particular task or piece of functionality. The protocol can then be _adopted_ by a **class**, **structure**, or **enumeration** to provide an actual implementation of those requirements. Any type that satisfies the requirements of a protocol is said to _conform_ to that protocol.
+
+In addition to specifying requirements that conforming types must implement, you can extend a protocol to implement some of these requirements or to implement additional functionality that conforming types can take advantage of.
+
+**Delegation** is a design pattern that enables a class or structure to hand off \(or _delegate_\) some of its responsibilities to an instance of another type. This design pattern is implemented by defining a protocol that encapsulates the delegated responsibilities, such that a conforming type \(known as a delegate\) is guaranteed to provide the functionality that has been delegated. Delegation can be used to respond to a particular action, or to retrieve data from an external source without needing to know the underlying type of that source.
+
+To prevent strong reference cycles, delegates are declared as **weak** references.
+
+```swift
+weak var delegate: DiceGameDelegate?
+```
+
 ## Auto Reference Counting
 
 In most cases, memory management “just works” in Swift. Every time you create a new instance of a class, ARC allocates a chunk of memory to store information about that instance. When an instance is no longer needed, ARC frees up the memory used by that instance so that the memory can be used for other purposes instead.
