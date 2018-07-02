@@ -2,9 +2,7 @@
 
 ## UIKit
 
-The [UIKit](https://developer.apple.com/documentation/uikit) framework provides the required infrastructure for your **iOS** or **tvOS** apps. It provides the window and view architecture for implementing your interface, the event handling infrastructure for delivering Multi-Touch and other types of input to your app, and the main [**run loop**](processes-and-threads.md#runloop) needed to manage interactions among the user, the system, and your app.
-
-Other features offered by the framework include animation support, document support, drawing and printing support, information about the current device, text management and display, search support, accessibility support, app extension support, and resource management.
+The [UIKit](https://developer.apple.com/documentation/uikit) framework provides the required infrastructure for your **iOS** or **tvOS** apps. It provides the window and view architecture for implementing your interface, the event handling infrastructure for delivering Multi-Touch and other types of input to your app, and the main [run loop](processes-and-threads.md#runloop) needed to manage interactions among the user, the system, and your app.
 
 The [structure](https://developer.apple.com/documentation/uikit/about_app_development_with_uikit) of UIKit apps is based on the **Model-View-Controller** \(MVC\) design pattern. Figure 4 represents a fairly typical structure of a UIKit app. You provide the model objects that represent your app’s data structures. UIKit provides most of the view objects. Coordinating the exchange of data between your data objects and the UIKit views are your view controllers and app delegate object.
 
@@ -12,15 +10,13 @@ The [structure](https://developer.apple.com/documentation/uikit/about_app_develo
 
 UIKit provides most of the objects in the controller and view layers of your app. Specifically, UIKit defines the [`UIView`](https://developer.apple.com/documentation/uikit/uiview) class, which is usually responsible for displaying your content onscreen. \(You can also render content directly to the screen using Metal and other system frameworks.\) The [`UIApplication`](https://developer.apple.com/documentation/uikit/uiapplication) object runs your app’s main event loop and manages your app’s overall life cycle.
 
-## Foundation
+## UIKit - Core App
 
-The [Foundation](https://developer.apple.com/documentation/foundation) framework provides a base layer of functionality for apps and frameworks, including data storage and persistence, text processing, date and time calculations, sorting and filtering, and networking. The classes, protocols, and data types defined by Foundation are used throughout the macOS, iOS, watchOS, and tvOS SDKs.
+### **Life Cycle**
 
-The [Swift Standard Library](https://developer.apple.com/documentation/swift/swift_standard_library) provides many of the same types available in the Foundation framework.
+![](../../.gitbook/assets/00b28327-17dc-4f0c-866f-29f854edfce3.png)
 
-## App Launch
-
-Ref: [About the app launch sequence](https://developer.apple.com/documentation/uikit/core_app/managing_your_app_s_life_cycle/responding_to_the_launch_of_your_app/about_the_app_launch_sequence)
+### Launch
 
 ![](../../.gitbook/assets/76e68c08-6b09-4bac-8a00-44df7a097a43.png)
 
@@ -32,23 +28,23 @@ Ref: [About the app launch sequence](https://developer.apple.com/documentation/u
 6. UIKit performs state restoration, which calls additional methods of your app delegate and view controllers.
 7. UIKit calls your app delegate's `application(_:didFinishLaunchingWithOptions:)` method.
 
-Every iOS app has exactly **one** instance of UIApplication \(or, very rarely, a subclass of UIApplication\). A major role of your app’s application object is to handle the initial routing of incoming user **events**\(e.g. touches\).
+### UIApplication
 
-The application object maintains a list of open windows \(**UIWindow** objects\) and through those can retrieve any of the app’s **UIView** objects.
+Every iOS app has exactly one instance of UIApplication \(or, very rarely, a subclass of UIApplication\). A major role of your app’s application object is to handle the initial routing of incoming user events\(e.g. touches\). The application object maintains a list of open windows \(UIWindow objects\) and through those can retrieve any of the app’s UIView objects.
 
-## Life Cycle
+### Universal Links
 
-![](../../.gitbook/assets/00b28327-17dc-4f0c-866f-29f854edfce3.png)
-
-## Universal Links
-
-Ref: [Allowing Apps and Websites to Link to Your Content](https://developer.apple.com/documentation/uikit/core_app/allowing_apps_and_websites_to_link_to_your_content)
-
-While universal links and custom URLs are both acceptable forms of deep linking, _universal links_ _are strongly recommended as a **best practice**_. Key **benefits** are \(1\) One URL works for both your website and your app, allowing your website to handle the link when your app is not installed. \(2\) iOS verifies the association through the Apple App Site Association file on your website, eliminating the possibility that other apps might claim your scheme and redirect your URLs.
+While [universal links](https://developer.apple.com/documentation/uikit/core_app/allowing_apps_and_websites_to_link_to_your_content) and custom URLs are both acceptable forms of deep linking, _universal links_ _are strongly recommended as a **best practice**_. Key **benefits** are \(1\) One URL works for both your website and your app, allowing your website to handle the link when your app is not installed. \(2\) iOS verifies the association through the Apple App Site Association file on your website, eliminating the possibility that other apps might claim your scheme and redirect your URLs.
 
 {% hint style="danger" %}
 Universal links offer a potential **attack** vector into your app, so make sure to validate all URL parameters and discard any malformed URLs.
 {% endhint %}
 
 UIKit apps can communicate through universal links. Supporting universal links allows **other apps** to send small amounts of data directly to your app without using a third-party server. Define the parameters that your app handles within the URL **query** string.
+
+## Foundation
+
+The [Foundation](https://developer.apple.com/documentation/foundation) framework provides a base layer of functionality for apps and frameworks, including data storage and persistence, text processing, date and time calculations, sorting and filtering, and networking. The classes, protocols, and data types defined by Foundation are used throughout the macOS, iOS, watchOS, and tvOS SDKs.
+
+The [Swift Standard Library](https://developer.apple.com/documentation/swift/swift_standard_library) provides many of the same types available in the Foundation framework.
 
