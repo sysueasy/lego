@@ -1,24 +1,18 @@
 # NFC
 
-## Reference
-
-[https://www.sony.net/Products/felica/NFC/index.html](https://www.sony.net/Products/felica/NFC/index.html)
-
-## Glance
+## Overview
 
 NFC stands for Near Field Communication - a wireless communication technology operating at 13.56 MHz over a short distance of approximately 10 cm. This technology enables communication among electronic devices, as well as between such devices and conventional _contactless IC cards_.
 
 The basis of NFC technology is the international standard ISO/IEC 18092 \(NFCIP-1\). In addition to **NFCIP-1**, NFC is defined by specifications developed by the NFC Forum, a non-profit industry association.
 
-In the NFC Forum specifications, the **Type-A** and **Type-B** communication technologies specified in the contactless IC card international standard **ISO/IEC 14443** are called **NFC-A** and **NFC-B**, respectively. The FeliCa communication technology, based on the Japanese Industrial Standard JIS X 6319.4, is called **NFC-F**. NFC Forum develops specifications to realize global compatibility and consistent handling of these technologies.
+In the NFC Forum specifications, the **Type-A** and **Type-B** communication technologies specified in the contactless IC card international standard **ISO/IEC 14443** are called **NFC-A** and **NFC-B**, respectively. The FeliCa communication technology, based on the Japanese Industrial Standard JIS X 6319.4, is called **NFC-F**. All NFC devices support NFC-F communication. NFC Forum develops specifications to realize global compatibility and consistent handling of these technologies.
 
-![ID-1 \(credit card-sized form\)](../.gitbook/assets/index_02.jpg)
+![](../.gitbook/assets/index_02.jpg)
 
-NFC-F, the FeliCa communication technology, is defined as one of the communication methods specified in NFCIP-1 and by the NFC Forum. As a result, all NFC devices support NFC-F communication.
+\* ID-1 \(credit card-sized form\)
 
 ## NFC: applications in 3 key areas
-
-Reference: [https://nfc-forum.org/wp-content/uploads/2017/08/NFC-Real-World-II.pdf](https://nfc-forum.org/wp-content/uploads/2017/08/NFC-Real-World-II.pdf)
 
 Three key areas of application for NFC: 
 
@@ -42,7 +36,7 @@ In **reader/writer** mode, the NFC-enabled device is capable of reading NFC Foru
 
 In June 2006, the NFC Forum introduced standardized technology architecture, initial specifications and tag formats for NFC-compliant devices. These include Data Exchange Format \(**NDEF**\), and three initial Record Type Definition \(**RTD**\) specifications for smart poster, text and Internet resource reading applications.
 
-In addition, the NFC Forum announced the initial set of **four tag formats** that all NFC Forum-compliant devices **must support**. These are based on **ISO 14443 Types A and B** \(the international standards for contactless smartcards\) and **FeliCa** \(conformant with the ISO 18092, passive communication mode, standard\).
+In addition, the NFC Forum announced the initial set of **four tag formats** that all NFC Forum-compliant devices must support. These are based on ISO 14443 Types A and B \(the international standards for contactless smartcards\) and FeliCa \(conformant with the ISO 18092, passive communication mode, standard\).
 
 * Type 1 is based on ISO 14443 A and is currently available exclusively from Innovision Research & Technology \(TopazTM\). It has a 96-byte memory capacity.
 * Type 2 is also based on ISO 14443 A and is currently exclusively available from Philips \(MIFARE UltraLight\). It has half the memory capacity of Type 1 tags.
@@ -61,13 +55,16 @@ With the iOS 11 release, Apple took NFC beyond just payments by allowing the iPh
 
 ## Felica
 
-[https://www.sony.net/Products/felica/about/scheme.html](https://www.sony.net/Products/felica/about/scheme.html)
-
-FeliCa is certified by ISO/IEC 15408 EAL4, which assures the security and reliability of the FeliCa system. 
-
-The transaction process \(including secure encryption\) between the reader/writer and the IC card is completed within 0.1 second:
+FeliCa is certified by ISO/IEC 15408 EAL4, which assures the security and reliability of the FeliCa system. The transaction process \(including secure encryption\) between the reader/writer and the IC card is completed within 0.1 second:
 
 1. Card detection
 2. Mutual Authentication
 3. Data read/write
+
+## Reference
+
+* Ref: [https://www.sony.net/Products/felica/NFC/index.html](https://www.sony.net/Products/felica/NFC/index.html)
+* Ref: [https://www.sony.net/Products/felica/about/scheme.html](https://www.sony.net/Products/felica/about/scheme.html)
+* Ref: [https://nfc-forum.org/wp-content/uploads/2017/08/NFC-Real-World-II.pdf](https://nfc-forum.org/wp-content/uploads/2017/08/NFC-Real-World-II.pdf)
+* Ref: [https://nfc.today/news/iphone-nfc-to-open-in-ios-12](https://nfc.today/news/iphone-nfc-to-open-in-ios-12)
 

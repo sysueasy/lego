@@ -1,13 +1,13 @@
 # Knowledge Tree
 
-数学类：
+Math：
 
 * Advanced Mathematics
 * Linear Algebra
 * Discrete Mathematics
 * Probability and Statistics
 
-专业必修课类：
+Major：
 
 * Software Engineering
 * [Programming in High Level Languages](../java/)
@@ -16,7 +16,7 @@
 * [Database Systems](../database/)
 * [Computer Networks](../computer-networks/)
 * Principles of Compiler Construction
-* System Analysis and Design
+* [System Analysis and Design](../system-analysis-and-design/)
 
 Master Degree:
 

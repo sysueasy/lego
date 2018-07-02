@@ -6,14 +6,6 @@ Ref: [https://developer.apple.com/swift/blog/?id=10](https://developer.apple.com
 
 Types in Swift fall into one of two categories: first, “**value types**”, where each instance keeps a unique copy of its data, usually defined as a `struct`, `enum`, or tuple. The second, “**reference types**”, where instances share a single copy of the data, and the type is usually defined as a class.
 
-## Implicitly Unwrapped Optionals
-
-Sometimes it’s clear from a program’s structure that an optional will always have a value, after that value is first set. In these cases, it’s useful to remove the need to check and unwrap the optional’s value every time it’s accessed. 
-
-For example: `var capitalCity: City!`means that the `capitalCity` property has a default value of nil, like any other optional, but can be accessed without the need to unwrap its value.
-
-Don’t use an implicitly unwrapped optional when there’s a possibility of a variable becoming nil at a later point.
-
 ## In-Out Parameters
 
 Function parameters are constants by default. If you want a function to modify a parameter’s value, and you want those changes to persist after the function call has ended, define that parameter as an in-out parameter instead.
@@ -53,13 +45,15 @@ struct Point {
 
 ## Initialization
 
-Unlike Objective-C initializers, Swift initializers do not return a value. When you assign a default value to a stored property, or set its initial value within an initializer, the value of that property is set directly, without calling any **property observers**. 
+Unlike Objective-C initializers, Swift initializers do not return a value.
 
 ```swift
 init() { 
 // perform some initialization here
 }
 ```
+
+When you assign a default value to a stored property, or set its initial value within an initializer, the value of that property is set directly, without calling any **property observers**. 
 
 **Structure** types automatically receive a memberwise initializer if they do not define any of their own custom initializers. Unlike a default initializer, the structure receives a memberwise initializer even if it has stored properties that do not have default values.
 
@@ -86,7 +80,7 @@ Swift defines two kinds of initializers for **class** types to help ensure all s
 
 A **designated** initializer fully initializes all properties introduced by that class and calls an appropriate superclass initializer to continue the initialization process up the **superclass chain**. Classes tend to have very few designated initializers, and it is quite common for a class to have only one.
 
-Initializers can call other initializers to perform part of an instance’s initialization. This process, known as initializer delegation, avoids duplicating code across multiple initializers. **Convenience** initializers are secondary initializers that call a designated initializer from the same class with some of the parameters set to default values.
+Initializers can call other initializers to perform part of an instance’s initialization. This process, known as initializer delegation, avoids duplicating code across multiple initializers. **Convenience** initializers are secondary initializers that call a designated initializer from the same class.
 
 ```swift
 class Food {
@@ -100,14 +94,6 @@ class Food {
 }
 ```
 
-Swift applies the following three rules for delegation calls between initializers:
-
-* A designated initializer must call a designated initializer from its immediate superclass.
-* A convenience initializer must call another initializer from the same class.
-* A convenience initializer must ultimately call a designated initializer.
-
-![](../.gitbook/assets/initializerdelegation01_2x.png)
-
 Class initialization in Swift is a two-phase process. In the first phase, each stored property is assigned an initial value by the class that introduced it. The second phase is the opportunity to customize its stored properties further \(optional\).
 
 Swift’s **two-phase initialization** is similar Objective-C. The main difference is that during phase 1, Objective-C assigns zero or null values to every property. Swift’s initialization flow is more flexible in that it lets you set custom initial values.
@@ -119,11 +105,13 @@ Swift performs four helpful safety-checks to make sure that two-phase initializa
 * A convenience initializer must delegate to another initializer before assigning a value to any property.
 * An initializer cannot call any instance methods, read the values of any instance properties, or refer to self as a value until after the first phase of initialization is complete.
 
+![](../.gitbook/assets/initializerdelegation01_2x.png)
+
 Once the top of the superclass chain is reached, and the final class in the chain has ensured that all of its stored properties have a value, the instance’s memory is considered to be fully initialized, and phase 1 is complete. Then in phase 2, working back down from the top of the chain, each designated initializer in the chain has the option to customize the instance further. Initializers are now able to access self and can modify its properties, call its instance methods, and so on.
 
-When you write a subclass initializer that matches a superclass _designated_ initializer, you are effectively providing an **override** of that designated initializer. This is true even if you are overriding an automatically provided default initializer.
+When you write a subclass initializer that matches a superclass designated initializer, you are effectively providing an **override** of that **designated** initializer. This is true even if you are overriding an automatically provided default initializer.
 
-Conversely, if you write a subclass initializer that matches a superclass _convenience_ initializer, that superclass convenience initializer can never be called directly by your subclass. As a result, you do not write the override modifier.
+Conversely, if you write a subclass initializer that matches a superclass convenience initializer, that superclass convenience initializer can never be called directly by your subclass. As a result, you do not write the override modifier.
 
 ```swift
 class RecipeIngredient: Food { 
@@ -133,11 +121,6 @@ class RecipeIngredient: Food {
         super.init(name: name) //delegates up
         self.name = self.name + "Ingredient" //assigning new value to an inherited property.
     } 
-    /* You always write the override modifier 
-    when overriding a superclass designated initializer, 
-    even if your subclass’s implementation of the initializer 
-    is a convenience initializer.
-    */
     override convenience init(name: String) { 
         self.init(name: name, quantity: 1) 
     }
@@ -149,17 +132,7 @@ Unlike subclasses in Objective-C, Swift subclasses do not **inherit** their supe
 * If your subclass doesn’t define any designated initializers, it automatically inherits all of its superclass designated initializers.
 * If your subclass provides an implementation of all of its superclass designated initializers—either by inheriting them as per rule 1, or by providing a custom implementation—then it automatically inherits all of the superclass convenience initializers.
 
-Write the **required** modifier before the definition of a class initializer to indicate that every subclass of the class must implement that initializer:
-
-```swift
-class SomeClass {
-    required init() {
-        // initializer implementation goes here
-    }
-}
-```
-
-You do not have to provide an explicit implementation of a required initializer if you can satisfy the requirement with an inherited initializer.
+Write the **required** modifier before the definition of a class initializer to indicate that every subclass of the class must implement that initializer. You do not have to provide an explicit implementation of a required initializer if you can satisfy the requirement with an inherited initializer.
 
 ## Protocol
 
@@ -230,7 +203,7 @@ class CreditCard {
 }
 ```
 
-However, there is a third scenario, in which both properties should always have a value, and neither property should ever be nil once initialization is complete. In this scenario, it’s useful to combine an unowned property on one class with an [implicitly unwrapped optional](swift-notes.md#implicitly-unwrapped-optionals) property on the other class.
+However, there is a third scenario, in which both properties should always have a value, and neither property should ever be nil once initialization is complete. In this scenario, it’s useful to combine an unowned property on one class with an implicitly unwrapped optional property on the other class.
 
 ```swift
 class Country {
