@@ -1,8 +1,22 @@
 # Documentation
 
-UIKit: [https://developer.apple.com/documentation/uikit](https://developer.apple.com/documentation/uikit)
+## UIKit
 
-Core App: [https://developer.apple.com/documentation/uikit/core\_app](https://developer.apple.com/documentation/uikit/core_app)
+The [UIKit](https://developer.apple.com/documentation/uikit) framework provides the required infrastructure for your **iOS** or **tvOS** apps. It provides the window and view architecture for implementing your interface, the event handling infrastructure for delivering Multi-Touch and other types of input to your app, and the main [**run loop**](processes-and-threads.md#runloop) needed to manage interactions among the user, the system, and your app.
+
+Other features offered by the framework include animation support, document support, drawing and printing support, information about the current device, text management and display, search support, accessibility support, app extension support, and resource management.
+
+The [structure](https://developer.apple.com/documentation/uikit/about_app_development_with_uikit) of UIKit apps is based on the **Model-View-Controller** \(MVC\) design pattern. Figure 4 represents a fairly typical structure of a UIKit app. You provide the model objects that represent your app’s data structures. UIKit provides most of the view objects. Coordinating the exchange of data between your data objects and the UIKit views are your view controllers and app delegate object.
+
+![](../../.gitbook/assets/ff7aa08f-4857-44ce-88d5-7dacbef84509.png)
+
+UIKit provides most of the objects in the controller and view layers of your app. Specifically, UIKit defines the [`UIView`](https://developer.apple.com/documentation/uikit/uiview) class, which is usually responsible for displaying your content onscreen. \(You can also render content directly to the screen using Metal and other system frameworks.\) The [`UIApplication`](https://developer.apple.com/documentation/uikit/uiapplication) object runs your app’s main event loop and manages your app’s overall life cycle.
+
+## Foundation
+
+The [Foundation](https://developer.apple.com/documentation/foundation) framework provides a base layer of functionality for apps and frameworks, including data storage and persistence, text processing, date and time calculations, sorting and filtering, and networking. The classes, protocols, and data types defined by Foundation are used throughout the macOS, iOS, watchOS, and tvOS SDKs.
+
+The [Swift Standard Library](https://developer.apple.com/documentation/swift/swift_standard_library) provides many of the same types available in the Foundation framework.
 
 ## App Launch
 
