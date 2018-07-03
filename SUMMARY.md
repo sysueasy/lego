@@ -1,11 +1,9 @@
 # Table of contents
 
-* [General](README.md)
-* [General](general/README.md)
+* [Welcome](README.md)
+* [Preface](general/README.md)
   * [Knowledge Tree](general/knowledge-tree.md)
-  * [Version Number](general/version-number.md)
-  * [Open Source License](general/open-source-license.md)
-  * [Insights](general/2018.md)
+  * [Discussion](general/general.md)
   * [NFC](general/nfc.md)
 * [Apple Inc](ios-development/README.md)
   * [Swift](ios-development/swift-notes.md)
