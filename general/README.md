@@ -1,4 +1,4 @@
 # Preface
 
-Welcome to my GitBook.
+This page intentionally left blank.
 
