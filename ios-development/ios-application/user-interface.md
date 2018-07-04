@@ -4,7 +4,7 @@
 
 Each view controller manages a view hierarchy. The size and position of the root view is determined by the object that owns it, which is either a parent view controller or the app’s window. The view controller that is owned by the window is the app’s root view controller and its view is sized to fill the window.
 
-View controllers load their views **lazily**. Accessing the `view` property for the first time loads or creates the view controller’s views. There are several ways to specify the views for a view controller:
+View controllers load their views **lazily**. Accessing the view property for the first time loads or creates the view controller’s views. There are several ways to specify the views for a view controller:
 
 * Specify the view controller and its views in your app’s [Storyboard](https://developer.apple.com/library/archive/documentation/General/Conceptual/Devpedia-CocoaApp/Storyboard.html#//apple_ref/doc/uid/TP40009071-CH99). \(preferred\)
 * Specify the views for a view controller using a [Nib file](https://developer.apple.com/library/archive/documentation/General/Conceptual/DevPedia-CocoaCore/NibFile.html#//apple_ref/doc/uid/TP40008195-CH34).
@@ -16,7 +16,7 @@ When using a storyboard to define your view controller and its associated views,
 
 As of iOS 8, **all rotation-related methods are deprecated**. Instead, **rotations** are treated as a change in the size of the view controller’s view and are therefore reported using the `viewWillTransition(to:with:)` method. When the interface orientation changes, UIKit calls this method on the window’s root view controller. That view controller then notifies its child view controllers, propagating the message throughout the view controller hierarchy. The `viewWillLayoutSubviews()` method is also called after the view is resized and positioned by its parent.
 
-The system intersects the view controller's supported orientations with the **app's** supported orientations \(as determined by the `Info.plist` file or the app delegate's `application(_:supportedInterfaceOrientationsFor:)` method\) and the **device's** supported orientations to determine whether to rotate. For example, the `.portraitUpsideDown` orientation is not supported on iPhone X.
+The system intersects the view controller's supported orientations with the **app's** supported orientations \(as determined by the Info.plist file or the app delegate's `application(_:supportedInterfaceOrientationsFor:)` method\) and the **device's** supported orientations to determine whether to rotate. For example, the `.portraitUpsideDown` orientation is not supported on iPhone X.
 
 When the user changes the device orientation, the system calls `supportedInterfaceOrientations` on the **root** view controller or the **topmost presented** view controller that fills the window. If the view controller supports the new orientation, the window and view controller are rotated to the new orientation. This method is only called if the view controller's `shouldAutorotate` method returns true.
 
@@ -40,7 +40,7 @@ Views can adjust the size and position of their subviews. Use Auto Layout to def
 
 By default, when a subview’s visible area extends outside of the bounds of its superview, no clipping of the subview's content occurs. Use the `clipsToBounds` property to change that behavior.
 
-The geometry of each view is defined by its `frame` and `bounds` properties. The `frame`property defines the origin and dimensions of the view in the **coordinate** system of its superview. The `bounds` property defines the internal dimensions of the view as it sees them and _is used almost exclusively in custom drawing code_.
+The geometry of each view is defined by its **frame** and **bounds** properties. The frame property defines the origin and dimensions of the view in the **coordinate** system of its superview. The bounds property defines the internal dimensions of the view as it sees them and _is used almost exclusively in custom drawing code_.
 
 ### Animation
 
@@ -70,8 +70,6 @@ The default implementation of `draw(_:)` does nothing. Subclasses that use techn
 
 UIKit creates and configures a graphics context for drawing and adjusts the transform of that context so that its origin matches the origin of your view’s bounds rectangle. You can get a reference to the graphics context using the [`UIGraphicsGetCurrentContext()`](https://developer.apple.com/documentation/uikit/1623918-uigraphicsgetcurrentcontext) function, but do not establish a strong reference to the graphics context because it can change between calls to the `draw(_:)` method.
 
-You should limit any drawing to the rectangle specified in the `rect` parameter. In addition, if the [`isOpaque`](https://developer.apple.com/documentation/uikit/uiview/1622622-isopaque) property of your view is set to `true`, your `draw(_:)` method must totally fill the specified rectangle with opaque content.
-
 This method is called when a view is first displayed or when an event occurs that invalidates a visible part of the view. You should never call this method directly yourself. To invalidate part of your view, and thus cause that portion to be redrawn, call the [`setNeedsDisplay()`](https://developer.apple.com/documentation/uikit/uiview/1622437-setneedsdisplay) instead. These methods let the system know that it should update the view during the next drawing cycle.
 
 ## CALayer
@@ -84,13 +82,9 @@ Layers are often used to provide the backing store for views but can also be use
 let layer = self.view.layer // the view's core animation layer used for rendering
 ```
 
-A layer’s main job is to manage the visual content that you provide but the layer itself has visual attributes that can be set, such as a background color, border, and shadow. In addition to managing visual content, the layer also maintains information about the geometry of its content \(such as its position, size, and transform\) that is used to present that content onscreen. Modifying the properties of the layer is how you initiate **animations** on the layer’s content or geometry.
+A layer’s main job is to manage the visual content that you provide but the layer itself has visual attributes that can be set, such as a background color, border, and shadow. In addition to managing visual content, the layer also maintains information about the geometry of its content \(such as its position, size, and transform\) that is used to present that content onscreen. Modifying the properties of the layer is how you initiate animations on the layer’s content or geometry.
 
 If the layer object was created by a view, the view typically assigns itself as the layer’s **delegate** automatically, and you should not change that relationship.
-
-[`masksToBounds`](https://developer.apple.com/documentation/quartzcore/calayer/1410896-maskstobounds) A Boolean indicating whether sublayers are clipped to the layer’s bounds. Animatable.
-
-[`cornerRadius`](https://developer.apple.com/documentation/quartzcore/calayer/1410818-cornerradius) Setting the radius to a value greater than 0.0 causes the layer to begin drawing rounded corners on its background. By default, the corner radius does not apply to the image in the layer’s contents property; it applies only to the background color and border of the layer. However, setting the masksToBounds property to **true** causes the content to be clipped to the rounded corners.
 
 ## UIBlurEffect
 

@@ -42,6 +42,34 @@ Universal links offer a potential **attack** vector into your app, so make sure 
 
 UIKit apps can communicate through universal links. Supporting universal links allows **other apps** to send small amounts of data directly to your app without using a third-party server. Define the parameters that your app handles within the URL **query** string.
 
+## UIKit - Interactions
+
+Apps receive and **handle events** using _responder objects_. A responder object is any instance of the `UIResponder` class, and common subclasses include `UIView`, `UIViewController`, `UIWindow`, and `UIApplication`. Responders receive the raw event data \([`UIEvent`](https://developer.apple.com/documentation/uikit/uievent)\) and must either handle the event or forward it to another responder object.
+
+When your app receives an event, UIKit automatically directs that event to the most appropriate responder object, known as the **first responder**. Unhandled events are passed from responder to responder in the active **responder chain**, which is the dynamic configuration of your app’s responder objects.
+
+You can alter the responder chain by overriding the `next` property of your responder objects. Many UIKit classes already override this property and return specific objects.
+
+* UIView: If the view is the root view of a view controller, the next responder is the view controller.
+* UIViewController: If the view controller’s view is the root view of a window, the next responder is the window object. If the view controller was presented by another view controller, the next responder is the presenting view controller.
+* UIWindow: The window's next responder is the UIApplication object.
+* UIApplication: The next responder is the app delegate.
+
+![](../../.gitbook/assets/f17df5bc-d80b-4e17-81cf-4277b1e0f6e4.png)
+
+UIKit designates an object as the first responder to an event based on the **type** of that event. There are several kinds of events:
+
+* Touch events are the most common and are delivered to the view in which the touch originally occurred.
+* Motion events are UIKit triggered and are separate from the motion events reported by the Core Motion framework. \(e.g shake to undo\)
+* Remote-control events allow a responder object to receive commands from an external accessory or headset.
+* Press events represent interactions with a game controller, AppleTV remote, or other device that has physical buttons.
+
+To handle a specific type of event, a responder must **override** the corresponding methods. For example, to handle touch events, a responder implements the [`touchesBegan(_:with:)`](https://developer.apple.com/documentation/uikit/uiresponder/1621142-touchesbegan), etc. methods.
+
+**Gesture** recognizers receive touch and press events before their view does.
+
+UIKit compares the **touch** location to the bounds of view objects in the view hierarchy. The [`hitTest(_:with:)`](https://developer.apple.com/documentation/uikit/uiview/1622469-hittest) method of [`UIView`](https://developer.apple.com/documentation/uikit/uiview) traverses the view hierarchy, looking for the **deepest** subview that contains the specified touch, which becomes the first responder for the touch event. If a touch location is outside of a view’s bounds, the `hitTest(_:with:)` method ignores that view and all of its subviews.
+
 ## Foundation
 
 The [Foundation](https://developer.apple.com/documentation/foundation) framework provides a base layer of functionality for apps and frameworks, including:
