@@ -9,8 +9,10 @@ google/j2objc: [https://developers.google.com/j2objc/](https://developers.google
 J2ObjC is an open-source command-line tool from Google that translates Java source code to Objective-C for the iOS platform. The goal is to write an app's non-UI code \(such as **business logic** and **data models**\) in Java, which is then shared by web apps \(using [GWT](http://www.gwtproject.org/)\), Android apps, and iOS apps.
 
 {% hint style="info" %}
-GWT is a development toolkit for building and optimizing complex **browser-based** applications.
+GWT \(Google Web Toolkit\) is a development toolkit for building and optimizing complex **browser-based** applications.
 {% endhint %}
+
+See [How Google Inbox shares 70% of its code across Android, iOS, and the Web](https://arstechnica.com/information-technology/2014/11/how-google-inbox-shares-70-of-its-code-across-android-ios-and-the-web/). Google has built itself a good enough arsenal of cross compilers that it can write an app's logic once for Android in Java, and can then cross-compile to Objective-C for iOS and JavaScript for browsers. Java-to-JavaScript is handled by the **GWT**.
 
 ## KVO and KVC
 
