@@ -1,6 +1,6 @@
 # 5. Concurrency
 
-The Java platform is designed from the ground up to support concurrent programming. Since version 5.0, the Java platform has also included high-level concurrency APIs in the java.util.concurrent packages.
+The Java platform is designed from the ground up to support concurrent programming. Since version 5.0, the Java platform has also included high-level concurrency APIs in the `java.util.concurrent` packages.
 
 ## Processes and Threads
 
@@ -19,18 +19,25 @@ There are two basic strategies for using Java Thread objects to create a concurr
 * To directly control thread creation and management, simply instantiate [`Thread`](https://docs.oracle.com/javase/tutorial/essential/concurrency/runthread.html) each time the application needs to initiate an asynchronous task.
 * To abstract thread management from the rest of your application, pass the application's tasks to an `executor`.
 
-`Thread.sleep` causes the current thread to suspend execution for a specified period. This is an efficient means of making processor time available to the other threads of an application or other applications that might be running on a computer system. The `join` method allows one thread to wait for the completion of another.
+```java
+public class HelloRunnable implements Runnable {
+    public void run() {
+        System.out.println("Hello from a thread!");
+    }
+    public static void main(String args[]) {
+        (new Thread(new HelloRunnable())).start();
+    }
+}
+```
+
+`Thread.sleep` causes the current thread to suspend execution for a specified period. This is an efficient means of making processor time available to the other threads of an application or other applications that might be running on a computer system.
 
 ## Synchronization
 
 Threads communicate primarily by sharing access to fields and the objects reference fields refer to. This form of communication is extremely efficient, but makes two kinds of errors possible: thread interference and memory consistency errors. The tool needed to prevent these errors is **synchronization**.
 
-* **Interference** happens when two operations, running in different threads, but acting on the same data, **interleave**.
-* **Memory consistency errors** occur when different threads have inconsistent views of what should be the same data. The key to avoiding memory consistency errors is understanding the **happens-before** relationship.
-
-However, synchronization can introduce **thread contention**, which occurs when two or more threads try to access the same resource simultaneously and cause the Java runtime to execute one or more threads more slowly, or even suspend their execution. **Starvation** and **livelock** are forms of thread contention.
-
-### S**ynchronized methods**
+* **Thread** **Interference** happens when two operations, running in different threads, but acting on the same data, **interleave**.
+* **Memory consistency errors** occur when different threads have inconsistent views of what should be the same data.
 
 The Java programming language provides two basic synchronization idioms: **synchronized methods** and synchronized statements.
 
@@ -43,14 +50,19 @@ public class SynchronizedCounter {
 }
 ```
 
-Making these methods synchronized has two effects:
+When a thread invokes a synchronized method, it automatically acquires the **intrinsic lock** for that method's object and releases it when the method returns. The lock release occurs even if the return was caused by an uncaught exception. Making these methods synchronized has two effects:
 
 * First, it is not possible for two invocations of synchronized methods on the same object to **interleave**. When one thread is executing a synchronized method for an object, all other threads that invoke synchronized methods for the same object block \(suspend execution\) until the first thread is done with the object.
 * Second, when a synchronized method exits, it automatically establishes a **happens-before** relationship with any subsequent invocation of a synchronized method for the same object. This guarantees that changes to the state of the object are visible to all threads.
 
-### Intrinsic lock
+### Liveness
 
-When a thread invokes a synchronized method, it automatically acquires the **intrinsic lock** for that method's object and releases it when the method returns. The lock release occurs even if the return was caused by an uncaught exception.
+However, synchronization can introduce **thread contention**, which occurs when two or more threads try to access the same resource simultaneously and cause the Java runtime to execute one or more threads more slowly, or even suspend their execution.
+
+A concurrent application's ability to execute in a timely manner is known as its **liveness**. The most common kind of **liveness problem** is **deadlock**. Deadlock describes a situation where two or more threads are blocked forever, waiting for each other. Two other much less common problems are starvation and livelock. Starvation and livelock are forms of thread contention.
+
+* **Starvation** describes a situation where a thread is unable to gain regular access to shared resources and is unable to make progress. This happens when shared resources are made unavailable for long periods by "greedy" threads.
+* A thread often acts in response to the action of another thread. If the other thread's action is also a response to the action of another thread, then **livelock** may result.
 
 ### Atomic Access
 
@@ -60,18 +72,6 @@ There are actions you can specify that are atomic:
 
 * Reads and writes are atomic for _reference_ variables and for most _primitive_ variables \(all types except _long_ and _double_\).
 * Reads and writes are atomic for all variables declared **volatile** \(including long and double variables\).
-
-### Liveness
-
-Synchronized methods enable a simple strategy for preventing thread interference and memory consistency errors: if an object is visible to more than one thread, all reads or writes to that object's variables are done through synchronized methods. This strategy is effective, but can present liveness problems.
-
-A concurrent application's ability to execute in a timely manner is known as its **liveness**. The most common kind of liveness problem is **deadlock**. Deadlock describes a situation where two or more threads are blocked forever, waiting for each other.
-
-Two other much less common problems are starvation and livelock.
-
-**Starvation** describes a situation where a thread is unable to gain regular access to shared resources and is unable to make progress. This happens when shared resources are made unavailable for long periods by "greedy" threads.
-
-A thread often acts in response to the action of another thread. If the other thread's action is also a response to the action of another thread, then **livelock** may result.
 
 ### Guarded Blocks
 
