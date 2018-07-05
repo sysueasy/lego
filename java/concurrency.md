@@ -73,6 +73,8 @@ There are actions you can specify that are atomic:
 * Reads and writes are atomic for _reference_ variables and for most _primitive_ variables \(all types except _long_ and _double_\).
 * Reads and writes are atomic for all variables declared **volatile** \(including long and double variables\).
 
+The [`java.util.concurrent.atomic`](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/atomic/package-summary.html) package defines classes that support atomic operations on single variables.
+
 ### Guarded Blocks
 
 Threads often have to coordinate their actions. The most common coordination idiom is the [guarded block](https://docs.oracle.com/javase/tutorial/essential/concurrency/guardmeth.html). Such a block begins by polling a condition that must be true before the block can proceed. 
@@ -104,7 +106,27 @@ Immutable objects are particularly useful in concurrent applications. Since they
 
 In all of the previous examples, there's a close connection between the task being done by a new thread, as defined by its `Runnable` object, and the thread itself, as defined by a `Thread` object. This works well for small applications, but in large-scale applications, it makes sense to separate thread management and creation from the rest of the application. Objects that encapsulate these functions are known as **executors**.
 
-Most of the executor implementations in `java.util.concurrent` use **thread pools**, which consist of **worker threads**. This kind of thread exists separately from the `Runnable` and `Callable` tasks it executes and is often used to execute multiple tasks. Using worker threads minimizes the overhead due to thread creation. Thread objects use a significant amount of memory, and in a large-scale application, allocating and deallocating many thread objects creates a significant memory management overhead.
+The `Executor` interface does not strictly require that execution be asynchronous. In this simplest case, an executor can run the submitted task immediately in the caller's thread:
+
+```java
+ class DirectExecutor implements Executor {
+   public void execute(Runnable r) {
+     r.run();
+   }
+}
+```
+
+More typically, tasks are executed in some thread other than the caller's thread. The executor below spawns a new thread for each task.
+
+```java
+class ThreadPerTaskExecutor implements Executor {
+   public void execute(Runnable r) {
+     new Thread(r).start();
+   }
+}
+```
+
+Most of the executor implementations in `java.util.concurrent` use **thread pools**, which consist of **worker threads**, one is [`ThreadPoolExecutor`](https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/ThreadPoolExecutor.html). This kind of thread exists separately from the `Runnable` and `Callable` tasks it executes and is often used to execute multiple tasks. Using worker threads minimizes the overhead due to thread creation. Thread objects use a significant amount of memory, and in a large-scale application, allocating and deallocating many thread objects creates a significant memory management overhead.
 
 One common type of thread pool is the **fixed thread pool**. An important advantage of the fixed thread pool is that applications using it degrade gracefully. To understand this, consider a web server application where each HTTP request is handled by a separate thread. If the application simply creates a new thread for every new HTTP request, and the system receives more requests than it can handle immediately, the application will suddenly stop responding to all requests when the overhead of all those threads exceed the capacity of the system.
 
@@ -115,8 +137,4 @@ One common type of thread pool is the **fixed thread pool**. An important advant
 [`ConcurrentMap`](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ConcurrentMap.html) is a subinterface of `java.util.Map` that defines useful atomic operations. Making these operations atomic helps avoid synchronization. The standard general-purpose implementation of ConcurrentMap is `ConcurrentHashMap`, which is a concurrent analog of `HashMap`.
 
 All of these [collections](https://docs.oracle.com/javase/tutorial/essential/concurrency/collections.html) help avoid memory consistency errors by defining a happens-before relationship between an operation that adds an object to the collection with subsequent operations that access or remove that object.
-
-### Others
-
-The [`java.util.concurrent.atomic`](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/atomic/package-summary.html) package defines classes that support atomic operations on single variables.
 
