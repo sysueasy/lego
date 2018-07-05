@@ -28,7 +28,13 @@ Managed objects typically represent data held in a persistent store. In some sit
 
 An instance of [`NSFetchRequest`](https://developer.apple.com/documentation/coredata/nsfetchrequest) collects the criteria needed to select held in a persistent store. A fetch request must contain an entity description \(an instance of `NSEntityDescription`\) or an entity name that specifies which entity to search. It frequently also contains a predicate \(an instance of `NSPredicate`\) that specifies which properties to filter, and an array of sort descriptors \(instances of `NSSortDescriptor`\) that specify how the returned objects should be ordered.
 
+```swift
+let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Ticket")
+let predicate = NSPredicate(format: "ID > 50")
+fetchRequest.predicate = predicate
+```
+
 You often predefine fetch requests in a managed object model. [`NSManagedObjectModel`](https://developer.apple.com/documentation/coredata/nsmanagedobjectmodel)provides an API to retrieve a stored fetch request by name. Stored fetch requests can include placeholders for variable substitution, and so serve as templates for later completion.
 
-Core Data is designed to work in a **multithreaded** environment. However, not every object under the Core Data framework is thread safe.In general, avoid doing data processing on the main queue that is not user-related since data processing can be CPU-intensive. Do not pass `NSManagedObject` instances between queues.
+Core Data is designed to work in a **multithreaded** environment. However, not every object under the Core Data framework is thread safe. In general, avoid doing data processing on the main queue that is not user-related since data processing can be CPU-intensive. Do not pass `NSManagedObject` instances between queues.
 
