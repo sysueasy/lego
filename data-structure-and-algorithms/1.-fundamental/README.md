@@ -6,5 +6,9 @@ It is also important to recognize that a program in a particular language is jus
 
 Algorithms go hand in hand with data structures—schemes for organizing data that leave them amenable to efficient processing by an algorithm.
 
+We refer to the programming constructs, software libraries, and operating system features that we use to implement and describe algorithms as our **programming model**.
 
+A **basic model** for Java programming is to develop a program that addresses a specific computational task by creating a _library of static methods_, one of which is named main\(\).
+
+**Modular programming**: we build libraries of static methods \(modules\) and a static method in one library can call static methods defined in other libraries.
 
