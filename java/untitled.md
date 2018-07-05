@@ -61,8 +61,8 @@ public class ShadowTest {
         }
     }
     // x = 23
-    //this.x = 1
-    //ShadowTest.this.x = 0
+    // this.x = 1
+    // ShadowTest.this.x = 0
 }
 ```
 

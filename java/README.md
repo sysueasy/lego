@@ -10,8 +10,8 @@ The Java platform is a software-only platform that runs on top of other hardware
 
 Java platform gives you the following features:
 
-* Development Tools: **javac** compiler, the **java** launcher, and the **javadoc** documentation tool.
-* API: The **API** is a large collection of ready-made software components that is grouped into libraries of related classes and interfaces; these libraries are known as **packages**.
+* Development Tools: **javac** compiler, the java launcher, and the **javadoc** documentation tool.
+* API: The API is a large collection of ready-made software components that is grouped into libraries of related classes and interfaces; these libraries are known as **packages**.
 * Deployment Technologies: The **JDK** software provides standard mechanisms such as the Java Web Start software and Java Plug-In software for deploying your applications to end users.
 * User Interface Toolkits: The JavaFX, Swing, and Java 2D toolkits make it possible to create sophisticated Graphical User Interfaces \(**GUIs**\).
 * Integration Libraries
