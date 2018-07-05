@@ -6,9 +6,9 @@ Execute code **concurrently** on **multicore** hardware by submitting work to **
 
 GCD provides and manages FIFO queues to which your application can submit tasks in the form of block objects. Work submitted to dispatch queues are executed on a **pool of threads** fully managed by the system. _No guarantee_ is made as to the thread on which a task executes.
 
-Each work item can be executed either **synchronously** or **asynchronously**. When a work item is executed synchronously with the sync method, the program waits until execution finishes before the method call returns. When a work item is executed asynchronously with the async method, the method call **returns** immediately.
-
 A dispatch queue can be either **serial**, so that work items are executed _one at a time_, or it can be **concurrent**, so that work items are _dequeued in order,_ but _run all at once and can finish in any order_. Both serial and concurrent queues process work items in first in, first-out \(FIFO\) order.
+
+Each work item can be executed either **synchronously** or **asynchronously**. When a work item is executed synchronously with the sync method, the program waits until execution finishes before the method call returns. When a work item is executed asynchronously with the async method, the method call **returns** immediately.
 
 When an app launches, the system automatically creates a special queue called the **main** _queue_. Work items enqueued to the main queue execute serially on your app’s **main thread**. Attempting to **synchronously** execute a work item on the main queue results in **deadlock**.
 
@@ -22,11 +22,9 @@ In addition to the serial main queue, the system also creates a number of **glob
 let queue = DispatchQueue.global(qos: .default)
 ```
 
-You can also create **custom queue** if you will, as you will see soon.
+You can also create **custom queue** if you will.
 
 ## DispatchQueue
-
-[`DispatchQueue`](https://developer.apple.com/documentation/dispatch/dispatchqueue) manages the execution of work items. Each work item submitted to a queue is processed on a **pool of threads** managed by the system.
 
 To create a queue is as simple as:
 
@@ -48,7 +46,7 @@ You create a **concurrent** queue by:
 let queue = DispatchQueue(label: "com.yianzhou.whatsnew", attributes: .concurrent)
 ```
 
-Any pending blocks submitted to a queue _hold a reference_ to that queue, so the queue is not deallocated until all pending blocks have completed.
+Any pending blocks submitted to a queue **hold a reference** to that queue, so the queue is not deallocated until all pending blocks have completed.
 
 Submits a block to a dispatch queue for synchronous execution and waits until that block completes:
 
@@ -87,7 +85,7 @@ workItem.notify(queue: DispatchQueue.main) {
 
 To cancel a work item is simple: `workItem.cancel()`, be aware that you can only cancel an item before it reaches the head of a queue and starts executing.
 
-Like [immutable object](../../java/concurrency.md#immutable-objects) in Java, constants in Swift is read-only and thread-safe. However, collection types like `Array` and `Dictionary` are not thread-safe when declared mutable. There's no such concern in a serial dispatch queue because tasks are executed one by one. But thread interference and memory consistency errors can occur in a concurrent dispatch queue.
+Like [immutable object](../../java/concurrency.md#immutable-objects) in Java, constants in Swift is read-only and **thread-safe**. However, collection types like `Array` and `Dictionary` are not thread-safe when declared mutable. There's no such concern in a serial dispatch queue because tasks are executed one by one. But thread interference and memory consistency errors can occur in a concurrent dispatch queue.
 
 You set `.barrier` flag to a `DispatchWorkItem` before submit it to a concurrent queue to indicate that it should be the only item executed on the specified queue for that particular time.
 
@@ -101,7 +99,7 @@ let workItem = DispatchWorkItem(flags: [.barrier]) {
 
 [`DispatchQoS`](https://developer.apple.com/documentation/dispatch/dispatchqos) encapsulates quality of service classes. A **quality of service** \(QoS\) class categorizes work to be performed on a `DispatchQueue`. By specifying a QoS to work, you indicate its importance, and the system prioritizes it and schedules it accordingly.
 
-Because higher priority work is performed more quickly and with more resources than lower priority work, it typically requires more energy than lower priority work. Accurately specifying appropriate QoS classes for the work your app performs ensures that your app is responsive and energy efficient. `DispatchQoS.QoSClass` encapsulates quality of service classes: 
+Because higher priority work is performed more quickly and with more resources than lower priority work, it typically requires more **energy** than lower priority work. Accurately specifying appropriate QoS classes for the work your app performs ensures that your app is responsive and energy efficient. `DispatchQoS.QoSClass` encapsulates quality of service classes: 
 
 * userInteractive: highest priority
 * userInitiated

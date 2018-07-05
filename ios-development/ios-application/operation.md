@@ -13,7 +13,7 @@ The `RunLoop` class is generally not considered to be **thread-safe** and its me
 Because the `Operation` class is an abstract class, you do not use it directly but instead subclass or use one of the system-defined subclasses to perform the actual task:
 
 * The `NSInvocationOperation` implements a **non-concurrent** operation.
-* The `BlockOperation` manages the **concurrent** execution of one or more blocks. You can use this object to execute several blocks at once without having to create separate operation objects for each. When executing more than one block, the operation itself is considered finished only when all blocks have finished executing. Blocks added to a block operation are dispatched with default priority to an appropriate work queue.
+* The `BlockOperation` manages the **concurrent** execution of one or more blocks. You can use this object to execute several blocks at once without having to create separate operation objects for each. When executing more than one block, the operation itself is considered finished only when all blocks have finished executing. Blocks added to a block operation are dispatched with default **priority** to an appropriate work queue.
 
 An operation object is a single-shot object—that is, it executes its task once and cannot be used to execute it again. You typically execute operations by adding them to an operation queue \(an instance of the `OperationQueue` class\). An operation queue executes its operations either directly, by running them on secondary threads, or indirectly using the `libdispatch` library \(also known as **Grand Central Dispatch**\).
 
