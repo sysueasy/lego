@@ -1,10 +1,10 @@
 # Algorithms and Data Structures
 
-## Reference
+Textbook: [Algorithms, 4th Edition by Robert Sedgewick and Kevin Wayne](https://algs4.cs.princeton.edu/home/)
 
-[Algorithms, 4th Edition by Robert Sedgewick and Kevin Wayne](https://algs4.cs.princeton.edu/home/)
+Source code in textbook: [https://github.com/kevin-wayne/algs4](https://github.com/kevin-wayne/algs4)
 
-[VisuAlgo - 数据结构和算法动态可视化 \(Chinese\)](https://visualgo.net/)
+Practice: [VisuAlgo - 数据结构和算法动态可视化 \(Chinese\)](https://visualgo.net/)
 
-[LintCode](https://www.lintcode.com/)
+Practice: [LintCode](https://www.lintcode.com/)
 
