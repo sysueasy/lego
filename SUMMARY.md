@@ -1,10 +1,11 @@
 # Table of contents
 
 * [Welcome](README.md)
-* [Preface](general/README.md)
+* [General](general/README.md)
   * [Knowledge Tree](general/knowledge-tree.md)
   * [Discussion](general/general.md)
   * [NFC](general/nfc.md)
+  * [Git](general/git.md)
 * [Apple Inc](ios-development/README.md)
   * [Swift](ios-development/swift-notes.md)
   * [Objective-C](ios-development/j2objc.md)
