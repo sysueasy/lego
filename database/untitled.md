@@ -1,10 +1,6 @@
----
-description: >-
-  The premise of Chapters 3 and 4 is that you have received one or more tables
-  of data from some source that are to be stored in a new database.
----
-
 # 3. Relational Model and Normalization
+
+The premise of Chapters 3 and 4 is that you have received one or more tables of data from some source that are to be stored in a new database.
 
 A **relation** is a special case of a table. All relations are tables, but not all tables are relations.
 
@@ -32,7 +28,7 @@ Some SQL statements do produce tables with duplicate rows. Such row duplication
 
 In general, a functional dependency exists when the value of one or more attributes **determines** the value of other attribute\(s\).
 
-If each value of A will be paired with one and only one value of B, then we can say that B is **functionally dependent** upon A and written as `A->B` .
+If each value of A will be paired with one and only one value of B, then we can say that B is **functionally dependent** upon A and written as`A->B`.
 
 For example, we can say that EmployeeName is functionally dependent on Employee\#, written as:`Employee# -> EmployeeName`where employee\# is called the **determinant**.
 
@@ -67,7 +63,7 @@ These 3 constraints are to create **database integrity**.
 Relations are categorized into **normal forms** based on the kinds of problems that they have. To understand normal forms, we need first to define **modification anomalies**.
 
 * deletion anomaly: When we delete one   row, the structure of this table forces us to lose facts about two different things.
-*  insertion anomaly: The structure of   this table forces us to enter facts about two entities when we just want to enter facts about one.
+* insertion anomaly: The structure of   this table forces us to enter facts about two entities when we just want to enter facts about one.
 * update anomaly: changing existing data creates a data inconsistency to other rows.
 
 Normalization theory can be divided into three major categories:
@@ -102,7 +98,7 @@ When you put multivalued dependencies into a table of their own, they disappear.
 
 When someone gives you a set of tables and asks you to construct a database to store them, your first step should be to assess the tables’ structure and content. The next steps depend on whether you are creating an updatable database or a read-only database.
 
-Before we begin, let’s first review the advantages and disadvantages of normalization: On the positiveside, 
+Before we begin, let’s first review the advantages and disadvantages of normalization: On the positive side, 
 
 * eliminates modification anomalies
 * reduces data duplication
@@ -121,7 +117,7 @@ Unlike functional dependencies, the anomalies from multivalued dependencies are 
 
 ### Design a read-only database
 
-Read-only databases are used in **business intelligence** \(BI\) systems for producing information for assessment, analysis, planning, and control.
+Read-only databases are used in business intelligence \(BI\) systems for producing information for assessment, analysis, planning, and control.
 
 Often the data for a read-only database are extracted from operational databases. If a database is never updated, then no modification anomalies can occur. In almost all cases, normalization of the tables in a read-only database is a **bad** idea, you will need to **denormalize**, or join, the data prior to storage.
 
