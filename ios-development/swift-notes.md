@@ -12,6 +12,10 @@ Function parameters are constants by default. If you want a function to modify a
 
 You place an ampersand \(&\) directly before a variable’s name when you pass it as an argument to an in-out parameter, to indicate that it can be modified by the function: `swapTwoInts(&someInt, &anotherInt)`
 
+## Closure
+
+Closures are self-contained blocks of functionality that can be passed around and used in your code. Closures can **capture** and **store** references to any constants and variables from the context in which they are defined.
+
 ## Enumerations
 
 An enumeration defines a common type for a group of related values and enables you to work with those values in a type-safe way within your code.
