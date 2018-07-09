@@ -64,4 +64,5 @@
   * [5. Trends and Future](system-analysis-and-design/5.-trends-and-future.md)
 * [Operation System](operation-system/README.md)
   * [1. Introduction](operation-system/1.-introduction.md)
+  * [2. Process Management](operation-system/2.-process-management.md)
 
