@@ -12,7 +12,7 @@ Major：
 * Software Engineering
 * [Programming in High Level Languages](../java/)
 * [Data Structures and Algorithms](../data-structure-and-algorithms/)
-* [Operating Systems](../operation-system.md)
+* [Operating Systems](../operation-system/)
 * [Database Systems](../database/)
 * [Computer Networks](../computer-networks/)
 * Principles of Compiler Construction
