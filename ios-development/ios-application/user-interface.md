@@ -60,7 +60,7 @@ If you want a given view to size itself to its parent view, you should add it to
 
 ### LayoutSubviews
 
-You should not call `layoutSubviews()` directly. If you want to force a layout update, call the `setNeedsLayout()` method instead to do so. This method makes a note of the request and returns immediately. Because this method does not force an immediate update, but instead waits for the next update cycle, you can use it to **invalidate** the layout of multiple views before any of those views are updated. This behavior allows you to consolidate all of your layout updates to one update cycle, which is usually better for performance.
+You should not call `layoutSubviews()` directly. If you want to force a layout update, call the ****`setNeedsLayout()` method instead to do so. This method makes a note of the request and returns immediately. Because this method does not force an immediate update, but instead waits for the next update cycle, you can use it to invalidate the layout of multiple views before any of those views are updated. This behavior allows you to consolidate all of your layout updates to one update cycle, which is usually better for performance.
 
  If you want to update the layout of your views immediately, call the `layoutIfNeeded()` method. When using Auto Layout, the layout engine updates the position of views as needed to satisfy changes in constraints. Using the view that receives the message as the root view, this method lays out the view subtree starting at the root. If no layout updates are pending, this method exits without modifying the layout or calling any layout-related callbacks.
 
@@ -74,12 +74,12 @@ This method is called when a view is first displayed or when an event occurs tha
 
 ## CALayer
 
-**Core Animation** provides high frame rates and smooth animations without burdening the CPU and slowing down your app. Most of the work required to draw each frame of an animation is done for you.
+[Core Animation](https://developer.apple.com/documentation/quartzcore) provides high frame rates and smooth animations without burdening the CPU and slowing down your app. Most of the work required to draw each frame of an animation is done for you.
 
 Layers are often used to provide the backing store for views but can also be used without a view to display content. 
 
 ```swift
-let layer = self.view.layer // the view's core animation layer used for rendering
+let layer = self.view.layer
 ```
 
 A layer’s main job is to manage the visual content that you provide but the layer itself has visual attributes that can be set, such as a background color, border, and shadow. In addition to managing visual content, the layer also maintains information about the geometry of its content \(such as its position, size, and transform\) that is used to present that content onscreen. Modifying the properties of the layer is how you initiate animations on the layer’s content or geometry.

@@ -56,7 +56,7 @@ queue.sync {
 }
 ```
 
-This function does not return until the block has finished. As an optimization, this function invokes the block on the current thread when possible. Calling this function and targeting the current queue results in **deadlock**.
+This function does not return until the block has finished. Calling this function and targeting the current queue results in **deadlock**. As an optimization, this function invokes the block on the current thread when possible.
 
 Unlike with _async_, no `retain` is performed on the target queue. Because calls to this function are synchronous, it "borrows" the reference of the caller. Moreover, no `copy` is performed on the block.
 
@@ -87,7 +87,7 @@ To cancel a work item is simple: `workItem.cancel()`, be aware that you can only
 
 Like [immutable object](../../java/concurrency.md#immutable-objects) in Java, constants in Swift is read-only and **thread-safe**. However, collection types like `Array` and `Dictionary` are not thread-safe when declared mutable. There's no such concern in a serial dispatch queue because tasks are executed one by one. But thread interference and memory consistency errors can occur in a concurrent dispatch queue.
 
-You set `.barrier` flag to a `DispatchWorkItem` before submit it to a concurrent queue to indicate that it should be the only item executed on the specified queue for that particular time.
+You set `.barrier` flag to a `DispatchWorkItem` before submit it to a concurrent queue to indicate that it should be the **only** item executed on the specified queue for that particular time.
 
 ```swift
 let workItem = DispatchWorkItem(flags: [.barrier]) {

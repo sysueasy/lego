@@ -40,7 +40,7 @@ Every iOS app has exactly one instance of UIApplication \(or, very rarely, a sub
 
 ### Universal Links
 
-While [universal links](https://developer.apple.com/documentation/uikit/core_app/allowing_apps_and_websites_to_link_to_your_content) and custom URLs are both acceptable forms of deep linking, _universal links_ _are strongly recommended as a **best practice**_. Key **benefits** are \(1\) One URL works for both your website and your app, allowing your website to handle the link when your app is not installed. \(2\) iOS verifies the association through the Apple App Site Association file on your website, eliminating the possibility that other apps might claim your scheme and redirect your URLs.
+While [universal links](https://developer.apple.com/documentation/uikit/core_app/allowing_apps_and_websites_to_link_to_your_content) and custom URLs are both acceptable forms of deep linking, _universal links_ _are strongly recommended as a **best practice**_. Key **benefits** are \(1\) One URL works for both your website and your app, allowing your website to handle the link when your app is not installed. \(2\) iOS verifies the association through unforgeable URL like [https://www.google.com/apple-app-site-association](https://www.google.com/apple-app-site-association) on your website, eliminating the possibility that other apps might claim your scheme and redirect your URLs.
 
 {% hint style="danger" %}
 Universal links offer a potential **attack** vector into your app, so make sure to validate all URL parameters and discard any malformed URLs.
@@ -50,7 +50,7 @@ UIKit apps can communicate through universal links. Supporting universal links a
 
 ## UIKit - Interactions
 
-Apps receive and **handle events** using _responder objects_. A responder object is any instance of the `UIResponder` class, and common subclasses include `UIView`, `UIViewController`, `UIWindow`, and `UIApplication`. Responders receive the raw event data \([`UIEvent`](https://developer.apple.com/documentation/uikit/uievent)\) and must either handle the event or forward it to another responder object.
+Apps **receive and handle events** using _responder objects_. A responder object is any instance of the `UIResponder` class, and common subclasses include `UIView`, `UIViewController`, `UIWindow`, and `UIApplication`. Responders receive the raw event data \([`UIEvent`](https://developer.apple.com/documentation/uikit/uievent)\) and must either handle the event or forward it to another responder object.
 
 When your app receives an event, UIKit automatically directs that event to the most appropriate responder object, known as the **first responder**. Unhandled events are passed from responder to responder in the active **responder chain**, which is the dynamic configuration of your app’s responder objects.
 
