@@ -12,9 +12,15 @@ UIKit provides most of the objects in the controller and view layers of your app
 
 ## UIKit - Core App
 
-### **Life Cycle**
+[UIKit apps](https://developer.apple.com/documentation/uikit/core_app) are always in one of five states:
 
-![](../../.gitbook/assets/00b28327-17dc-4f0c-866f-29f854edfce3.png)
+![](../../.gitbook/assets/high_level_flow_2x_2bc77269-019d-4554-83b8-6aeecb73c348.png)
+
+Apps start off **not running**. When the user explicitly launches the app, the app moves briefly to the **inactive** state before entering the **active** state. \(An active app appears onscreen and is known as a **foreground** app.\) Quitting an active app moves it offscreen and into the _**background**_ state, where it stays until the system **suspends** it a short time later. At its discretion, the system may quietly _**terminate**_ a suspended app, returning it to the not running state.
+
+`applicationWillResignActive(_:)` called when your app is about to move from the active to inactive state. This can occur for certain types of temporary interruptions \(such as an incoming **phone call** or **SMS message**\) or when the user quits the app and it begins the transition to the background state. An app in the inactive state continues to run but does not dispatch incoming events to responders.
+
+`applicationDidEnterBackground(_:)`Use this method to release shared resources, invalidate timers, and store enough app state information to restore your app to its current state in case it is terminated later. Your implementation of this method has approximately **five seconds** to perform any tasks and return.
 
 ### Launch
 
