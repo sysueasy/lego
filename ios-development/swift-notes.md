@@ -144,7 +144,7 @@ A _protocol_ defines a blueprint of **methods**, **properties**, and other requi
 
 In addition to specifying requirements that conforming types must implement, you can extend a protocol to implement some of these requirements or to implement additional functionality that conforming types can take advantage of.
 
-**Delegation** is a design pattern that enables a class or structure to hand off \(or _delegate_\) some of its responsibilities to an instance of another type. This design pattern is implemented by defining a protocol that encapsulates the delegated responsibilities, such that a conforming type \(known as a delegate\) is guaranteed to provide the functionality that has been delegated. Delegation can be used to respond to a particular action, or to retrieve data from an external source without needing to know the underlying type of that source.
+**Delegation** is a design pattern that enables a class or structure to hand off \(or _delegate_\) some of its responsibilities to an instance of another type. This design pattern is implemented by defining a protocol that encapsulates the delegated responsibilities, such that a conforming type \(known as a delegate\) is guaranteed to provide the functionality that has been delegated. Delegation can be used to **respond to a particular action**, or to **retrieve data from an external source** without needing to know the underlying type of that source.
 
 To prevent strong reference cycles, delegates are declared as **weak** references.
 
@@ -260,11 +260,9 @@ Specifically, a conflict occurs if you have two accesses that meet all of the fo
 
 An access is _instantaneous_ if it’s not possible for other code to run after that access starts but before it ends. Most memory access is instantaneous. However, there are several ways to access memory, called _long-term_ accesses, that span the execution of other code.
 
-A function has long-term write access to all of its [in-out parameters](swift-notes.md#in-out-parameters). 
-
-A [mutating](swift-notes.md#methods) method on a structure has write access to self for the duration of the method call.
-
-[Value types](swift-notes.md#value-and-reference-type) are made up of individual constituent values, mutating any piece of the value mutates the whole value, meaning read or write access to one of the properties requires read or write access to the whole value.
+* A function has long-term write access to all of its [in-out parameters](swift-notes.md#in-out-parameters). 
+* A [mutating](swift-notes.md#methods) method on a structure has write access to self for the duration of the method call.
+* [Value types](swift-notes.md#value-and-reference-type) are made up of individual constituent values, mutating any piece of the value mutates the whole value, meaning read or write access to one of the properties requires read or write access to the whole value.
 
 If the compiler can’t prove the access is safe, it doesn’t allow the access.
 
