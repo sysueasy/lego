@@ -1,10 +1,6 @@
 # URL Loading System
 
-* Ref: [URL Loading System](https://developer.apple.com/documentation/foundation/url_loading_system)
-* Ref: [Working with JSON in Swift](https://developer.apple.com/swift/blog/?id=37)
-* Ref: [Alamofire](https://github.com/Alamofire/Alamofire) is an HTTP networking library written in Swift.
-
-## Overview
+## **Overview**
 
 The URL Loading System provides access to resources identified by URLs, using standard protocols like https or custom protocols you create. Loading is performed **asynchronously**, so your app can remain responsive and handle incoming data or errors as they arrive.
 
@@ -55,4 +51,10 @@ The [`URLCache`](https://developer.apple.com/documentation/foundation/urlcache) 
 4. Authentication and Credentials
 
 When your app makes a request with a [`URLSessionTask`](https://developer.apple.com/documentation/foundation/urlsessiontask), the server may respond with one or more demands for credentials before continuing. The session task attempts to handle this for you. If it can’t, it calls your session’s delegate to handle the challenges. If you don’t implement a delegate, your request may be denied by the server, and you receive a response with HTTP status code 401 \(Forbidden\) instead of the data you expect.
+
+## Reference
+
+* Ref: [URL Loading System](https://developer.apple.com/documentation/foundation/url_loading_system)
+* Ref: [Working with JSON in Swift](https://developer.apple.com/swift/blog/?id=37)
+* Ref: [Alamofire](https://github.com/Alamofire/Alamofire) is an HTTP networking library written in Swift.
 

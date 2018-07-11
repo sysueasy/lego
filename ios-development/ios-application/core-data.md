@@ -20,7 +20,7 @@ lazy var persistentContainer: NSPersistentContainer = {
 
 You use instances of [`NSManagedObject`](https://developer.apple.com/documentation/coredata/nsmanagedobject) as data structures, and you define the relationships between those objects using the data model.
 
-A managed object is associated with an entity description \(an instance of `NSEntityDescription`\)and with a managed object context that tracks changes to the object graph. 
+A managed object is associated with an entity description \(an instance of `NSEntityDescription`\) and with a managed object context that tracks changes to the object graph. 
 
 `NSManagedObject` provides support for a range of common types. Sometimes, however, you want to use types that are not supported directly. For example, in a graphics application you might want to define a Rectangle entity that has attributes color and bounds that are an instance of `NSColor` and an `NSRect` struct respectively. For some types you can use a transformable attribute, for others this may require you to create a subclass of `NSManagedObject`.
 

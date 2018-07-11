@@ -17,6 +17,24 @@ Because the `Operation` class is an abstract class, you do not use it directly b
 
 An operation object is a single-shot object—that is, it executes its task once and cannot be used to execute it again. You typically execute operations by adding them to an operation queue \(an instance of the `OperationQueue` class\). An operation queue executes its operations either directly, by running them on secondary threads, or indirectly using the `libdispatch` library \(also known as **Grand Central Dispatch**\).
 
+```swift
+let operation1 = BlockOperation {
+    print("operation1...")
+}
+operation1.addExecutionBlock {
+    print("operation1.1...")
+}
+        
+let operation2 = BlockOperation {
+    print("operation2...")
+}
+operation2.addDependency(operation1)
+        
+operationQueue.addOperations([operation1, operation2], waitUntilFinished: false)
+// If true, the current thread is blocked until all of the specified operations finish executing.
+// If false, the operations are added to the queue and control returns immediately to the caller.
+```
+
 Dependencies are a convenient way to execute operations in a **specific order**. By default, an operation object that has dependencies is not considered ready until all of its dependent operation objects have finished executing. The dependencies make no distinction about whether a dependent operation finished successfully or unsuccessfully. \(In other words, canceling an operation similarly marks it as finished.\)
 
 The `NSOperation` class is itself **multicore** aware. It is therefore safe to call the methods of an `NSOperation` object from multiple threads without creating additional locks to synchronize access to the object.
