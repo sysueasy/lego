@@ -2,9 +2,7 @@
 
 ## Value and Reference Type
 
-Ref: [https://developer.apple.com/swift/blog/?id=10](https://developer.apple.com/swift/blog/?id=10)
-
-Types in Swift fall into one of two categories: first, “**value types**”, where each instance keeps a unique copy of its data, usually defined as a `struct`, `enum`, or tuple. The second, “**reference types**”, where instances share a single copy of the data, and the type is usually defined as a class.
+[Types in Swift](https://developer.apple.com/swift/blog/?id=10) fall into one of two categories: first, “**value types**”, where each instance keeps a unique copy of its data, usually defined as a `struct`, `enum`, or `tuple`. The second, “**reference types**”, where instances share a single copy of the data, and the type is usually defined as a `class`.
 
 ## In-Out Parameters
 
@@ -31,11 +29,13 @@ enum Barcode {
 }
 ```
 
+## Structures and Classes
+
+Structures and classes are general-purpose, flexible constructs that become the building blocks of your program’s code. You define properties and methods to add functionality to your structures and classes. An instance of a class is traditionally known as an **object**. However, Swift structures and classes are much closer in functionality than in other languages, and much of this chapter describes functionality that applies to instances of either a class or a structure type. Because of this, the more general term **instance** is used.
+
 ## Methods
 
-Structures and enumerations are [value types](swift-notes.md#value-and-reference-type). By default, the properties of a value type cannot be modified from within its instance methods.
-
-However, if you need to modify the properties of your structure or enumeration within a particular method, you can opt in to **mutating** behavior for that method.
+Structures and enumerations are [value types](swift-notes.md#value-and-reference-type). By default, the properties of a value type cannot be modified from within its instance methods. However, if you need to modify the properties of your structure or enumeration within a particular method, you can opt in to **mutating** behavior for that method.
 
 ```swift
 struct Point {
@@ -69,7 +69,7 @@ struct Size {
 let twoByTwo = Size(width: 2.0, height: 2.0)
 ```
 
-Swift provides a **default initializer** for any structure or class that provides default values for all of its properties and does not provide at least one initializer itself. The default initializer simply creates a new instance with all of its properties set to their default values.
+Swift provides a **default** initializer for any structure or class that provides default values for all of its properties and does not provide at least one initializer itself.
 
 ```swift
 class ShoppingListItem { 
@@ -100,7 +100,7 @@ class Food {
 
 Class initialization in Swift is a two-phase process. In the first phase, each stored property is assigned an initial value by the class that introduced it. The second phase is the opportunity to customize its stored properties further \(optional\).
 
-Swift’s **two-phase initialization** is similar Objective-C. The main difference is that during phase 1, Objective-C assigns zero or null values to every property. Swift’s initialization flow is more flexible in that it lets you set custom initial values.
+Swift’s **two-phase initialization** is similar Objective-C. The main difference is that during phase one, Objective-C assigns zero or null values to every property. Swift’s initialization flow is more flexible in that it lets you set custom initial values.
 
 Swift performs four helpful safety-checks to make sure that two-phase initialization is completed, otherwise you will get _compile error_:
 
@@ -111,7 +111,7 @@ Swift performs four helpful safety-checks to make sure that two-phase initializa
 
 ![](../.gitbook/assets/initializerdelegation01_2x.png)
 
-Once the top of the superclass chain is reached, and the final class in the chain has ensured that all of its stored properties have a value, the instance’s memory is considered to be fully initialized, and phase 1 is complete. Then in phase 2, working back down from the top of the chain, each designated initializer in the chain has the option to customize the instance further. Initializers are now able to access self and can modify its properties, call its instance methods, and so on.
+Once the top of the superclass chain is reached, and the final class in the chain has ensured that all of its stored properties have a value, the instance’s memory is considered to be fully initialized, and phase 1 is complete. Then in phase 2, working back down from the top of the chain, each designated initializer in the chain has the option to customize the instance further.
 
 When you write a subclass initializer that matches a superclass designated initializer, you are effectively providing an **override** of that **designated** initializer. This is true even if you are overriding an automatically provided default initializer.
 
@@ -144,7 +144,7 @@ A _protocol_ defines a blueprint of **methods**, **properties**, and other requi
 
 In addition to specifying requirements that conforming types must implement, you can extend a protocol to implement some of these requirements or to implement additional functionality that conforming types can take advantage of.
 
-**Delegation** is a design pattern that enables a class or structure to hand off \(or _delegate_\) some of its responsibilities to an instance of another type. This design pattern is implemented by defining a protocol that encapsulates the delegated responsibilities, such that a conforming type \(known as a delegate\) is guaranteed to provide the functionality that has been delegated. Delegation can be used to **respond to a particular action**, or to **retrieve data from an external source** without needing to know the underlying type of that source.
+**Delegation** is a **design pattern** that enables a class or structure to hand off \(or _delegate_\) some of its responsibilities to an instance of another type. This design pattern is implemented by defining a protocol that encapsulates the delegated responsibilities, such that a conforming type \(known as a delegate\) is guaranteed to provide the functionality that has been delegated. Delegation can be used to **respond to a particular action**, or to **retrieve data from an external source** without needing to know the underlying type of that source.
 
 To prevent strong reference cycles, delegates are declared as **weak** references.
 

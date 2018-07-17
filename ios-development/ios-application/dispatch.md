@@ -1,5 +1,7 @@
 # Dispatch
 
+Mentioned in [WWDC 2017 session](https://developer.apple.com/videos/play/wwdc2017/706), macOS 10.13 and iOS 11 have reinvented how Grand Central Dispatch and the Darwin kernel collaborate, enabling your applications to run concurrent workloads more efficiently.
+
 ## Overview
 
 Execute code **concurrently** on **multicore** hardware by submitting work to **dispatch queues** managed by the system. **GCD** \(**Grand Central Dispatch**\), operating at the system level, can better accommodate the needs of all running applications, matching them to the available system resources in a balanced fashion.
