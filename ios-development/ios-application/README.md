@@ -2,7 +2,7 @@
 
 ## UIKit
 
-The [UIKit](https://developer.apple.com/documentation/uikit) framework provides the required infrastructure for your **iOS** or **tvOS** apps. It provides the window and view architecture for implementing your interface, the event handling infrastructure for delivering Multi-Touch and other types of input to your app, and the main [run loop](./#runloop) needed to manage interactions among the user, the system, and your app.
+The [UIKit](https://developer.apple.com/documentation/uikit) framework provides the required infrastructure for your **iOS** or **tvOS** apps. It provides the window and view architecture for implementing your interface, the event handling infrastructure for delivering Multi-Touch and other types of input to your app, and the main [run loop](operation.md#runloop) needed to manage interactions among the user, the system, and your app.
 
 The [structure](https://developer.apple.com/documentation/uikit/about_app_development_with_uikit) of UIKit apps is based on the **Model-View-Controller** \(MVC\) design pattern. You provide the model objects that represent your app’s data structures. UIKit provides most of the view objects. Coordinating the exchange of data between your data objects and the UIKit views are your view controllers and app delegate object.
 
