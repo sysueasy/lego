@@ -9,7 +9,6 @@
 * [Apple Inc](ios-development/README.md)
   * [Swift](ios-development/swift-notes.md)
   * [Objective-C](ios-development/j2objc.md)
-  * [Xcode](ios-development/xcode.md)
   * [Documentation](ios-development/ios-application/README.md)
     * [User Interface](ios-development/ios-application/user-interface.md)
     * [Dispatch](ios-development/ios-application/dispatch.md)
