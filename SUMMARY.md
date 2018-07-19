@@ -6,6 +6,7 @@
   * [Discussion](general/general.md)
   * [NFC](general/nfc.md)
   * [Git](general/git.md)
+* [The C Programming Language](the-c-programming-language.md)
 * [Apple Inc](ios-development/README.md)
   * [Swift](ios-development/swift-notes.md)
   * [Objective-C](ios-development/j2objc.md)
