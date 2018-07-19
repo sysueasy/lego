@@ -5,7 +5,7 @@ The first program to write is the same for all languages:
 ```c
 #include <stdio.h> // include information about standard input/output library
 // define a function called main
-int main(int argc, char const *argv[]) //arguments
+int main(int argc, char const *argv[]) //arguments参数
 { // statement enclosed in braces
     printf("hello, world\n"); 
     return 0;
@@ -36,7 +36,32 @@ Although C compilers do not care about how a program looks, proper _indentation_
 
 In C, as in many other languages, **integer** **division** _**truncates**_: any fractional part is discarded, e.g 5/9 would be truncated to zero.
 
-`%6.2f` : print as floating point, at least 6 wide and 2 after decimal point. `printf` also recognizes %o for octal, %x for hexadecimal, %c for character, %s for character string and %% for itself.
+`%6.2f` : print as floating point, at least 6 wide and 2 after decimal point.
+
+A `#define` line defines a **symbolic name** or **symbolic constant** to be a particular string of characters, conventionally written in **upper case** so they can be readily distinguished from lower case variable names.
+
+```c
+#include <stdio.h>
+int main(){ /* copy input to output; 1st version */
+    int c;
+    while ((c = getchar()) != EOF)
+        putchar(c);
+}
+```
+
+`EOF` is an integer defined in `<stdio.h>`as a symbolic constant, its value is **-1**.
+
+A assignment can appear as part of a larger expression.
+
+You could instead write `c = c + 1` but `++c` is more concise and often more efficient.
+
+By definition, `char` are just small integers. A character written between single quotes represents an **integer** value in the machine's character set, called a **character constant**. `'A'` is a character constant; in the ASCII character set its value is 65.
+
+Since `main` is a **function** like any other, a return value of zero implies normal termination; non-zero values signal unusual or erroneous termination conditions.
+
+In C, all function **arguments** are passed \`\`by value.'' This means that the called function is given the values of its arguments in temporary variables rather than the originals.
+
+
 
 
 
