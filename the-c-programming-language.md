@@ -22,7 +22,7 @@ To run, type command `a.out`, in macOS, use `./a.out`. It will print these words
 
 A C program, whatever its size, consists of **functions** and **variables**. A function contains **statements** that specify the computing operations to be done, and variables store values used during the computation. 
 
-Our example is a function named **main**. Normally you are at liberty to give functions whatever names you like, but main is special - your program begins executing at the beginning of main. This means that every program must have a main somewhere.
+Our example is a function named **main**. Normally you are at liberty to give functions whatever names you like, but main is special, your program begins executing at the beginning of main. This means that every program must have a main somewhere.
 
 A sequence of characters in double quotes, like "hello, world\n", is called a **character string** or **string constant**.
 
@@ -30,19 +30,11 @@ An **escape sequence** like \n provides a general and extensible mechanism for r
 
 C provides **data types** including: `int, float, char, short, long, double`. The size of these objects depends on the machine you are using \(32-bit or 64-bit\). There are also `arrays, structures, unions` of these basic types, `pointers` to them, and `functions` that return them.
 
-The while loop operates as follows: The condition in parentheses is tested. If it is true the body of the loop is executed. Then the condition is re-tested, and if true, the body is executed again.
-
-```c
-while (fahr <= upper) { }
-```
-
 Although C compilers do not care about how a program looks, proper _indentation_ and _spacing_ are critical in making programs easy for people to read. We recommend writing only one statement per line, and using _blanks around operators_ to clarify grouping.
 
 In C, as in many other languages, **integer** **division** _**truncates**_: any fractional part is discarded, e.g 5/9 would be truncated to zero.
 
-`%6.2f` : print as floating point, at least 6 wide and 2 after decimal point.
-
-A `#define` line defines a **symbolic name** or **symbolic constant** to be a particular string of characters, conventionally written in **upper case** so they can be readily distinguished from lower case variable names.
+A `#define name replacement list` line defines a **symbolic name** or **symbolic constant** to be a particular string of characters, conventionally written in **upper case** so they can be readily distinguished from lower case variable names. The replacement text can be any sequence of characters; it is not limited to numbers.
 
 ```c
 #include <stdio.h>
@@ -53,9 +45,20 @@ int main(){ /* copy input to output; 1st version */
 }
 ```
 
-`EOF` is an integer defined in `<stdio.h>`as a symbolic constant, its value is **-1**.
+`EOF` is an integer defined in `<stdio.h>`as a symbolic constant, its value is **-1**. In macOS, type `CTRL+D` in terminal to trigger EOF.
 
-A assignment can appear as part of a larger expression.
+Any assignment in C is an expression and has a value, it can appear as part of a larger expression.
+
+```c
+/* copy:  copy 'from' into 'to'; assume to is big enough */
+void copy(char to[], char from[]) 
+{
+    int i;
+    i = 0;
+    while ((to[i] = from[i]) != '\0')
+        ++i; 
+}
+```
 
 You could instead write `c = c + 1` but `++c` is more concise and often more efficient.
 
@@ -63,9 +66,19 @@ By definition, `char` are just small integers. A character written between singl
 
 Since `main` is a **function** like any other, a return value of zero implies normal termination; non-zero values signal unusual or erroneous termination conditions.
 
-In C, all function **arguments** are passed \`\`by value.'' This means that the called function is given the values of its arguments in temporary variables rather than the originals.
+A **function** provides a convenient way to encapsulate some computation, which can then be used without worrying about its implementation. With properly designed functions, it is possible to ignore _how_ a job is done; knowing _what_ is done is sufficient.
 
+In C, all function arguments are passed "**by value**". This means that the called function is given the values of its arguments in temporary variables rather than the originals.
 
+When necessary, it is possible to arrange for a function to modify a variable in a calling routine, by providing the address of the variable to be set \(technically a **pointer** to the variable\).
+
+The story is different for **arrays**. When the name of an array is used as an argument, the value passed to the function is the location or address of the beginning of the array - there is no copying of array elements. By subscripting this value, the function can access and alter any argument of the array.
+
+Each **local** variable in a function comes into existence only when the function is called, and disappears when the function is exited, such variables are known as **automatic variables**.
+
+As an alternative to automatic variables, it is possible to define variables that are **external** to all functions, that is, variables that can be accessed by name by any function.
+
+An external variable must be **defined**, exactly once, outside of any function; this sets aside storage for it. The variable must also be **declared** in each function that wants to access it; this states the type of the variable. The declaration may be an explicit `extern` statement or may be implicit from context.
 
 
 
