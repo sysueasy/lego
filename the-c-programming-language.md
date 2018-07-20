@@ -1,5 +1,7 @@
 # The C Programming Language
 
+## Hello World
+
 The first program to write is the same for all languages:
 
 ```c
@@ -16,9 +18,11 @@ On the UNIX operating system you must create the program in a file such as `hell
 
 To run, type command `a.out`, in macOS, use `./a.out`. It will print these words.
 
+## Tutorial
+
 A C program, whatever its size, consists of **functions** and **variables**. A function contains **statements** that specify the computing operations to be done, and variables store values used during the computation. 
 
-Our example is a function named `main`. Normally you are at liberty to give functions whatever names you like, but `main` is special - your program begins executing at the beginning of main. This means that every program must have a main somewhere.
+Our example is a function named **main**. Normally you are at liberty to give functions whatever names you like, but main is special - your program begins executing at the beginning of main. This means that every program must have a main somewhere.
 
 A sequence of characters in double quotes, like "hello, world\n", is called a **character string** or **string constant**.
 
