@@ -74,11 +74,19 @@ When necessary, it is possible to arrange for a function to modify a variable in
 
 The story is different for **arrays**. When the name of an array is used as an argument, the value passed to the function is the location or address of the beginning of the array - there is no copying of array elements. By subscripting this value, the function can access and alter any argument of the array.
 
+## External Variables
+
 Each **local** variable in a function comes into existence only when the function is called, and disappears when the function is exited, such variables are known as **automatic variables**.
 
 As an alternative to automatic variables, it is possible to define variables that are **external** to all functions, that is, variables that can be accessed by name by any function.
 
 An external variable must be **defined**, exactly once, outside of any function; this sets aside storage for it. The variable must also be **declared** in each function that wants to access it; this states the type of the variable. The declaration may be an explicit `extern` statement or may be implicit from context.
 
+In certain circumstances, the **extern** declaration can be omitted. If the definition of the external variable occurs in the source file before its use in a particular function, then there is no need for an extern declaration in the function.
 
+The usual practice is to collect extern declarations of variables and functions in a separate file, historically called a **header**, that is included by `#include` at the front of each source file.
+
+You should note that "**definition**" refers to the place where the variable is created or assigned storage; "**declaration**" refers to places where the nature of the variable is stated but no storage is allocated.
+
+Relying too heavily on external variables is fraught with peril since it leads to programs whose data connections are not all obvious - variables can be changed in unexpected and even inadvertent ways, and the program is hard to modify.
 
