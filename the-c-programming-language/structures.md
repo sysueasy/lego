@@ -71,7 +71,7 @@ struct key {
 
 Here inner braces like `{ "auto", 0 }` are not necessary when the initializers are simple variables or character strings, and when all are present.
 
-Don't assume that the size of a structure is the sum of the sizes of its members. Because of alignment requirements for different objects, there may be unnamed "holes" in a structure. The following structure might well require eight bytes, not five.
+Don't assume that the size of a structure is the sum of the sizes of its members. Because of **alignment requirements** for different objects, there may be unnamed "holes" in a structure. The following structure might well require eight bytes, not five.
 
 ```c
 struct {
@@ -90,7 +90,86 @@ Thus, the number of keywords is the size of the array which can be defined by:
 #define NKEYS (sizeof keytab / sizeof(struct key))
 ```
 
+## Data Structures
 
+To represent a node in binary search tree in C:
 
+```c
+struct tnode { /* the tree node */
+    char *word;
+    int count;
+    struct tnode *left; // left child
+    struct tnode *right; // right child
+};
+```
 
+A **storage allocator** is needed to make a new tnode, where we make use of the standard library function _malloc_, we will discuss this in detail in later chapters.
+
+```c
+#include <stdlib.h>
+/* talloc:  make a tnode */
+struct tnode *talloc(void) {
+    return (struct tnode *) malloc(sizeof(struct tnode));
+}
+```
+
+## Typedef
+
+C provides a facility called _typedef_ for creating new data type names. 
+
+```c
+typedef char *String;
+```
+
+The declaration makes _String_ a synonym for char \* or character pointer, which may then be used in declarations and casts:
+
+```c
+String p, lineptr[MAXLINES], alloc(int);
+```
+
+As a more complicated example, we could make _typedefs_ for the tree nodes shown earlier in this chapter:
+
+```c
+typedef struct tnode *Treeptr;
+typedef struct tnode { /* the tree node: */
+    // ...
+} Treenode;
+```
+
+This creates two new type keywords called _Treenode_ \(a structure\) and _Treeptr_ \(a pointer to the structure\).
+
+Besides purely aesthetic issues, there are two main reasons for using _typedef_s.
+
+The first is to parameterize a program against portability problems. If _typedef_s are used for data types that may be machine-dependent, only the _typedefs_ need change when the program is moved. One common situation is to use _typedef_ names for various integer quantities, then make an appropriate set of choices of short, int, and long for each host machine. Types like _size\_t_ and _ptrdiff\_t_ from the standard library are examples.
+
+The second purpose of _typedef_s is to provide better documentation for a program - a type called _Treeptr_ may be easier to understand than one declared only as a pointer to a complicated structure.
+
+## Unions
+
+A union is a variable that may hold \(at different times\) objects of different types and sizes, with the compiler keeping track of size and alignment requirements.
+
+```c
+union u_tag {
+    int ival;
+    float fval;
+    char *sval;
+} u;
+```
+
+The variable _u_ will be large enough to hold the largest of the three types; the specific size is implementation-dependent. Any of these types may be assigned to _u_ and then used in expressions.
+
+Syntactically, members of a union are accessed as: `u->ival`
+
+It is the programmer's responsibility to keep track of which type is currently stored in a union. If the variable _utype_ is used to keep track of the current type stored in _u_, then one might see code such as
+
+```c
+if (utype == INT)
+   printf("%d\n", u.ival);
+if (utype == FLOAT)
+   printf("%f\n", u.fval);
+if (utype == STRING)
+   printf("%s\n", u.sval);
+else
+   printf("bad type %d in utype\n", utype);
+```
 
