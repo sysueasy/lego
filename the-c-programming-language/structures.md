@@ -103,7 +103,7 @@ struct tnode { /* the tree node */
 };
 ```
 
-A **storage allocator** is needed to make a new tnode, where we make use of the standard library function _malloc_, we will discuss this in detail in later chapters.
+A **storage allocator** is needed to make a new _tnode_, where we make use of the standard library function _malloc_, we will discuss this in detail later.
 
 ```c
 #include <stdlib.h>
@@ -172,4 +172,22 @@ if (utype == STRING)
 else
    printf("bad type %d in utype\n", utype);
 ```
+
+## Storage Allocator
+
+Rather than allocating from a compiled-in fixed-size array, the standard library function, _malloc_ will request space from the operating system as needed.
+
+Since other activities in the program may also request space without calling this allocator, the space that _malloc_ manages may not be contiguous. Thus its free storage is kept as a **list of free blocks**. Each block contains a size, a pointer to the next block, and the space itself. The blocks are kept in order of **increasing** storage address, and the last block \(highest address\) points to the first.
+
+![](../.gitbook/assets/screen-shot-2018-07-23-at-17.15.25.png)
+
+When a request is made, the free list is scanned until a big-enough block is found. This algorithm is called "**first fit**," by contrast with "**best fit**," which looks for the smallest block that will satisfy the request.
+
+* If the block is exactly the size requested, it is unlinked from the list and returned to the user.
+* If the block is too big, it is split, and the proper amount is returned to the user while the residue remains on the free list.
+* If no big-enough block is found, another large chunk is obtained by the operating system and linked into the free list.
+
+**Freeing** also causes a search of the free list, to find the proper place to insert the block being freed. If the block being freed is adjacent to a free block on either side, it is **coalesced** with it into a single bigger block, so storage does not become too fragmented. Determining the adjacency is easy because the free list is maintained in order of increasing address.
+
+One problem is to ensure that the storage returned by _malloc_ is **aligned** properly for the objects that will be stored in it. Although machines vary, for each machine there is a **most restrictive** type: if the most restrictive type can be stored at a particular address, all other types may be also. On some machines, the most restrictive type is a _double_; on others, _int_ or _long_ suffices.
 
