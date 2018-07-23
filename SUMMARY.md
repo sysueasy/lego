@@ -10,6 +10,7 @@
   * [Basic](the-c-programming-language/2.-type-operators-expressions.md)
   * [Functions and Program Structures](the-c-programming-language/functions-and-program-structures.md)
   * [Pointers and Arrays](the-c-programming-language/pointers-and-arrays.md)
+  * [Structures](the-c-programming-language/structures.md)
 * [Apple Inc](ios-development/README.md)
   * [Swift](ios-development/swift-notes.md)
   * [Objective-C](ios-development/j2objc.md)

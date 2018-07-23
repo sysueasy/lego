@@ -30,9 +30,9 @@ iq = ip; /* iq is now points to whatever ip pointed to */
 
 Since C passes arguments to functions by value, there is no direct way for the called function to alter a variable in the calling function.
 
-For instance, a sorting routine might exchange two out-of-order arguments with a function called _swap_. It is not enough to write `void swap(int x, int y)` because of **call by value**, _swap_ can't affect the arguments.
+For instance, a sorting routine might exchange two out-of-order arguments with a function called _swap_. It is not enough to write `void swap(int x, int y)` because of **call by value**.
 
-The way to obtain the desired effect is for the calling program to pass pointers to the values to be changed: `swap(&a, &b);`Since the operator & produces the address of a variable, `&a` is a pointer to a. In swap itself, the parameters are declared as pointers, and the operands are accessed indirectly through them: `void swap(int *px, int *py) { }`
+The way to obtain the desired effect is to pass pointers to the values to be changed: `swap(&a, &b)`Since the operator & produces the address of a variable, `&a` is a pointer to a. In swap itself, the parameters are declared as pointers, and the operands are accessed indirectly through them: `void swap(int *px, int *py) { }`
 
 ## Pointers and Arrays
 
@@ -47,9 +47,9 @@ If _pa_ points to a particular element of an array, then by definition _pa+1_ po
 
 ![](../.gitbook/assets/screen-shot-2018-07-21-at-21.30.50.png)
 
-These remarks are **true** regardless of the type or size of the variables in the array. The meaning of "adding 1 to a pointer," and by extension, all pointer arithmetic, is that _**pa+1**_ **points to the next object**, and is that _pa+i_ points to the i-th object beyond pa.
+These remarks are **true** regardless of the type or size of the variables in the array. The meaning of "adding 1 to a pointer," and by extension, all pointer arithmetic, is that _pa+1_ points to the next object, and is that _pa+i_ points to the i-th object beyond pa.
 
-If \*pa is an _int_ is four bytes, for example, the _pa+1_ will be moved by four bytes. All the pointer manipulations automatically take into account the size of the objects pointed to.
+If _\*pa_ is an _int_ is four bytes, for example, the _pa+1_ will be moved by four bytes. All the pointer manipulations automatically take into account the size of the objects pointed to.
 
 Since the name of an array is a synonym for the location of the initial element, the assignment `pa=&a[0]` can also be written as `pa = a`.
 
@@ -61,11 +61,11 @@ There is one **difference** between an array name and a pointer that must be kep
 
 When an array name is passed to a function, what is passed is the **location** of the initial element.
 
-As formal parameters in a function definition, `char s[];` and `char *s;`are equivalent. we prefer the **latter** because it says more explicitly that the variable is a pointer.
+As formal parameters in a function definition, `char s[]` and `char *s`are equivalent. we prefer the **latter** because it says more explicitly that the variable is a pointer.
 
 ```c
 /* strlen: return length of string s */
-    int strlen(char *s){
+int strlen(char *s){
     int n;
     for (n = 0; *s != '\0', s++)
         n++;
@@ -73,11 +73,9 @@ As formal parameters in a function definition, `char s[];` and `char *s;`are equ
 }
 ```
 
-Since s is a pointer, incrementing it is perfectly legal; `s++` has no effect on the character string in the function that called _strlen_, but merely increments strlen's **private copy of the pointer**.
+Since s is a pointer, incrementing it is perfectly legal; `s++` has no effect on the character string in the function that called _strlen_, but merely increments strlen's **private copy of the pointer**. Passing pointer arguments doesn't break the rule of call by value.
 
 Pointers may be **compared** under certain circumstances. If _p_ and _q_ point to members of the same array, then relations like `==, !=, <, >=`, etc., work properly.
-
-## Character Pointers
 
 There is an important difference between these definitions:
 
@@ -98,17 +96,13 @@ void strcpy(char *s, char *t){
 }
 ```
 
-## Pointer Arrays / Pointers to Pointers 
+Since pointers are variables themselves, they can be **stored in arrays** just as other variables can.
 
-Since pointers are variables themselves, they can be stored in arrays just as other variables can. Let us illustrate by writing a program that will sort a set of text lines into alphabetic order. When two out-of-order lines have to be exchanged, the pointers in the pointer array are exchanged, not the text lines themselves.
+Let us illustrate by writing a program that will sort a set of text lines into alphabetic order. When two out-of-order lines have to be exchanged, the pointers in the pointer array are exchanged, not the text lines themselves. This eliminates the twin problems of complicated storage management and high overhead that would go with moving the lines themselves.
 
 ![](../.gitbook/assets/screen-shot-2018-07-22-at-10.55.38.png)
 
-This eliminates the twin problems of complicated storage management and high overhead that would go with moving the lines themselves.
-
-`char *lineptr[20]` says that _lineptr_ is an array of 20 elements, each element of which is a pointer to a char. That is, `lineptr[i]` is a character pointer, and `*lineptr[i]` is the character it points to, the **first** character of the _i-th_ saved text line.
-
-## Multi-dimensional Arrays
+`char *line[20]` says that _line_ is an array of 20 elements, each element of which is a pointer to a char. That is, `line[i]` is a character pointer, and `*line[i]` is the character it points to, the **first** character of the _i-th_ saved text line.
 
 C provides rectangular multi-dimensional arrays, although in practice they are much less used than arrays of pointers.
 
@@ -150,8 +144,6 @@ int main(int argc, char const *argv[]){
 ```
 
 When main is called, it is called with two arguments: argument count, and argument vector, a pointer to an array of character strings that contain the arguments, one per string.
-
-![](../.gitbook/assets/screen-shot-2018-07-22-at-12.56.02.png)
 
 A common convention for C programs on UNIX systems is that an argument that begins with a minus sign introduces an optional flag or parameter, like `find -x -npattern`. Furthermore, it is convenient for users if option arguments can be combined, as in `find -nx pattern`
 
