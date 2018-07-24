@@ -32,5 +32,16 @@ Because the `BankAccount` class is key-value coding compliant, it recognizes the
 
 `[myAccount setValue:@(100.0) forKey:@"currentBalance"];`.
 
+## Objective-C Runtime
+
+The Objective-C Runtime **module** APIs define the **base** of the Objective-C language. These APIs include:
+
+* Types such as the **NSObject** class and the **NSObject** **protocol** that provide the root functionality of most Objective-C classes.
+* Functions and data structures that comprise the Objective-C runtime, which provides support for the dynamic properties of the Objective-C language.
+
+You typically don't need to use the Objective-C runtime library directly when programming in Objective-C. This API is useful primarily for developing bridge layers between Objective-C and other languages, or for low-level debugging.
+
+**NSObject** is the root class of most Objective-C class hierarchies, from which subclasses inherit a basic interface to the runtime system and the ability to behave as Objective-C objects.
+
 
 
