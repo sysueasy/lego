@@ -175,6 +175,8 @@ else
 
 ## Storage Allocator
 
+The UNIX operating system provides its services through a set of **system calls**, which are in effect functions within the operating system that may be called by user programs.
+
 Rather than allocating from a compiled-in fixed-size array, the standard library function, _malloc_ will request space from the operating system as needed.
 
 Since other activities in the program may also request space without calling this allocator, the space that _malloc_ manages may not be contiguous. Thus its free storage is kept as a **list of free blocks**. Each block contains a size, a pointer to the next block, and the space itself. 
@@ -194,4 +196,24 @@ When a request is made, the free list is scanned until a big-enough block is fou
 **Freeing** also causes a search of the free list, to find the proper place to insert the block being freed. If the block being freed is adjacent to a free block on either side, it is **coalesced** with it into a single bigger block, so storage does not become too fragmented. Determining the adjacency is easy because the free list is maintained in order of increasing address.
 
 One problem is to ensure that the storage returned by _malloc_ is **aligned** properly for the objects that will be stored in it. Although machines vary, for each machine there is a **most restrictive** type: if the most restrictive type can be stored at a particular address, all other types may be also. On some machines, the most restrictive type is a _double_; on others, _int_ or _long_ suffices.
+
+The control information at the beginning is called the "header." To simplify alignment, all blocks are multiples of the header size, and the header is aligned properly. This is achieved by a union that contains the desired header structure and an instance of the most restrictive alignment type, which we have arbitrarily made a long:
+
+```c
+typedef long Align; /* for alignment to long boundary */
+union header { /* block header */
+    struct {
+        union header* ptr; /* next block on free list */
+        unsigned size; /* size of this block */
+    } s;
+    Align x; /* force alignment of blocks */
+};
+typedef union header Header;
+```
+
+The Align field is never used; it just forces each header to be aligned on a worst-case boundary.
+
+In _malloc_, the requested size in characters is rounded up to the proper number of header-sized units; the block that will be allocated contains one more unit, for the header itself, and this is the value recorded in the size field of the header. The pointer returned by _malloc_ points at the free space, not at the header itself. The user can do anything with the space requested, but if anything is written outside of the allocated space the list is likely to be scrambled.
+
+The **size** field is necessary because the blocks controlled by malloc need not be contiguous - it is not possible to compute sizes by pointer arithmetic.
 
