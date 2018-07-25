@@ -6,13 +6,13 @@ Mentioned in [WWDC 2017 session](https://developer.apple.com/videos/play/wwdc201
 
 Execute code **concurrently** on **multicore** hardware by submitting work to **dispatch queues** managed by the system. **GCD** \(**Grand Central Dispatch**\), operating at the system level, can better accommodate the needs of all running applications, matching them to the available system resources in a balanced fashion.
 
-GCD provides and manages FIFO queues to which your application can submit tasks in the form of block objects. Work submitted to dispatch queues are executed on a **pool of threads** fully managed by the system. _No guarantee_ is made as to the thread on which a task executes.
+GCD provides and manages **FIFO** queues to which your application can submit tasks in the form of block objects. Work submitted to dispatch queues are executed on a **pool of threads** fully managed by the system. _No guarantee_ is made as to the thread on which a task executes.
 
 A dispatch queue can be either **serial**, so that work items are executed _one at a time_, or it can be **concurrent**, so that work items are _dequeued in order,_ but _run all at once and can finish in any order_. Both serial and concurrent queues process work items in first in, first-out \(FIFO\) order.
 
 Each work item can be executed either **synchronously** or **asynchronously**. When a work item is executed synchronously with the sync method, the program waits until execution finishes before the method call returns. When a work item is executed asynchronously with the async method, the method call **returns** immediately.
 
-When an app launches, the system automatically creates a special queue called the **main** _queue_. Work items enqueued to the main queue execute serially on your app’s **main thread**. Attempting to **synchronously** execute a work item on the main queue results in **deadlock**.
+When an app launches, the system automatically creates a **special** queue called the **main** _queue_. Work items enqueued to the main queue execute serially on your app’s **main thread**. Attempting to **synchronously** execute a work item on the main queue results in **deadlock**.
 
 ```swift
 let queue = DispatchQueue.main

@@ -84,7 +84,7 @@ Swift defines two kinds of initializers for **class** types to help ensure all s
 
 A **designated** initializer fully initializes all properties introduced by that class and calls an appropriate superclass initializer to continue the initialization process up the **superclass chain**. Classes tend to have very few designated initializers, and it is quite common for a class to have only one.
 
-Initializers can call other initializers to perform part of an instance’s initialization. This process, known as initializer delegation, avoids duplicating code across multiple initializers. **Convenience** initializers are secondary initializers that call a designated initializer from the same class.
+Initializers can call other initializers to perform part of an instance’s initialization. This process, known as **initializer delegation**, avoids duplicating code across multiple initializers. **Convenience** initializers are secondary initializers that call a designated initializer from the same class.
 
 ```swift
 class Food {

@@ -49,6 +49,14 @@ You typically don't need to use the Objective-C runtime library directly when pr
 
 In a **reference-counted** environment \(as opposed to one which uses **garbage collection**\), an `NSAutoreleasePool` object contains objects that have received an `autorelease` message and when drained it sends a `release` message to each of those objects. Thus, sending `autorelease` instead of `release` to an object **extends the lifetime** of that object at least until the pool itself is drained \(it may be longer if the object is subsequently retained\). An object can be put into the same pool several times, in which case it receives a `release` message for each time it was put into the pool.
 
+```objectivec
+int main(int argc, char * argv[]) {
+    @autoreleasepool {
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
+    }
+}
+```
+
 In a reference counted environment, Cocoa expects there to be an autorelease pool **always available**. If a pool is not available, autoreleased objects do not get released and you leak memory. In this situation, your program will typically log suitable warning messages.
 
 The Application Kit creates an autorelease pool on the **main thread** at the beginning of **every cycle** **of the event loop**, and **drains it at the end**, thereby releasing any autoreleased objects generated while processing an event. If you use the Application Kit, you therefore typically don’t have to create your own pools. If your application creates _a lot of temporary autoreleased objects within the event loop_, however, it may be beneficial to create “local” autorelease pools to help to minimize the peak memory footprint.
