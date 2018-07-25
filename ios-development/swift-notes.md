@@ -31,7 +31,7 @@ enum Barcode {
 
 ## Structures and Classes
 
-Structures and classes are general-purpose, flexible constructs that become the building blocks of your program’s code. You define properties and methods to add functionality to your structures and classes. An instance of a class is traditionally known as an **object**. However, Swift structures and classes are much closer in functionality than in other languages, and much of this chapter describes functionality that applies to instances of either a class or a structure type. Because of this, the more general term **instance** is used.
+Structures and classes are general-purpose, flexible constructs that become the building blocks of your program’s code. You define properties and methods to add functionality to your structures and classes. An instance of a class is traditionally known as an **object**. However, Swift structures and classes are much closer in functionality than in other languages, because of this, the more general term **instance** is used.
 
 ## Methods
 
