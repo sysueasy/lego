@@ -41,7 +41,19 @@ The [Objective-C Runtime](https://developer.apple.com/documentation/objectivec?l
 
 You typically don't need to use the Objective-C runtime library directly when programming in Objective-C. This API is useful primarily for developing bridge layers between Objective-C and other languages, or for low-level debugging.
 
-**NSObject** is the root class of most Objective-C class hierarchies, from which subclasses inherit a basic interface to the runtime system and the ability to behave as Objective-C objects.
+### NSObject
+
+[NSObject](https://developer.apple.com/documentation/objectivec/nsobject?language=objc) is the root class of most Objective-C class hierarchies, from which subclasses inherit a basic interface to the runtime system and the ability to behave as Objective-C objects.
+
+An object that conforms to [NSObject](https://developer.apple.com/documentation/objectivec/1418956-nsobject?language=objc) **protocol** can be considered a first-class object. Such an object can be asked about its: Class, and the place of its class in the inheritance hierarchy; Conformance to protocols; Ability to respond to a particular message. The Cocoa root class NSObject adopts this protocol, so all objects inheriting from NSObject have the features described by this protocol. This protocol is imported into Swift with the name NSObjectProtocol.
+
+`-(BOOL)isEqual:(id)object;` If two objects are equal, they must have the same **hash value**. If you define `isEqual:` in a subclass and intend to put instances of that subclass into a collection. Make sure you also define hash in your subclass.
+
+`@property(readonly) NSUInteger hash;` Returns an integer that can be used as a table address in a hash table structure.
+
+`-(BOOL)isKindOfClass:(Class)aClass;` Returns a Boolean value that indicates whether the receiver is an **instance** **of** **given class** or an instance of any class that **inherits** from that class.
+
+`-(BOOL)isMemberOfClass:(Class)aClass;` Returns a Boolean value that indicates whether the receiver is an **instance** **of** **a given class**.
 
 ## NSAutoreleasePool
 
