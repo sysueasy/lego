@@ -6,5 +6,3 @@ Source code in textbook: [https://github.com/kevin-wayne/algs4](https://github.c
 
 Practice: [VisuAlgo - 数据结构和算法动态可视化 \(Chinese\)](https://visualgo.net/)
 
-Practice: [LintCode](https://www.lintcode.com/)
-
