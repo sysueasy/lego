@@ -5,10 +5,9 @@
 The first program to write is the same for all languages:
 
 ```c
-#include <stdio.h> // include information about standard input/output library
-// define a function called main
-int main(int argc, char const *argv[]) //arguments参数
-{ // statement enclosed in braces
+#include <stdio.h>
+int main(int argc, char const *argv[]) //arguments 参数
+{
     printf("hello, world\n"); 
     return 0;
 }
@@ -16,7 +15,7 @@ int main(int argc, char const *argv[]) //arguments参数
 
 On the UNIX operating system you must create the program in a file such as `hello.c`, then compile it with the command `cc hello.c`, make an executable file called `a.out`.
 
-To run, type command `a.out`, in macOS, use `./a.out`. It will print these words.
+To run, type command `a.out`, in macOS, use `./a.out`.
 
 ## Tutorial
 
@@ -69,8 +68,4 @@ Since `main` is a **function** like any other, a return value of zero implies no
 A **function** provides a convenient way to encapsulate some computation, which can then be used without worrying about its implementation. With properly designed functions, it is possible to ignore _how_ a job is done; knowing _what_ is done is sufficient.
 
 In C, all function arguments are passed "**by value**". This means that the called function is given the values of its arguments in temporary variables rather than the originals.
-
-When necessary, it is possible to arrange for a function to modify a variable in a calling routine, by providing the address of the variable to be set \(technically a **pointer** to the variable\).
-
-The story is different for **arrays**. When the name of an array is used as an argument, the value passed to the function is the location or address of the beginning of the array - there is no copying of array elements. By subscripting this value, the function can access and alter any argument of the array.
 
