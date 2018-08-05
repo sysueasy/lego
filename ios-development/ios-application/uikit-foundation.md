@@ -48,6 +48,24 @@ Universal links offer a potential **attack** vector into your app, so make sure 
 
 UIKit apps can communicate through universal links. Supporting universal links allows **other apps** to send small amounts of data directly to your app without using a third-party server. Define the parameters that your app handles within the URL **query** string.
 
+## UIScreen, UIWindow, UIView
+
+Every device has at least one [`UIScreen`](https://developer.apple.com/documentation/uikit/uiscreen) object representing the device’s main screen, and additional screen objects represent connected displays.
+
+```swift
+let rect = UIScreen.main.bounds
+```
+
+A [`UIWindow`](https://developer.apple.com/documentation/uikit/uiwindow) object provides no visible content of its own. All of the window's visible content is provided by its _root view controller_. The window's role is to receive events from UIKit and to forward any relevant events to the root view controller and associated views. 
+
+```swift
+let vc = self.window.rootViewController // AppDelegate.swift
+```
+
+Most apps need **only one** **window**, on the device’s **main screen**, extra windows are commonly used to [display content on an external screen](https://developer.apple.com/documentation/uikit/windows_and_screens/displaying_content_on_a_connected_screen).
+
+Whereas touch events are delivered to the window where they occurred, events that do not have a relevant coordinate value are delivered to the _**key window**_.
+
 ## UIViewController
 
 Each view controller manages a view hierarchy. The size and position of the root view is determined by the object that owns it, which is either a parent view controller or the app’s window. The view controller that is owned by the window is the app’s root view controller and its view is sized to fill the window.
