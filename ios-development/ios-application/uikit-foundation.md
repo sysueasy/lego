@@ -66,6 +66,11 @@ Most apps need **only one** **window**, on the device’s **main screen**, extra
 
 Whereas touch events are delivered to the window where they occurred, events that do not have a relevant coordinate value are delivered to the _**key window**_.
 
+```swift
+let keyWindow = UIApplication.shared.keyWindow
+keyWindow?.addSubview(topMostView) // topmost view (e.g. alert)
+```
+
 ## UIViewController
 
 Each view controller manages a view hierarchy. The size and position of the root view is determined by the object that owns it, which is either a parent view controller or the app’s window. The view controller that is owned by the window is the app’s root view controller and its view is sized to fill the window.
