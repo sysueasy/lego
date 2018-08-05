@@ -1,5 +1,7 @@
 # Structures
 
+## Structure
+
 A structure is a collection of one or more variables, possibly of different types, grouped together under a single name for convenient handling.
 
 Structures help to organize complicated data, particularly in large programs, because they permit a group of related variables to be treated as a unit instead of as separate entities.
@@ -51,7 +53,7 @@ struct {
 // *p->str fetches whatever str points to; *(p->str)
 ```
 
-##  Arrays of Structures
+## Arrays of Structures
 
 Consider writing a program to count the occurrences of each C keyword.
 
@@ -80,9 +82,7 @@ struct {
 };
 ```
 
-C provides a compile-time unary operator called `sizeof` that can be used to compute the size of any object.
-
-The expressions _sizeof object_ yield an integer equal to the size of the specified object or type **in bytes**. Strictly, _sizeof_ produces an unsigned integer value whose type, `size_t`, is defined in the header `<stdio.h>`.
+C provides a compile-time unary operator called `sizeof` that can be used to compute the size of any object. The expressions `sizeof object` yield an integer equal to the size of the specified object or type **in bytes**. Strictly, _sizeof_ produces an unsigned integer value whose type, `size_t`, is defined in the header `<stdio.h>`.
 
 Thus, the number of keywords is the size of the array which can be defined by:
 
@@ -187,20 +187,20 @@ The blocks are kept in order of **increasing** storage address, and the last blo
 
 ![](../.gitbook/assets/screen-shot-2018-07-23-at-17.15.25.png)
 
-When a request is made, the free list is scanned until a big-enough block is found. This algorithm is called "**first fit**," by contrast with "**best fit**," which looks for the smallest block that will satisfy the request.
+When a request is made, the free list is scanned until a big-enough block is found. This algorithm is called "**first fit**," by contrast with "best fit," which looks for the smallest block that will satisfy the request.
 
 * If the block is exactly the size requested, it is unlinked from the list and returned to the user.
 * If the block is too big, it is split, and the proper amount is returned to the user while the residue remains on the free list.
-* If no big-enough block is found, another large chunk is obtained by the operating system and linked into the free list.
+* If no big-enough block is found, another large chunk is obtained from the operating system and linked into the free list.
 
 **Freeing** also causes a search of the free list, to find the proper place to insert the block being freed. If the block being freed is adjacent to a free block on either side, it is **coalesced** with it into a single bigger block, so storage does not become too fragmented. Determining the adjacency is easy because the free list is maintained in order of increasing address.
 
-One problem is to ensure that the storage returned by _malloc_ is **aligned** properly for the objects that will be stored in it. Although machines vary, for each machine there is a **most restrictive** type: if the most restrictive type can be stored at a particular address, all other types may be also. On some machines, the most restrictive type is a _double_; on others, _int_ or _long_ suffices.
+One problem is to ensure that the storage returned by _malloc_ is **aligned** properly for the objects that will be stored in it. Although machines vary, for each machine there is a **most restrictive** type: if the most restrictive type can be stored at a particular address, all other types may be also. On some machines, the most restrictive type is a _double_ \(8 bytes\).
 
-The control information at the beginning is called the "header." To simplify alignment, all blocks are multiples of the header size, and the header is aligned properly. This is achieved by a union that contains the desired header structure and an instance of the most restrictive alignment type, which we have arbitrarily made a long:
+The control information at the beginning is called the "header." To simplify alignment, all blocks are multiples of the header size, and the header is aligned properly. This is achieved by a union that contains the desired header structure and an instance of the most restrictive alignment type, which we have arbitrarily made a double:
 
 ```c
-typedef long Align; /* for alignment to long boundary */
+typedef double Align; /* for alignment to double boundary */
 union header { /* block header */
     struct {
         union header* ptr; /* next block on free list */

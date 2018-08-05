@@ -1,4 +1,4 @@
-# Pointers and Arrays
+# Pointers
 
 ## Pointers and Addresses
 
@@ -73,7 +73,7 @@ int strlen(char *s){
 }
 ```
 
-Since s is a pointer, incrementing it is perfectly legal; `s++` has no effect on the character string in the function that called _strlen_, but merely increments strlen's **private copy of the pointer**. Passing pointer arguments doesn't break the rule of call by value.
+Since _s_ is a pointer, incrementing it is perfectly legal; `s++` has no effect on the character string in the function that called _strlen_, but merely increments _strlen_'s **private copy of the pointer**. Passing pointer arguments doesn't break the rule of call by value.
 
 Pointers may be **compared** under certain circumstances. If _p_ and _q_ point to members of the same array, then relations like `==, !=, <, >=`, etc., work properly.
 
@@ -145,7 +145,7 @@ int main(int argc, char const *argv[]){
 
 When main is called, it is called with two arguments: argument count, and argument vector, a pointer to an array of character strings that contain the arguments, one per string.
 
-A common convention for C programs on UNIX systems is that an argument that begins with a minus sign introduces an optional flag or parameter, like `find -x -npattern`. Furthermore, it is convenient for users if option arguments can be combined, as in `find -nx pattern`
+A common convention for C programs on UNIX systems is that an argument that begins with a minus sign introduces an optional flag or parameter, like `find -x -npattern`. Furthermore, it is convenient for users if option arguments can be combined, as in `find -nx pattern`.
 
 ## Pointers to Functions
 

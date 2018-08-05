@@ -1,4 +1,4 @@
-# Functions and Program Structures
+# Functions
 
 C programs generally consist of many small functions rather than a few big ones. A program may reside in one or more **source files**. Source files may be compiled separately and loaded together, along with previously compiled functions from **libraries**.
 
