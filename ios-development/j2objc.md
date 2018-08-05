@@ -1,5 +1,52 @@
 # Objective-C
 
+## Fundamentals
+
+打开 objc.h，第一段就是：
+
+```c
+#if !OBJC_TYPES_DEFINED
+/// An opaque type that represents an Objective-C class.
+typedef struct objc_class *Class;
+
+/// Represents an instance of a class.
+struct objc_object {
+    Class _Nonnull isa  OBJC_ISA_AVAILABILITY;
+};
+
+/// A pointer to an instance of a class.
+typedef struct objc_object *id;
+#endif
+```
+
+这段代码给了我们以下信息：
+
+* `Class` 是一个指向 `objc_class` 结构体的指针。
+* `objc_object` 是一个结构体，它的第一个元素是 `isa` 。
+* `id` 是一个指向 `objc_object` 结构体的指针。
+
+打开 Runtime.h，会看到：
+
+```c
+struct objc_class {
+    Class _Nonnull isa  OBJC_ISA_AVAILABILITY;
+
+#if !__OBJC2__
+    Class _Nullable super_class    OBJC2_UNAVAILABLE;
+    const char * _Nonnull name     OBJC2_UNAVAILABLE;
+#endif
+
+} OBJC2_UNAVAILABLE;
+/* Use `Class` instead of `struct objc_class *` */
+```
+
+给了我们以下信息：
+
+* `objc_class` 的第一个元素是 `isa`，是 `Class` 类型。
+* `objc_class` 的第二个元素是 `super_class`，也是 `Class` 类型。
+
+![](../.gitbook/assets/screen-shot-2018-08-05-at-15.33.19.png)
+
 ## J2ObjC
 
 github, google/j2objc: [https://github.com/google/j2objc](https://github.com/google/j2objc)
