@@ -1,5 +1,7 @@
 # Swift
 
+Swift 中文介绍：[https://developer.apple.com/cn/swift/](https://developer.apple.com/cn/swift/)
+
 ## Value and Reference Type
 
 [Types in Swift](https://developer.apple.com/swift/blog/?id=10) fall into one of two categories: first, “**value types**”, where each instance keeps a unique copy of its data, usually defined as a `struct`, `enum`, or `tuple`. The second, “**reference types**”, where instances share a single copy of the data, and the type is usually defined as a `class`.
@@ -265,4 +267,14 @@ An access is _instantaneous_ if it’s not possible for other code to run after 
 * [Value types](swift-notes.md#value-and-reference-type) are made up of individual constituent values, mutating any piece of the value mutates the whole value, meaning read or write access to one of the properties requires read or write access to the whole value.
 
 If the compiler can’t prove the access is safe, it doesn’t allow the access.
+
+## Access Control
+
+_Open access_ and _public access_ enable entities to be used within any source file from their defining module, and also in a source file from another module that imports the defining module.
+
+_Internal access_ enables entities to be used within any source file from their defining module.
+
+_File-private access_ restricts the use of an entity to its own defining source file.
+
+_Private access_ restricts the use of an entity to the enclosing declaration, and to extensions of that declaration that are in the same file.
 
