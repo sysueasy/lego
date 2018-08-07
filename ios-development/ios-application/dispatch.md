@@ -2,6 +2,29 @@
 
 Mentioned in [WWDC 2017 session](https://developer.apple.com/videos/play/wwdc2017/706), macOS 10.13 and iOS 11 have reinvented how Grand Central Dispatch and the Darwin kernel collaborate, enabling your applications to run concurrent workloads more efficiently.
 
+## Legacy
+
+Before GCD, there are two ways to do synchronization: build-in synchronization block
+
+```objectivec
+- (void)synchronizedMethod {
+    @synchronized(self) {
+        //safe
+    }
+}
+```
+
+and [NSLock](https://developer.apple.com/documentation/foundation/nslock)/[NSRecursiveLock](https://developer.apple.com/documentation/foundation/nsrecursivelock).
+
+```objectivec
+_lock = [[NSLock alloc] init];
+- (void)synchronizedMethod {
+    [_lock lock];
+    // safe
+    [_lock unlock];
+}
+```
+
 ## Overview
 
 Execute code **concurrently** on **multicore** hardware by submitting work to **dispatch queues** managed by the system. **GCD** \(**Grand Central Dispatch**\), operating at the system level, can better accommodate the needs of all running applications, matching them to the available system resources in a balanced fashion.
