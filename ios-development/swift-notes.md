@@ -28,6 +28,16 @@ let firstSpace = name.firstIndex(of: " ") ?? name.endIndex
 let firstName = name[..<firstSpace] // prefix
 ```
 
+[`~=`](https://docs.swift.org/swift-book/ReferenceManual/Patterns.html#ID426) match a value with a range of values.
+
+```swift
+let rawInput = "126 a.b 22219 zzzzzz"
+let numericPrefix = rawInput.prefix(while: { "0"..."9" ~= $0 })
+// numericPrefix is the substring "126"
+```
+
+When you need to store a substring or pass it to a function that requires a `String` instance, you can convert it by `String(numericPrefix)`.
+
  Each element of a string is represented by a [`Character`](https://developer.apple.com/documentation/swift/character) instance.
 
 ```swift
