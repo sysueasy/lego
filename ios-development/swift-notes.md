@@ -2,6 +2,93 @@
 
 Swift 中文介绍：[https://developer.apple.com/cn/swift/](https://developer.apple.com/cn/swift/)
 
+## String
+
+Swift [`String`](https://developer.apple.com/documentation/swift/string) is a [Unicode](https://www.unicode.org/standard/standard.html) string value that is a collection of characters.
+
+The `String` type bridges with the Objective-C class `NSString` and offers interoperability with C functions that works with strings.
+
+Strings always have **value** semantics\(rather than object\). Modifying a copy of a string leaves the original unaffected.
+
+```swift
+var otherGreeting = greeting // "Welcome!"
+otherGreeting += " Have a nice time!" // "Welcome! Have a nice time!"
+print(greeting) // "Welcome!"
+```
+
+Although strings in Swift have value semantics, strings use a **copy-on-write** strategy to store their data in a buffer. This buffer can then be shared by different copies of a string. A string’s data is only copied lazily, upon mutation, when more than one string instance is using the same buffer. Therefore, the first in any sequence of mutating operations causes elements to be copied into unique, contiguous storage which may cost O\(_n_\) time and space, where _n_ is the length of the string’s encoded representation.
+
+### Substring
+
+[`Substring`](https://developer.apple.com/documentation/swift/substring) is a type that represents substrings of a string while **sharing the original string’s storage**. Substrings present the same interface as strings.
+
+```swift
+let name = "Marie Curie"
+let firstSpace = name.firstIndex(of: " ") ?? name.endIndex
+let firstName = name[..<firstSpace] // prefix
+```
+
+ Each element of a string is represented by a [`Character`](https://developer.apple.com/documentation/swift/character) instance.
+
+```swift
+let cafe = "Cafe\u{301} du 🌍"
+print(cafe.count) // Prints "9"
+print(Array(cafe)) // Prints "["C", "a", "f", "é", " ", "d", "u", " ", "🌍"]"
+```
+
+### Unicode scalar value
+
+A string’s `unicodeScalars` property is a collection of Unicode scalar values, the **21-bit** codes that are the basic unit of Unicode. Each scalar value is represented by a `Unicode.Scalar`instance and is equivalent to a UTF-32 code unit.
+
+```swift
+print(cafe.unicodeScalars.count) // Prints "10"
+print(Array(cafe.unicodeScalars))
+// Prints "["C", "a", "f", "e", "\u{0301}", " ", "d", "u", " ", "\u{0001F30D}"]"
+print(cafe.unicodeScalars.map { $0.value })
+// Prints "[67, 97, 102, 101, 769, 32, 100, 117, 32, 127757]"
+```
+
+### UTF-16
+
+A string’s `utf16` property is a collection of UTF-16 code units, the **16-bit** encoding form of the string’s Unicode scalar values. These elements match those accessed through indexed `NSString` APIs.
+
+```swift
+print(cafe.utf16.count) // Prints "11"
+print(Array(cafe.utf16))
+// Prints "[67, 97, 102, 101, 769, 32, 100, 117, 32, 55356, 57101]"
+let nscafe = cafe as NSString
+print(nscafe.length) // Prints "11"
+print(nscafe.character(at: 3)) // Prints "101"
+```
+
+### UTF-8
+
+A string’s `utf8` property is a collection of UTF-8 code units, the **8-bit** encoding form of the string’s Unicode scalar values. This representation matches the one used when String instances are passed to C APIs.
+
+```swift
+print(cafe.utf8.count) // Prints "14"
+print(Array(cafe.utf8))
+// Prints "[67, 97, 102, 101, 204, 129, 32, 100, 117, 32, 240, 159, 140, 141]"
+let cLength = strlen(cafe)
+print(cLength) // Prints "14"
+```
+
+### String length
+
+When you need to know the length of a string, you must first consider what you’ll use the length for. Are you measuring the number of characters that will be **displayed** on the screen, or are you measuring the amount of **storage** needed for the string in a particular encoding?
+
+For example, an emoji flag character is constructed from **a pair of** Unicode scalar values:
+
+```swift
+let flag = "🇨🇳"
+print(flag.count) // Prints "1"
+print(flag.unicodeScalars.count) // Prints "2"
+print(flag.utf16.count) // Prints "4"
+print(flag.utf8.count) // Prints "8"
+```
+
+To check whether a string is empty, use its `isEmpty` property instead of comparing the length of one of the **view**s to `0`.
+
 ## Value and Reference Type
 
 [Types in Swift](https://developer.apple.com/swift/blog/?id=10) fall into one of two categories: first, “**value types**”, where each instance keeps a unique copy of its data, usually defined as a `struct`, `enum`, or `tuple`. The second, “**reference types**”, where instances share a single copy of the data, and the type is usually defined as a `class`.
@@ -15,6 +102,14 @@ You place an ampersand \(&\) directly before a variable’s name when you pass i
 ## Closure
 
 Closures are self-contained blocks of functionality that can be passed around and used in your code. Closures can **capture** and **store** references to any constants and variables from the context in which they are defined.
+
+Swift automatically provides **shorthand argument names** to inline closures, which can be used to refer to the values of the closure’s arguments by the names `$0`, `$1`, `$2`, and so on.
+
+If you use these shorthand argument names within your closure expression, you can omit the closure’s argument list from its definition, and also the `in`keyword.
+
+```swift
+reversedNames = names.sorted(by: { $0 > $1 } )
+```
 
 ## Enumerations
 
