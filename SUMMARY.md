@@ -71,7 +71,5 @@
 * [Operation System](operation-system/README.md)
   * [1. Introduction](operation-system/1.-introduction.md)
   * [2. Process Management](operation-system/2.-process-management.md)
-  * [3. Memory Management](operation-system/4.-memory-management/README.md)
-    * [3.1 Main Memory](operation-system/4.-memory-management/4.1-main-memory.md)
-    * [3.2 Virtual Memory](operation-system/4.-memory-management/4.2-virtual-memory.md)
+  * [3. Memory Management](operation-system/4.-memory-management.md)
 
