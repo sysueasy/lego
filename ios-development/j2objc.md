@@ -2,7 +2,7 @@
 
 ## NSObject
 
-​[NSObject](https://developer.apple.com/documentation/objectivec/nsobject?language=objc) is the root class of most Objective-C class hierarchies, from which subclasses inherit a basic interface to the **runtime** system and the ability to behave as Objective-C objects.
+​[NSObject](https://developer.apple.com/documentation/objectivec/nsobject?language=objc) is the root class of most Objective-C class hierarchies, from which subclasses inherit a basic interface to the runtime system and the ability to behave as Objective-C objects.
 
 An object that conforms to [NSObject protocol](https://developer.apple.com/documentation/objectivec/1418956-nsobject) can be considered a first-class object. Such an object can be asked about its: 
 
@@ -12,7 +12,7 @@ An object that conforms to [NSObject protocol](https://developer.apple.com/docum
 
 The Cocoa root class NSObject adopts this protocol. This protocol is imported into Swift with the name NSObjectProtocol.
 
-`-(BOOL)isEqual:(id)object;` If two objects are equal, they must have the same **hash value**. If you define `isEqual:` in a subclass and intend to put instances of that subclass into a collection, make sure you also define hash in your subclass.
+`-(BOOL)isEqual:(id)object;` If two objects are equal, they must have the same **hash value**. If you define `isEqual:` in a subclass and intend to put instances of that subclass into a collection, make sure you also define `hash` in your subclass.
 
 `@property(readonly) NSUInteger hash;` Returns an integer that can be used as a table address in a hash table structure.
 
