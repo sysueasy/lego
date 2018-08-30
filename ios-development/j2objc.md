@@ -12,10 +12,6 @@ An object that conforms to [NSObject protocol](https://developer.apple.com/docum
 
 The Cocoa root class NSObject adopts this protocol. This protocol is imported into Swift with the name NSObjectProtocol.
 
-`-(BOOL)isEqual:(id)object;` If two objects are equal, they must have the same **hash value**. If you define `isEqual:` in a subclass and intend to put instances of that subclass into a collection, make sure you also define `hash` in your subclass.
-
-`@property(readonly) NSUInteger hash;` Returns an integer that can be used as a table address in a hash table structure.
-
 `-(BOOL)isKindOfClass:(Class)aClass;` Returns a Boolean value that indicates whether the receiver is an **instance** **of** **given class** or an instance of any class that **inherits** from that class.
 
 `-(BOOL)isMemberOfClass:(Class)aClass;` Returns a Boolean value that indicates whether the receiver is an **instance** **of** **a given class**.
@@ -65,11 +61,7 @@ The `super_class` pointer creates the hierarchy. The `isa` pointer describes the
 
 ## J2ObjC
 
-github, google/j2objc: [https://github.com/google/j2objc](https://github.com/google/j2objc)
-
-google/j2objc: [https://developers.google.com/j2objc/](https://developers.google.com/j2objc/)
-
-J2ObjC is an open-source command-line tool from Google that translates Java source code to Objective-C for the iOS platform. The goal is to write an app's non-UI code \(such as **business logic** and **data models**\) in Java, which is then shared by web apps \(using [GWT](http://www.gwtproject.org/)\), Android apps, and iOS apps.
+[J2ObjC](https://developers.google.com/j2objc/) is an open-source command-line tool from Google that translates Java source code to Objective-C for the iOS platform. The goal is to write an app's non-UI code \(such as **business logic** and **data models**\) in Java, which is then shared by web apps \(using [GWT](http://www.gwtproject.org/)\), Android apps, and iOS apps.
 
 {% hint style="info" %}
 GWT \(Google Web Toolkit\) is a development toolkit for building and optimizing complex **browser-based** applications.
@@ -109,7 +101,7 @@ int main(int argc, char * argv[]) {
 }
 ```
 
-In a reference counted environment, Cocoa expects there to be an autorelease pool **always available**. If a pool is not available, autoreleased objects do not get released and you leak memory. In this situation, your program will typically log suitable warning messages.
+In a reference counted environment, Cocoa expects there to be an autorelease pool always available. If a pool is not available, autoreleased objects do not get released and you leak memory. In this situation, your program will typically log suitable warning messages.
 
 The Application Kit creates an autorelease pool on the **main thread** at the beginning of **every cycle** **of the event loop**, and **drains it at the end**, thereby releasing any autoreleased objects generated while processing an event. If you use the Application Kit, you therefore typically don’t have to create your own pools. If your application creates _a lot of temporary autoreleased objects within the event loop_, however, it may be beneficial to create “local” autorelease pools to help to minimize the peak memory footprint.
 
