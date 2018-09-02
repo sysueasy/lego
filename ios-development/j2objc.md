@@ -69,23 +69,13 @@ GWT \(Google Web Toolkit\) is a development toolkit for building and optimizing 
 
 See [How Google Inbox shares 70% of its code across Android, iOS, and the Web](https://arstechnica.com/information-technology/2014/11/how-google-inbox-shares-70-of-its-code-across-android-ios-and-the-web/). Google has built itself a good enough arsenal of cross compilers that it can write an app's logic once for Android in Java, and can then cross-compile to Objective-C for iOS and JavaScript for browsers. Java-to-JavaScript is handled by the **GWT**.
 
-## KVO and KVC
+## KVC and KVO
+
+You typically use accessor methods to gain access to an object’s properties. In contrast, a key-value coding compliant object provides a simple messaging interface that is consistent across all of its properties. Key-value coding is a fundamental concept that underlies many other Cocoa technologies, such as key-value observing, Cocoa bindings, Core Data, and AppleScript-ability.
+
+Objects typically adopt key-value coding when they inherit from `NSObject`. Swift objects that inherit from `NSObject` or one of its subclasses are key-value coding compliant for their properties by default.
 
 Key-value observing \(KVO\) provides a mechanism that allows objects to be notified of changes to specific properties of other objects.
-
-When an object is key-value coding \(KVC\) compliant, its properties are addressable via string parameters through a concise, uniform messaging interface.
-
-```objectivec
-@interface BankAccount : NSObject
-@property (nonatomic) NSNumber* currentBalance;              // An attribute
-@property (nonatomic) Person* owner;                         // A to-one relation
-@property (nonatomic) NSArray< Transaction* >* transactions; // A to-many relation
-@end
-```
-
-Because the `BankAccount` class is key-value coding compliant, it recognizes the keys `owner`, `currentBalance`, and `transactions`, which are the names of its properties. Instead of calling the `setCurrentBalance:` method, you can set the value by its key:
-
-`[myAccount setValue:@(100.0) forKey:@"currentBalance"];`.
 
 ## NSAutoreleasePool
 
