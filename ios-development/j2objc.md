@@ -105,13 +105,9 @@ If you use Automatic Reference Counting \(ARC\), you cannot use autorelease pool
 
 Each thread \(including the main thread\) maintains its own **stack** of `NSAutoreleasePool`objects. As new pools are created, they get added to the **top of the stack**. When pools are deallocated, they are removed from the stack. Autoreleased objects are placed into the **top autorelease pool** for the current thread. When a thread terminates, it automatically drains all of the autorelease pools associated with itself.
 
-### Threads
-
 If you are making Cocoa calls outside of the Application Kit’s main thread—for example if you create a Foundation-only application or if you detach a thread—you need to create your own autorelease pool.
 
 If your application or thread is long-lived and potentially generates a lot of autoreleased objects, you should **periodically drain and create** autorelease pools \(like the Application Kit does on the main thread\); otherwise, autoreleased objects accumulate and your memory footprint grows. If, however, your detached thread does not make Cocoa calls, you do not need to create an autorelease pool.
-
-### Garbage Collection
 
 In a garbage-collected environment, there is no need for autorelease pools. You may, however, write a framework that is designed to work in both a garbage-collected and reference-counted environment. In this case, you can use autorelease pools to **hint** to the collector that collection may be appropriate.
 
