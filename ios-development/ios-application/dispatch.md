@@ -1,7 +1,5 @@
 # Dispatch
 
-Mentioned in [WWDC 2017 session](https://developer.apple.com/videos/play/wwdc2017/706), macOS 10.13 and iOS 11 have reinvented how Grand Central Dispatch and the Darwin kernel collaborate, enabling your applications to run concurrent workloads more efficiently.
-
 ## Legacy
 
 Before GCD, there are two ways to do synchronization: build-in synchronization block
@@ -33,9 +31,9 @@ GCD provides and manages **FIFO** queues to which your application can submit ta
 
 A dispatch queue can be either **serial**, so that work items are executed _one at a time_, or it can be **concurrent**, so that work items are _dequeued in order,_ but _run all at once and can finish in any order_. Both serial and concurrent queues process work items in first in, first-out \(FIFO\) order.
 
-Each work item can be executed either **synchronously** or **asynchronously**. When a work item is executed synchronously with the sync method, the program waits until execution finishes before the method call returns. When a work item is executed asynchronously with the async method, the method call **returns** immediately.
+Each work item can be executed either **synchronously** or **asynchronously**. When a work item is executed synchronously with the sync method, the program waits until execution finishes before the method call returns. When a work item is executed asynchronously with the async method, the method call returns immediately.
 
-When an app launches, the system automatically creates a **special** queue called the **main** _queue_. Work items enqueued to the main queue execute serially on your app’s **main thread**. Attempting to **synchronously** execute a work item on the main queue results in **deadlock**.
+When an app launches, the system automatically creates a **special** queue called the **main** queue. Work items enqueued to the main queue execute serially on your app’s **main thread**. Attempting to **synchronously** execute a work item on the main queue results in **deadlock**.
 
 ```swift
 let queue = DispatchQueue.main
@@ -98,16 +96,6 @@ let workItem = DispatchWorkItem {
 workItem.perform() // will dispatch on the main thread
 ```
 
-You can notify your main queue \(or any other queue\) when a work item is dispatched:
-
-```swift
-let queue = DispatchQueue.global()
-queue.async(execute: workItem)
-workItem.notify(queue: DispatchQueue.main) {
-    // work item has been done
-}
-```
-
 To cancel a work item is simple: `workItem.cancel()`, be aware that you can only cancel an item before it reaches the head of a queue and starts executing.
 
 Like [immutable object](../../java/concurrency.md#immutable-objects) in Java, constants in Swift is read-only and **thread-safe**. However, collection types like `Array` and `Dictionary` are not thread-safe when declared mutable. There's no such concern in a serial dispatch queue because tasks are executed one by one. But thread interference and memory consistency errors can occur in a concurrent dispatch queue.
@@ -124,7 +112,7 @@ let workItem = DispatchWorkItem(flags: [.barrier]) {
 
 [`DispatchQoS`](https://developer.apple.com/documentation/dispatch/dispatchqos) encapsulates quality of service classes. A **quality of service** \(QoS\) class categorizes work to be performed on a `DispatchQueue`. By specifying a QoS to work, you indicate its importance, and the system prioritizes it and schedules it accordingly.
 
-Because higher priority work is performed more quickly and with more resources than lower priority work, it typically requires more **energy** than lower priority work. Accurately specifying appropriate QoS classes for the work your app performs ensures that your app is responsive and energy efficient. `DispatchQoS.QoSClass` encapsulates quality of service classes: 
+Because higher priority work is performed more quickly and with more resources than lower priority work, it typically requires more energy than lower priority work. Accurately specifying appropriate QoS classes for the work your app performs ensures that your app is responsive and energy efficient. `DispatchQoS.QoSClass` encapsulates quality of service classes: 
 
 * userInteractive: highest priority
 * userInitiated
