@@ -81,7 +81,7 @@ Key-value observing \(KVO\) provides a mechanism that allows objects to be notif
 
 [NSAutoreleasePool](https://developer.apple.com/documentation/foundation/nsautoreleasepool?language=objc) is an object that supports Cocoa’s reference-counted memory management system.
 
-In a **reference-counted** environment \(as opposed to one which uses **garbage collection**\), an `NSAutoreleasePool` object contains objects that have received an `autorelease` message and when drained it sends a `release` message to each of those objects. Thus, sending `autorelease` instead of `release` to an object **extends the lifetime** of that object at least until the pool itself is drained \(it may be longer if the object is subsequently retained\). An object can be put into the same pool several times, in which case it receives a `release` message for each time it was put into the pool.
+In a reference-counted environment \(as opposed to one which uses **garbage collection**\), an `NSAutoreleasePool` object contains objects that have received an `autorelease` message and when drained it sends a `release` message to each of those objects. Thus, sending `autorelease` instead of `release` to an object **extends the lifetime** of that object at least until the pool itself is drained \(it may be longer if the object is subsequently retained\). An object can be put into the same pool several times, in which case it receives a `release` message for each time it was put into the pool.
 
 ```objectivec
 int main(int argc, char * argv[]) {
@@ -103,7 +103,7 @@ The Application Kit creates an autorelease pool on the **main thread** at the be
 
 If you use Automatic Reference Counting \(ARC\), you cannot use autorelease pools directly.`@autoreleasepool` blocks are more efficient than using an instance of `NSAutoreleasePool` directly; you can also use them even if you do not use ARC.
 
-Each thread \(including the main thread\) maintains its own **stack** of `NSAutoreleasePool`objects. As new pools are created, they get added to the **top of the stack**. When pools are deallocated, they are removed from the stack. Autoreleased objects are placed into the **top autorelease pool** for the current thread. When a thread terminates, it automatically drains all of the autorelease pools associated with itself.
+Each thread \(including the main thread\) maintains its own **stack** of `NSAutoreleasePool`objects. As new pools are created, they get added to the top of the stack. When pools are deallocated, they are removed from the stack. Autoreleased objects are placed into the top autorelease pool for the current thread. When a thread terminates, it automatically drains all of the autorelease pools associated with itself.
 
 If you are making Cocoa calls outside of the Application Kit’s main thread—for example if you create a Foundation-only application or if you detach a thread—you need to create your own autorelease pool.
 
@@ -111,7 +111,6 @@ If your application or thread is long-lived and potentially generates a lot of a
 
 In a garbage-collected environment, there is no need for autorelease pools. You may, however, write a framework that is designed to work in both a garbage-collected and reference-counted environment. In this case, you can use autorelease pools to **hint** to the collector that collection may be appropriate.
 
-In a garbage-collected environment, sending a `drain` message to a pool triggers garbage collection if necessary; `release`, however, is a no-op.
-
-In a reference-counted environment, `drain` has the same effect as `release`. Typically, therefore, you should use `drain` instead of `release`.
+* In a garbage-collected environment, sending a `drain` message to a pool triggers garbage collection if necessary; `release`, however, is a no-op.
+* In a reference-counted environment, `drain` has the same effect as `release`. Typically, therefore, you should use `drain` instead of `release`.
 
