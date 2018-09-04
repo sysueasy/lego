@@ -1,4 +1,4 @@
-# Fundamentals
+# Frameworks
 
 ## Foundation
 
@@ -11,7 +11,7 @@ The [Foundation](https://developer.apple.com/documentation/foundation) framework
 
 The classes, protocols, and data types defined by Foundation are used throughout the macOS, iOS, watchOS, and tvOS SDKs.
 
-## CALayer
+## Core Animation
 
 [Core Animation](https://developer.apple.com/documentation/quartzcore) provides high frame rates and smooth animations without burdening the CPU and slowing down your app. Most of the work required to draw each frame of an animation is done for you.
 
@@ -25,15 +25,9 @@ A layer’s main job is to manage the visual content that you provide but the la
 
 If the layer object was created by a view, the view typically assigns itself as the layer’s **delegate** automatically, and you should not change that relationship.
 
-## UIBlurEffect
+## Security
 
-```swift
-let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
-let blurEffectView = UIVisualEffectView(effect: blurEffect)
-blurEffectView.frame = self.bounds
-blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-self.addSubview(blurEffectView)
-```
+[Keychain Services](https://developer.apple.com/documentation/security/keychain_services): Securely store small chunks of data on behalf of the user.
 
 ## Reference
 
