@@ -8,7 +8,7 @@ Minimizing memory usage not only decreases your application’s memory footprint
 
 Both OS X and iOS include a fully-integrated, always-on **virtual memory system**. System provides approximately **18 EB** of addressable space for 64-bit processes.
 
-The virtual memory manager creates a **logical address space** \(or “virtual” address space\) for each process and divides it up into uniformly-sized chunks of memory called _**pages**_. The processor and its **memory management unit** \(MMU\) maintain a _**page table**_ to **map** pages in the program’s logical address space to hardware addresses in the computer’s RAM.
+The virtual memory manager creates a **logical address space** \(or “virtual” address space\) for each process and divides it up into uniformly-sized chunks of memory called _**pages**_. The processor and its **memory management unit** \(MMU\) maintain a **page table** to **map** pages in the program’s logical address space to hardware addresses in the computer’s RAM.
 
 As far as a program is concerned, addresses in its logical address space are always available. However, if an application accesses an address on a memory page that is not currently in physical RAM, a _**page fault**_ occurs. When that happens, the virtual memory system invokes a special page-fault handler to respond to the fault immediately. The page-fault handler stops the currently executing code, locates a free page of physical memory, loads the page containing the needed data from disk, updates the page table, and then returns control to the program’s code, which can then access the memory address normally. This process is known as _**paging**_.
 

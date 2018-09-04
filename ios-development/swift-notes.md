@@ -1,7 +1,5 @@
 # Swift
 
-Swift 中文介绍：[https://developer.apple.com/cn/swift/](https://developer.apple.com/cn/swift/)
-
 ## String
 
 Swift [`String`](https://developer.apple.com/documentation/swift/string) is a [Unicode](https://www.unicode.org/standard/standard.html) string value that is a collection of characters.
