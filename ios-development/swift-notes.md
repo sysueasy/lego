@@ -14,7 +14,7 @@ otherGreeting += " Have a nice time!" // "Welcome! Have a nice time!"
 print(greeting) // "Welcome!"
 ```
 
-Although strings in Swift have value semantics, strings use a **copy-on-write** strategy to store their data in a buffer. This buffer can then be shared by different copies of a string. A string’s data is only copied lazily, upon mutation, when more than one string instance is using the same buffer. Therefore, the first in any sequence of mutating operations causes elements to be copied into unique, contiguous storage which may cost O\(_n_\) time and space, where _n_ is the length of the string’s encoded representation.
+Although strings in Swift have value semantics, strings use a **copy-on-write** strategy to store their data in a buffer. This buffer can then be shared by different copies of a string. A string’s data is only copied lazily, upon mutation, when more than one string instance is using the same buffer. Therefore, the first in any sequence of mutating operations causes elements to be copied into unique, contiguous storage which may cost O\(n\) time and space, where _n_ is the length of the string’s encoded representation.
 
 ### Substring
 
@@ -26,7 +26,7 @@ let firstSpace = name.firstIndex(of: " ") ?? name.endIndex
 let firstName = name[..<firstSpace] // prefix
 ```
 
-[`~=`](https://docs.swift.org/swift-book/ReferenceManual/Patterns.html#ID426) match a value with a range of values.
+By default, the Swift standard library [`~=`](https://docs.swift.org/swift-book/ReferenceManual/Patterns.html#ID426) operator compares two values of the same type using the == operator. It can also match a value with a range of values, by checking whether the value is contained within the range.
 
 ```swift
 let rawInput = "126 a.b 22219 zzzzzz"
@@ -109,14 +109,22 @@ You place an ampersand \(&\) directly before a variable’s name when you pass i
 
 ## Closure
 
-Closures are self-contained blocks of functionality that can be passed around and used in your code. Closures can **capture** and **store** references to any constants and variables from the context in which they are defined.
+[Closures](https://docs.swift.org/swift-book/LanguageGuide/Closures.html) are self-contained blocks of functionality that can be passed around and used in your code. Closures can **capture** and **store** references to any constants and variables from the context in which they are defined.
 
-Swift automatically provides **shorthand argument names** to inline closures, which can be used to refer to the values of the closure’s arguments by the names `$0`, `$1`, `$2`, and so on.
+```swift
+reversedNames = names.sorted(by: { (s1: String, s2: String) -> Bool in
+    return s1 > s2
+})
+```
+
+Swift automatically provides shorthand argument names to inline closures, which can be used to refer to the values of the closure’s arguments by the names `$0`, `$1`, `$2`, and so on.
 
 If you use these shorthand argument names within your closure expression, you can omit the closure’s argument list from its definition, and also the `in`keyword.
 
+Single-expression closures can implicitly return the result of their single expression by omitting the `return` keyword from their declaration.
+
 ```swift
-reversedNames = names.sorted(by: { $0 > $1 } )
+reversedNames = names.sorted { $0 > $1 }
 ```
 
 ## Enumerations
