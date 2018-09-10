@@ -267,7 +267,7 @@ weak var delegate: DiceGameDelegate?
 
 ## Auto Reference Counting
 
-In most cases, memory management “just works” in Swift. Every time you create a new instance of a class, ARC allocates a chunk of memory to store information about that instance. When an instance is no longer needed, ARC frees up the memory used by that instance so that the memory can be used for other purposes instead.
+In most cases, memory management “just works” in Swift.
 
 Whenever you assign a class instance to a property, constant, or variable, that makes a strong reference to the instance. ARC will not deallocate an instance as long as at least one active reference to that instance still exists.
 

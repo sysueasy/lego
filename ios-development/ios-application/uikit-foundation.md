@@ -18,7 +18,7 @@ UIKit provides most of the objects in the controller and view layers of your app
 
 Apps start off **not running**. When the user explicitly launches the app, the app moves briefly to the **inactive** state before entering the **active** state. \(An active app appears onscreen and is known as a **foreground** app.\) Quitting an active app moves it offscreen and into the _**background**_ state, where it stays until the system **suspends** it a short time later. At its discretion, the system may quietly _**terminate**_ a suspended app, returning it to the not running state.
 
-`applicationWillResignActive(_:)` called when your app is about to move from the active to inactive state. This can occur for certain types of temporary interruptions \(such as an incoming **phone call** or **SMS message**\) or when the user quits the app and it begins the transition to the background state. An app in the inactive state continues to run but does not dispatch incoming events to responders.
+`applicationWillResignActive(_:)` called when your app is about to move from the active to inactive state. This can occur for certain types of temporary interruptions \(such as an incoming phone call or SMS message\) or when the user quits the app and it begins the transition to the background state. An app in the inactive state continues to run but does not dispatch incoming events to responders.
 
 `applicationDidEnterBackground(_:)`Use this method to release shared resources, invalidate timers, and store enough app state information to restore your app to its current state in case it is terminated later. Your implementation of this method has approximately **five seconds** to perform any tasks and return.
 
@@ -40,7 +40,7 @@ Every iOS app has exactly one instance of UIApplication \(or, very rarely, a sub
 
 ### Universal Links
 
-While [universal links](https://developer.apple.com/documentation/uikit/core_app/allowing_apps_and_websites_to_link_to_your_content) and custom URLs are both acceptable forms of deep linking, _universal links_ _are strongly recommended as a **best practice**_. Key **benefits** are \(1\) One URL works for both your website and your app, allowing your website to handle the link when your app is not installed. \(2\) iOS verifies the association through unforgeable URL like [https://www.google.com/apple-app-site-association](https://www.google.com/apple-app-site-association) on your website, eliminating the possibility that other apps might claim your scheme and redirect your URLs.
+While [universal links](https://developer.apple.com/documentation/uikit/core_app/allowing_apps_and_websites_to_link_to_your_content) and custom URLs are both acceptable forms of deep linking, universal links are strongly recommended as a best practice. Key benefits are \(1\) One URL works for both your website and your app, allowing your website to handle the link when your app is not installed. \(2\) iOS verifies the association through unforgeable URL like [https://www.google.com/apple-app-site-association](https://www.google.com/apple-app-site-association) on your website, eliminating the possibility that other apps might claim your scheme and redirect your URLs.
 
 {% hint style="danger" %}
 Universal links offer a potential **attack** vector into your app, so make sure to validate all URL parameters and discard any malformed URLs.
@@ -111,11 +111,7 @@ Views can adjust the size and position of their subviews. Use Auto Layout to def
 
 By default, when a subview’s visible area extends outside of the bounds of its superview, no clipping of the subview's content occurs. Use the `clipsToBounds` property to change that behavior.
 
-The geometry of each view is defined by its **frame** and **bounds** properties. The frame property defines the origin and dimensions of the view in the **coordinate** system of its superview. The bounds property defines the internal dimensions of the view as it sees them and _is used almost exclusively in custom drawing code_.
-
-### Animation
-
-Changes to several view properties can be animated: frame, bounds, center, transform, alpha, backgroundColor. To animate your changes, create a [`UIViewPropertyAnimator`](https://developer.apple.com/documentation/uikit/uiviewpropertyanimator) object and use its handler block to change the values of your view's properties. The animation support provided by _Core Animation_ is fast and easy to use, makes visible changes to a view without requiring you to subclass and implement complex drawing code. 
+The geometry of each view is defined by its **frame** and **bounds** properties. The frame property defines the origin and dimensions of the view in the **coordinate** system of its superview. The bounds property defines the internal dimensions of the view as it sees them and is used almost exclusively in custom drawing code.
 
 ### Subclassing
 
@@ -133,7 +129,7 @@ If you want a given view to size itself to its parent view, you should add it to
 
 You should not call `layoutSubviews()` directly. If you want to force a layout update, call the ****`setNeedsLayout()` method instead to do so. This method makes a note of the request and returns immediately. Because this method does not force an immediate update, but instead waits for the next update cycle, you can use it to invalidate the layout of multiple views before any of those views are updated. This behavior allows you to consolidate all of your layout updates to one update cycle, which is usually better for performance.
 
- If you want to update the layout of your views immediately, call the `layoutIfNeeded()` method. When using Auto Layout, the layout engine updates the position of views as needed to satisfy changes in constraints. Using the view that receives the message as the root view, this method lays out the view subtree starting at the root. If no layout updates are pending, this method exits without modifying the layout or calling any layout-related callbacks.
+If you want to update the layout of your views immediately, call the `layoutIfNeeded()` method. When using Auto Layout, the layout engine updates the position of views as needed to satisfy changes in constraints. Using the view that receives the message as the root view, this method lays out the view subtree starting at the root. If no layout updates are pending, this method exits without modifying the layout or calling any layout-related callbacks.
 
 ### The View Drawing Cycle
 
@@ -145,7 +141,7 @@ This method is called when a view is first displayed or when an event occurs tha
 
 ## User Interactions
 
-Apps **receive and handle events** using _responder objects_. A responder object is any instance of the `UIResponder` class, and common subclasses include `UIView`, `UIViewController`, `UIWindow`, and `UIApplication`. Responders receive the raw event data \([`UIEvent`](https://developer.apple.com/documentation/uikit/uievent)\) and must either handle the event or forward it to another responder object.
+Apps **receive and handle events** using _responder objects_. A responder object is any instance of the `UIResponder` class, and common subclasses include `UIView`, `UIViewController`, `UIWindow`, and `UIApplication`. Responders receive the raw event data and must either handle the event or forward it to another responder object.
 
 When your app receives an event, UIKit automatically directs that event to the most appropriate responder object, known as the **first responder**. Unhandled events are passed from responder to responder in the active **responder chain**, which is the dynamic configuration of your app’s responder objects.
 
