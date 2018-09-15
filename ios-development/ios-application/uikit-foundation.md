@@ -113,7 +113,23 @@ By default, when a subview’s visible area extends outside of the bounds of its
 
 The geometry of each view is defined by its **frame** and **bounds** properties. The frame property defines the origin and dimensions of the view in the **coordinate** system of its superview. The bounds property defines the internal dimensions of the view as it sees them and is used almost exclusively in custom drawing code.
 
-### Subclassing
+### The Render Loop
+
+> [High Performance Auto Layout](https://developer.apple.com/videos/play/wwdc2018/220/)
+
+The Render Loop is the process that runs potentially at 120 times every second. That makes sure that all the content is ready to go for each frame. It consists of three phases -- Update Constraints, Layout, and Display.
+
+| Update Constraints | Layout | Display |
+| :--- | :--- | :--- |
+| updateConstraints\(\) | layoutSubViews\(\) | draw\(\_:\) |
+| setNeedsUpdateConstraints\(\) | setNeedsLayout\(\) | setNeedsDisplay\(\) |
+| updateConstraintsIfNeeded\(\) | layoutIfNeeded\(\) | - |
+
+First every view that needs it will receive `updateConstraints()`. And that runs from the leaf most views up to the view hierarchy towards the window. Next, every view receives `layoutSubViews()`. This runs the opposite direction starting from the window going down towards the leaves. Last, every view gets `draw(_:)` if it needs it also from the window towards the leaves.
+
+![](../../.gitbook/assets/screen-shot-2018-09-15-at-20.38.11.png)
+
+### Subclass
 
 Although there are many good reasons to **subclass** `UIView`, it is recommended that you do so only when the basic `UIView` class or the standard system views do not provide the capabilities that you need. Subclassing requires more work on your part to implement the view and to tune its performance.
 
