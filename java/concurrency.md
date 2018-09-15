@@ -2,11 +2,13 @@
 
 The Java platform is designed from the ground up to support concurrent programming. Since version 5.0, the Java platform has also included high-level concurrency APIs in the `java.util.concurrent` packages.
 
+进程之间的交流用 IPC，线程之间的交流通过共享对数据的读写。
+
 ## Processes and Threads
 
-A **process** generally has a complete, private set of basic run-time resources; in particular, each process has its own memory space. Processes are often seen as synonymous with **programs** or **applications**.
+A **process** generally has a complete, private set of basic run-time resources; in particular, each process has its own memory space. Processes are often seen as synonymous with programs or applications.
 
-However, what the user sees as a single application may in fact be a set of cooperating processes. To facilitate communication between processes, most operating systems support **Inter Process Communication** \(IPC\) resources, such as **pipes** and **sockets**.
+However, what the user sees as a single application may in fact be a set of cooperating processes. To facilitate communication between processes, most operating systems support Inter Process Communication \(IPC\) resources, such as pipes and sockets.
 
 **Threads** exist within a process — every process has at least one. From the application programmer's point of view, you start with just one thread, called the **main** thread. This thread has the ability to create additional threads.
 
@@ -16,8 +18,7 @@ Single-core devices can achieve concurrency through **time-slicing**. They would
 
 There are two basic strategies for using Java Thread objects to create a concurrent application:
 
-* To directly control thread creation and management, simply instantiate [`Thread`](https://docs.oracle.com/javase/tutorial/essential/concurrency/runthread.html) each time the application needs to initiate an asynchronous task.
-* To abstract thread management from the rest of your application, pass the application's tasks to an `executor`.
+To directly control thread creation and management, simply instantiate [`Thread`](https://docs.oracle.com/javase/tutorial/essential/concurrency/runthread.html) each time the application needs to initiate an asynchronous task.
 
 ```java
 public class HelloRunnable implements Runnable {
@@ -30,16 +31,18 @@ public class HelloRunnable implements Runnable {
 }
 ```
 
+To abstract thread management from the rest of your application, pass the application's tasks to an [executor](concurrency.md#executors).
+
 `Thread.sleep` causes the current thread to suspend execution for a specified period. This is an efficient means of making processor time available to the other threads of an application or other applications that might be running on a computer system.
 
 ## Synchronization
 
-Threads communicate primarily by sharing access to fields and the objects reference fields refer to. This form of communication is extremely efficient, but makes two kinds of errors possible: thread interference and memory consistency errors. The tool needed to prevent these errors is **synchronization**.
+Threads communicate primarily by sharing access to fields and the objects reference fields refer to. This form of communication is extremely efficient, but makes two kinds of errors possible:
 
 * **Thread** **Interference** happens when two operations, running in different threads, but acting on the same data, **interleave**.
 * **Memory consistency errors** occur when different threads have inconsistent views of what should be the same data.
 
-The Java programming language provides two basic synchronization idioms: **synchronized methods** and synchronized statements.
+The tool needed to prevent these errors is **synchronization**. The Java programming language provides two basic synchronization idioms: synchronized methods and synchronized statements.
 
 ```java
 public class SynchronizedCounter {
@@ -50,7 +53,7 @@ public class SynchronizedCounter {
 }
 ```
 
-When a thread invokes a synchronized method, it automatically acquires the **intrinsic lock** for that method's object and releases it when the method returns. The lock release occurs even if the return was caused by an uncaught exception. Making these methods synchronized has two effects:
+When a thread invokes a synchronized method, it automatically acquires the intrinsic lock for that method's object and releases it when the method returns. The lock release occurs even if the return was caused by an uncaught exception. Making these methods synchronized has two effects:
 
 * First, it is not possible for two invocations of synchronized methods on the same object to **interleave**. When one thread is executing a synchronized method for an object, all other threads that invoke synchronized methods for the same object block \(suspend execution\) until the first thread is done with the object.
 * Second, when a synchronized method exits, it automatically establishes a **happens-before** relationship with any subsequent invocation of a synchronized method for the same object. This guarantees that changes to the state of the object are visible to all threads.
@@ -59,7 +62,7 @@ When a thread invokes a synchronized method, it automatically acquires the **int
 
 However, synchronization can introduce **thread contention**, which occurs when two or more threads try to access the same resource simultaneously and cause the Java runtime to execute one or more threads more slowly, or even suspend their execution.
 
-A concurrent application's ability to execute in a timely manner is known as its **liveness**. The most common kind of **liveness problem** is **deadlock**. Deadlock describes a situation where two or more threads are blocked forever, waiting for each other. Two other much less common problems are starvation and livelock. Starvation and livelock are forms of thread contention.
+A concurrent application's ability to execute in a timely manner is known as its **liveness**. The most common kind of liveness problem is **deadlock**. Deadlock describes a situation where two or more threads are blocked forever, waiting for each other. Two other much less common problems are starvation and livelock. Starvation and livelock are forms of thread contention.
 
 * **Starvation** describes a situation where a thread is unable to gain regular access to shared resources and is unable to make progress. This happens when shared resources are made unavailable for long periods by "greedy" threads.
 * A thread often acts in response to the action of another thread. If the other thread's action is also a response to the action of another thread, then **livelock** may result.
@@ -79,18 +82,36 @@ The [`java.util.concurrent.atomic`](https://docs.oracle.com/javase/8/docs/api/ja
 
 Threads often have to coordinate their actions. The most common coordination idiom is the [guarded block](https://docs.oracle.com/javase/tutorial/essential/concurrency/guardmeth.html). Such a block begins by polling a condition that must be true before the block can proceed. 
 
+The invocation of `Object.wait` does not return until another thread has issued a notification `Object.notifyAll` that some special event may have occurred — though not necessarily the event this thread is waiting for. Let's use guarded blocks to create a [Producer-Consumer](https://docs.oracle.com/javase/tutorial/essential/concurrency/guardmeth.html) ****application.
+
 ```java
-public synchronized void guardedJoy() {
-    while(!joy) {
-        try {
-            wait();
-        } catch (InterruptedException e) {}
+public class Drop {
+    private String message;
+    private boolean empty = true;
+    
+    public synchronized String take() {
+        while (empty) {
+            try {
+                wait();
+            } catch (InterruptedException e) {}
+        }
+        empty = true;
+        notifyAll();
+        return message;
     }
-    System.out.println("Joy have been achieved!");
+
+    public synchronized void put(String message) {
+        while (!empty) {
+            try { 
+                wait();
+            } catch (InterruptedException e) {}
+        }
+        empty = false;
+        this.message = message;
+        notifyAll();
+    }
 }
 ```
-
-The invocation of `Object.wait` does not return until another thread has issued a notification `Object.notifyAll` that some special event may have occurred — though not necessarily the event this thread is waiting for. Let's use guarded blocks to create a [Producer-Consumer](https://docs.oracle.com/javase/tutorial/essential/concurrency/guardmeth.html) ****application.
 
 ### Immutable Objects
 
