@@ -1,6 +1,6 @@
 # Algorithms and Data Structures
 
-Textbook: [Algorithms, 4th Edition by Robert Sedgewick and Kevin Wayne](https://algs4.cs.princeton.edu/home/)
+Textbook: [Algorithms, 4th Edition by Robert Sedgwick and Kevin Wayne](https://algs4.cs.princeton.edu/home/)
 
 Source code in textbook: [https://github.com/kevin-wayne/algs4](https://github.com/kevin-wayne/algs4)
 

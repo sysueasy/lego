@@ -34,6 +34,7 @@
   * [5. Concurrency](java/concurrency.md)
 * [Algorithms and Data Structures](data-structure-and-algorithms/README.md)
   * [1. Fundamental](data-structure-and-algorithms/1.-fundamental/README.md)
+    * [1.1 Fundamental](data-structure-and-algorithms/1.-fundamental/1.1-fundamental.md)
     * [1.2 Data Abstraction](data-structure-and-algorithms/1.-fundamental/1.-fundamentals.md)
     * [1.3 Bags, Queues, and Stacks](data-structure-and-algorithms/1.-fundamental/1.3-bags-queues-and-stacks.md)
     * [1.4 Analysis of Algorithms](data-structure-and-algorithms/1.-fundamental/1.4-analysis-of-algorithms.md)
