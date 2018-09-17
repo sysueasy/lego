@@ -181,7 +181,7 @@ UIKit designates an object as the first responder to an event based on the **typ
 
 To handle a specific type of event, a responder must **override** the corresponding methods. For example, to handle touch events, a responder implements the [`touchesBegan(_:with:)`](https://developer.apple.com/documentation/uikit/uiresponder/1621142-touchesbegan), etc. methods.
 
-Gesture recognizers receive touch and press events before their view does.
+[Gesture recognizers](https://developer.apple.com/documentation/uikit/uigesturerecognizer) receive touch and press events before their view does.
 
 UIKit compares the touch location to the bounds of view objects in the view hierarchy. The [`hitTest(_:with:)`](https://developer.apple.com/documentation/uikit/uiview/1622469-hittest) method of `UIView` traverses the view hierarchy, looking for the deepest subview that contains the specified touch, which becomes the first responder for the touch event. If a touch location is outside of a view’s bounds, the `hitTest(_:with:)` method ignores that view and all of its subviews.
 
