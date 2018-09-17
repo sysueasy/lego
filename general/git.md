@@ -1,7 +1,5 @@
 # Git
 
-Pro Git: 
-
 Version control is a system that records changes to a file or set of files over time so that you can recall specific versions later.
 
 * Local Version Control Systems
@@ -10,11 +8,9 @@ Version control is a system that records changes to a file or set of files over 
 
 Git was birth in 2005, developed by Linux development community. Git is amazingly fast, very efficient with large projects. Git has an incredible branching system for non-linear development.
 
-Git thinks about its data more like a stream of **snapshots**. if files have not changed, Git doesn’t store the file again, just a link to the previous identical file it has already stored.
+Git thinks about its data more like a stream of **snapshots**. if files have not changed, Git doesn’t store the file again, just a link to the previous identical file it has already stored. In Git, nearly every operation is local.
 
-In Git, nearly every operation is local.
-
-Integrity: Everything in Git is check-summed \(SHA-1 hash\). It's very hard to make unredoable changes.
+Everything in Git is check-summed \(SHA-1 hash\). It's very hard to make unredoable changes.
 
 ## Git Basic
 
@@ -52,22 +48,53 @@ You will have to explicitly push tags to a shared server after you have created 
 
 ## Git Branching
 
-Some people refer to Git’s branching model as its “killer feature”. Git encourages workflows that branch and merge often, even multiple times in a day.
+Some people refer to Git’s branching model as its “killer feature”. Git encourages workflows that branch and merge often, even multiple times in a day. Because a branch in Git is actually a simple file that contains the 40 character SHA-1 checksum of the commit it points to, branches are cheap to create and destroy.
 
-A branch in Git is actually a simple file that contains the 40 character SHA-1 checksum of the commit it points to.
+```c
+$ git checkout -b iss53
+// Switched to a new branch "iss53"
+```
 
 **HEAD** is a pointer to the local branch you’re currently on.
+
+In this case, Git does a simple three-way merge, using the two snapshots pointed to by the branch tips and the common ancestor of the two. Git creates a new snapshot that results from this three-way merge and automatically creates a new commit that points to it.
+
+![](../.gitbook/assets/screen-shot-2018-09-17-at-21.07.33.png)
 
 You typically have two kinds of workflows:
 
 1. Long-Running Branches \(progressive-stability branching\): having only code that is entirely stable in their **master** branch \(possibly only code that has been or will be released\). And another parallel branch named **develop**.
 2. Topic Branches: a short-lived branch that you create and use for a single particular feature or related work.
 
-Remote-tracking branches are references to the state of remote branches. They’re local references that you can’t move; Git moves them for you whenever you do any network communication, to make sure they accurately represent the state of the remote repository.
+![](../.gitbook/assets/screen-shot-2018-09-17-at-21.22.57.png)
 
-The remote branch that the local branch tracks is called an “**upstream** branch”.
+### **Remote Branches**
+
+Remote references are references \(pointers\) in your remote repositories, including branches, tags, and so on. Remote-tracking branches are references to the state of remote branches. They’re local references that you can’t move; Git moves them for you whenever you do any network communication, to make sure they accurately represent the state of the remote repository. Remote-tracking branches take the form like _origin/master_.
+
+It’s important to note that when you do a _fetch_ that brings down new remote-tracking branches, you don’t automatically have local, editable copies of them. In other words, in this case, you don’t have a new _serverfix_ branch — you only have an _origin/serverfix_ pointer that you can’t modify.
+
+The remote branch that the local branch tracks is called an “upstream branch”.
 
 If you see "ahead by three and behind by one", meaning that there is one commit on the server we haven’t merged in yet and three commits locally that we haven’t pushed.
+
+### Rebasing
+
+In Git, there are two main ways to integrate changes from one branch into another: the **merge** and the **rebase**.
+
+With the rebase command, you can take all the changes that were committed on one branch and replay them on another one.
+
+![](../.gitbook/assets/screen-shot-2018-09-17-at-21.52.23.png)
+
+At this point, you can go back to the master branch and do a fast-forward merge.
+
+![](../.gitbook/assets/screen-shot-2018-09-17-at-21.52.43.png)
+
+Rebasing makes for a cleaner history. If you examine the log of a rebased branch, it looks like a linear history: it appears that all the work happened in series, even when it originally happened in parallel.
+
+Often, you’ll do this to make sure your commits apply cleanly on a remote branch — perhaps in a project to which you’re trying to contribute but that you don’t maintain. In this case, you’d do your work in a branch and then rebase your work onto _origin/master_ when you were ready to submit your patches to the main project. That way, the maintainer doesn’t have to do any integration work — just a fast-forward or a clean apply.
+
+The Perils of Rebasing can be summed up in a single line: **Do not rebase commits that exist outside your repository**. In general the right way is to rebase local changes you’ve made but haven’t shared yet before you push them in order to clean up your story, but never rebase anything you’ve pushed somewhere.
 
 ## Git on the server
 
