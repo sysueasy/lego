@@ -129,6 +129,22 @@ First every view that needs it will receive `updateConstraints()`. And that runs
 
 ![](../../.gitbook/assets/screen-shot-2018-09-15-at-20.38.11.png)
 
+### LayoutSubviews
+
+You should not call `layoutSubviews()` directly. If you want to force a layout update, call the ****`setNeedsLayout()` method instead to do so. This method makes a note of the request and returns immediately.
+
+Because this method does not force an immediate update, but instead waits for the next update cycle, you can use it to invalidate the layout of multiple views before any of those views are updated. This behavior allows you to consolidate all of your layout updates to one update cycle, which is usually better for performance.
+
+If you want to update the layout of your views immediately, call the `layoutIfNeeded()` method. If no layout updates are pending, this method exits without modifying the layout or calling any layout-related callbacks.
+
+### Drawing
+
+The default implementation of `draw(_:)` does nothing. Subclasses that use technologies such as Core Graphics and UIKit to draw their view’s content should override this method and implement their drawing code there.
+
+UIKit creates and configures a graphics context for drawing and adjusts the transform of that context so that its origin matches the origin of your view’s bounds rectangle. You can get a reference to the graphics context using the [`UIGraphicsGetCurrentContext()`](https://developer.apple.com/documentation/uikit/1623918-uigraphicsgetcurrentcontext) function, but do not establish a strong reference to the graphics context because it can change between calls to the `draw(_:)` method.
+
+This method is called when a view is first displayed or when an event occurs that invalidates a visible part of the view. You should never call this method directly yourself. To invalidate part of your view, and thus cause that portion to be redrawn, call the `setNeedsDisplay()` instead.
+
 ### Subclass
 
 Although there are many good reasons to **subclass** `UIView`, it is recommended that you do so only when the basic `UIView` class or the standard system views do not provide the capabilities that you need. Subclassing requires more work on your part to implement the view and to tune its performance.
@@ -141,23 +157,9 @@ Rather than draw your content using a `draw(_:)` method, embed image and label s
 
 If you want a given view to size itself to its parent view, you should add it to the parent view before calling `sizeToFit()`.
 
-### LayoutSubviews
-
-You should not call `layoutSubviews()` directly. If you want to force a layout update, call the ****`setNeedsLayout()` method instead to do so. This method makes a note of the request and returns immediately. Because this method does not force an immediate update, but instead waits for the next update cycle, you can use it to invalidate the layout of multiple views before any of those views are updated. This behavior allows you to consolidate all of your layout updates to one update cycle, which is usually better for performance.
-
-If you want to update the layout of your views immediately, call the `layoutIfNeeded()` method. When using Auto Layout, the layout engine updates the position of views as needed to satisfy changes in constraints. Using the view that receives the message as the root view, this method lays out the view subtree starting at the root. If no layout updates are pending, this method exits without modifying the layout or calling any layout-related callbacks.
-
-### The View Drawing Cycle
-
-The default implementation of `draw(_:)` does nothing. Subclasses that use technologies such as Core Graphics and UIKit to draw their view’s content should override this method and implement their drawing code there. You do not need to override this method if your view sets its content in other ways. For example, you do not need to override this method if your view just displays a background color or if your view sets its content directly using the underlying layer object.
-
-UIKit creates and configures a graphics context for drawing and adjusts the transform of that context so that its origin matches the origin of your view’s bounds rectangle. You can get a reference to the graphics context using the [`UIGraphicsGetCurrentContext()`](https://developer.apple.com/documentation/uikit/1623918-uigraphicsgetcurrentcontext) function, but do not establish a strong reference to the graphics context because it can change between calls to the `draw(_:)` method.
-
-This method is called when a view is first displayed or when an event occurs that invalidates a visible part of the view. You should never call this method directly yourself. To invalidate part of your view, and thus cause that portion to be redrawn, call the [`setNeedsDisplay()`](https://developer.apple.com/documentation/uikit/uiview/1622437-setneedsdisplay) instead. These methods let the system know that it should update the view during the next drawing cycle.
-
 ## Touches, Presses, and Gestures
 
-Apps **receive and handle events** using _responder objects_. A responder object is any instance of the `UIResponder` class, and common subclasses include `UIView`, `UIViewController`, `UIWindow`, and `UIApplication`. Responders receive the raw event data and must either handle the event or forward it to another responder object.
+Apps receive and handle events using _responder objects_. A responder object is any instance of the `UIResponder` class, and common subclasses include `UIView`, `UIViewController`, `UIWindow`, and `UIApplication`. Responders receive the raw event data and must either handle the event or forward it to another responder object.
 
 When your app receives an event, UIKit automatically directs that event to the most appropriate responder object, known as the **first responder**. Unhandled events are passed from responder to responder in the active **responder chain**, which is the dynamic configuration of your app’s responder objects.
 
@@ -179,9 +181,9 @@ UIKit designates an object as the first responder to an event based on the **typ
 
 To handle a specific type of event, a responder must **override** the corresponding methods. For example, to handle touch events, a responder implements the [`touchesBegan(_:with:)`](https://developer.apple.com/documentation/uikit/uiresponder/1621142-touchesbegan), etc. methods.
 
-**Gesture** recognizers receive touch and press events before their view does.
+Gesture recognizers receive touch and press events before their view does.
 
-UIKit compares the **touch** location to the bounds of view objects in the view hierarchy. The [`hitTest(_:with:)`](https://developer.apple.com/documentation/uikit/uiview/1622469-hittest) method of `UIView` traverses the view hierarchy, looking for the **deepest** subview that contains the specified touch, which becomes the first responder for the touch event. If a touch location is outside of a view’s bounds, the `hitTest(_:with:)` method ignores that view and all of its subviews.
+UIKit compares the touch location to the bounds of view objects in the view hierarchy. The [`hitTest(_:with:)`](https://developer.apple.com/documentation/uikit/uiview/1622469-hittest) method of `UIView` traverses the view hierarchy, looking for the deepest subview that contains the specified touch, which becomes the first responder for the touch event. If a touch location is outside of a view’s bounds, the `hitTest(_:with:)` method ignores that view and all of its subviews.
 
 This method traverses the view hierarchy by calling the [`point(inside:with:)`](https://developer.apple.com/documentation/uikit/uiview/1622533-point) method of each subview to determine which subview should receive a touch event.  
 
