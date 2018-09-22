@@ -11,6 +11,8 @@
   * [Functions](the-c-programming-language/functions-and-program-structures.md)
   * [Pointers](the-c-programming-language/pointers-and-arrays.md)
   * [Structures](the-c-programming-language/structures.md)
+* [Discrete Mathematics](discrete-mathematics/README.md)
+  * [1. Fundamentals](discrete-mathematics/1.-fundamentals.md)
 * [Apple Inc](ios-development/README.md)
   * [Swift](ios-development/swift-notes.md)
   * [Objective-C](ios-development/j2objc.md)
