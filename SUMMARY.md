@@ -14,6 +14,7 @@
 * [Discrete Mathematics](discrete-mathematics/README.md)
   * [1. Fundamentals](discrete-mathematics/1.-fundamentals.md)
   * [2. Algorithms](discrete-mathematics/2.-algorithms.md)
+  * [3. Number Theory and Cryptography](discrete-mathematics/3.-number-theory-and-cryptography.md)
 * [Apple Inc](ios-development/README.md)
   * [Swift](ios-development/swift-notes.md)
   * [Objective-C](ios-development/j2objc.md)
