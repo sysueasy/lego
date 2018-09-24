@@ -13,6 +13,7 @@
   * [Structures](the-c-programming-language/structures.md)
 * [Discrete Mathematics](discrete-mathematics/README.md)
   * [1. Fundamentals](discrete-mathematics/1.-fundamentals.md)
+  * [2. Algorithms](discrete-mathematics/2.-algorithms.md)
 * [Apple Inc](ios-development/README.md)
   * [Swift](ios-development/swift-notes.md)
   * [Objective-C](ios-development/j2objc.md)
