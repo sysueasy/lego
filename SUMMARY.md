@@ -17,6 +17,7 @@
   * [3. Algorithms](discrete-mathematics/2.-algorithms.md)
   * [4. Number Theory and Cryptography](discrete-mathematics/3.-number-theory-and-cryptography.md)
   * [5. Induction and Recursion](discrete-mathematics/5.-induction-and-recursion.md)
+  * [6. Counting](discrete-mathematics/6.-counting.md)
 * [Apple Inc](ios-development/README.md)
   * [Swift](ios-development/swift-notes.md)
   * [Objective-C](ios-development/j2objc.md)
