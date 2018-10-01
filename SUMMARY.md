@@ -14,6 +14,7 @@
   * [Fundamentals](discrete-mathematics/1.-fundamentals.md)
   * [Number Theory](discrete-mathematics/3.-number-theory-and-cryptography.md)
   * [Counting](discrete-mathematics/6.-counting.md)
+  * [Probability](discrete-mathematics/probability.md)
 * [Java](java/README.md)
   * [1. Fundamentals](java/1.-get-started.md)
   * [2. Object-oriented Programming](java/untitled.md)
