@@ -26,17 +26,13 @@ We can find the conditional probability that an event F occurs, given that an ev
 
 ![](../.gitbook/assets/screen-shot-2018-10-04-at-09.24.53.png)
 
-## Random Variables
-
-A random variable is a function from the sample space of an experiment to the set of real numbers.
-
-Suppose that a coin is flipped three times. Let X\(t\) be the random variable that equals the number of heads that appear when t is the outcome. Then X\(t\) takes on the following values:
-
-![](../.gitbook/assets/screen-shot-2018-10-04-at-09.36.19.png)
+A **random variable** is a function from the sample space of an experiment to the set of real numbers.
 
 The **distribution** of a random variable X on a sample space S is the set of pairs \(r, p\(X = r\)\) for all r ∈ X\(S\), where p\(X = r\) is the probability that X takes the value r.
 
 ![](../.gitbook/assets/screen-shot-2018-10-04-at-09.43.17.png)
 
+The expected value of a random variable tells us its average value. The **variance** of a random variable helps us characterize how widely a random variable is distributed. In particular, it provides a measure of how widely X is distributed about its expected value.
 
+![](../.gitbook/assets/screen-shot-2018-10-04-at-17.23.17.png)
 
