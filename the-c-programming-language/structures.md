@@ -42,7 +42,7 @@ Pointers to structures are so frequently used that an alternative **notation** i
 printf("origin is (%d, %d)\n", pp->x, pp->y);
 ```
 
-The structure operators `.` and `->`, together with `()` for function calls and `[]` for subscripts, are at the **top** of the precedence hierarchy and thus bind very tightly.
+The structure operators `.` and `->`, together with `()` for function calls and `[]` for subscripts, are at the top of the precedence hierarchy and thus bind very tightly.
 
 ```c
 struct {
@@ -82,7 +82,7 @@ struct {
 };
 ```
 
-C provides a compile-time unary operator called `sizeof` that can be used to compute the size of any object. The expressions `sizeof object` yield an integer equal to the size of the specified object or type **in bytes**. Strictly, _sizeof_ produces an unsigned integer value whose type, `size_t`, is defined in the header `<stdio.h>`.
+C provides a compile-time unary operator called `sizeof` that can be used to compute the size of any object. The expressions `sizeof object` yield an integer equal to the size of the specified object or type in bytes. Strictly, _sizeof_ produces an unsigned integer value whose type, `size_t`, is defined in the header `<stdio.h>`.
 
 Thus, the number of keywords is the size of the array which can be defined by:
 
@@ -103,7 +103,7 @@ struct tnode { /* the tree node */
 };
 ```
 
-A [storage allocator](structures.md#storage-allocator) is needed to make a new _tnode_, where we make use of the standard library function _malloc_, we will discuss this in detail later.
+A [storage allocator](structures.md#storage-allocator) is needed to make a new _tnode_, where we make use of the standard library function _malloc_.
 
 ```c
 #include <stdlib.h>
@@ -124,7 +124,8 @@ typedef char *String;
 The declaration makes _String_ a synonym for char \* or character pointer, which may then be used in declarations and casts:
 
 ```c
-String p, lineptr[MAXLINES], alloc(int);
+String p;
+p = (String) malloc(100);
 ```
 
 As a more complicated example, we could make _typedefs_ for the tree nodes shown earlier in this chapter:
@@ -179,7 +180,7 @@ The UNIX operating system provides its services through a set of **system calls*
 
 Rather than allocating from a compiled-in fixed-size array, the standard library function, _malloc_ will request space from the operating system as needed.
 
-Since other activities in the program may also request space without calling this allocator, the space that _malloc_ manages may not be contiguous. Thus its free storage is kept as a **list of free blocks**. Each block contains a size, a pointer to the next block, and the space itself. 
+Since other activities in the program may also request space without calling this allocator, the space that _malloc_ manages may not be contiguous. Thus its free storage is kept as a list of free blocks. Each block contains a size, a pointer to the next block, and the space itself. 
 
 ![](../.gitbook/assets/screen-shot-2018-07-23-at-22.26.50.png)
 

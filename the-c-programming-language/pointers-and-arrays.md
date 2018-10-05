@@ -32,7 +32,7 @@ Since C passes arguments to functions by value, there is no direct way for the c
 
 For instance, a sorting routine might exchange two out-of-order arguments with a function called _swap_. It is not enough to write `void swap(int x, int y)` because of **call by value**.
 
-The way to obtain the desired effect is to pass pointers to the values to be changed: `swap(&a, &b)`Since the operator & produces the address of a variable, `&a` is a pointer to a. In swap itself, the parameters are declared as pointers, and the operands are accessed indirectly through them: `void swap(int *px, int *py) { }`
+The way to obtain the desired effect is to pass pointers to the values to be changed: `swap(&a, &b)`Since the operator & produces the address of a variable, `&a` is a pointer to a. In swap itself, the parameters are declared as pointers, and the operands are accessed indirectly through them: `void swap(int *px, int *py) {}`
 
 ## Pointers and Arrays
 
@@ -49,7 +49,7 @@ If _pa_ points to a particular element of an array, then by definition _pa+1_ po
 
 These remarks are **true** regardless of the type or size of the variables in the array. The meaning of "adding 1 to a pointer," and by extension, all pointer arithmetic, is that _pa+1_ points to the next object, and is that _pa+i_ points to the i-th object beyond pa.
 
-If _\*pa_ is an _int_ is four bytes, for example, the _pa+1_ will be moved by four bytes. All the pointer manipulations automatically take into account the size of the objects pointed to.
+If _\*pa_ is an _int_ of four bytes, for example, the _pa+1_ will be moved by four bytes. All the pointer manipulations automatically take into account the size of the objects pointed to.
 
 Since the name of an array is a synonym for the location of the initial element, the assignment `pa=&a[0]` can also be written as `pa = a`.
 
@@ -57,7 +57,7 @@ Rather more surprising, at first sight, is the fact that a reference to `a[i]` c
 
 In short, an array-and-index expression is **equivalent** to one written as a pointer and offset.
 
-There is one **difference** between an array name and a pointer that must be kept in mind. A pointer is a variable, but an array name is not a variable; constructions like `a=pa` and `a++` are illegal.
+There is one difference between an array name and a pointer that must be kept in mind. A pointer is a variable, but an array name is not a variable; constructions like `a=pa` and `a++` are illegal.
 
 When an array name is passed to a function, what is passed is the **location** of the initial element.
 
@@ -73,7 +73,7 @@ int strlen(char *s){
 }
 ```
 
-Since _s_ is a pointer, incrementing it is perfectly legal; `s++` has no effect on the character string in the function that called _strlen_, but merely increments _strlen_'s **private copy of the pointer**. Passing pointer arguments doesn't break the rule of call by value.
+Since _s_ is a pointer, incrementing it is perfectly legal; `s++` has no effect on the character string in the function that called _strlen_, but merely increments _strlen_'s private copy of the pointer. Passing pointer arguments doesn't break the rule of call by value.
 
 Pointers may be **compared** under certain circumstances. If _p_ and _q_ point to members of the same array, then relations like `==, !=, <, >=`, etc., work properly.
 
@@ -96,13 +96,13 @@ void strcpy(char *s, char *t){
 }
 ```
 
-Since pointers are variables themselves, they can be **stored in arrays** just as other variables can.
+Since pointers are variables themselves, they can be stored in arrays just as other variables can.
 
 Let us illustrate by writing a program that will sort a set of text lines into alphabetic order. When two out-of-order lines have to be exchanged, the pointers in the pointer array are exchanged, not the text lines themselves. This eliminates the twin problems of complicated storage management and high overhead that would go with moving the lines themselves.
 
 ![](../.gitbook/assets/screen-shot-2018-07-22-at-10.55.38.png)
 
-`char *line[20]` says that _line_ is an array of 20 elements, each element of which is a pointer to a char. That is, `line[i]` is a character pointer, and `*line[i]` is the character it points to, the **first** character of the _i-th_ saved text line.
+`char *line[20]` says that _line_ is an array of 20 elements, each element of which is a pointer to a char. That is, `line[i]` is a character pointer, and `*line[i]` is the character it points to, the first character of the i-th saved text line.
 
 C provides rectangular multi-dimensional arrays, although in practice they are much less used than arrays of pointers.
 
@@ -131,9 +131,9 @@ int a[10][20];
 int *b[10];
 ```
 
-For a_, a_ is a true two-dimensional array: 200 int-sized locations have been set aside. For b, the definition only allocates 10 pointers and does not initialize them; Assuming that each element of _b_ does point to a twenty-element array, then there will be 200 ints set aside, **plus** ten cells for the pointers.
+For a_, a_ is a true two-dimensional array: 200 int-sized locations have been set aside. For b, the definition only allocates 10 pointers and does not initialize them; Assuming that each element of _b_ does point to a twenty-element array, then there will be 200 ints set aside, plus ten cells for the pointers.
 
-The important advantage of the pointer array is that the rows of the array may be of **different lengths**. That is, each element of b need not point to a twenty-element vector; some may point to two elements, some to fifty, and some to none at all.
+The important advantage of the pointer array is that the rows of the array may be of different lengths. That is, each element of b need not point to a twenty-element vector; some may point to two elements, some to fifty, and some to none at all.
 
 ## Command-line Arguments
 
