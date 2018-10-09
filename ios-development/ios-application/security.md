@@ -5,7 +5,11 @@ CN: [https://www.apple.com/cn/business/site/docs/iOS\_Security\_Guide.pdf](https
 
 Security architecture diagram of iOS:
 
-![](../.gitbook/assets/ios_security_guide-1.jpg)
+![](../../.gitbook/assets/ios_security_guide-1.jpg)
+
+## Keychain
+
+[Keychain Services](https://developer.apple.com/documentation/security/keychain_services): Securely store small chunks of data on behalf of the user.
 
 ## Apple Pay
 

@@ -25,10 +25,6 @@ A layer’s main job is to manage the visual content that you provide but the la
 
 If the layer object was created by a view, the view typically assigns itself as the layer’s **delegate** automatically, and you should not change that relationship.
 
-## Security
-
-[Keychain Services](https://developer.apple.com/documentation/security/keychain_services): Securely store small chunks of data on behalf of the user.
-
 ## Reference
 
 * Design: [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/)
