@@ -42,9 +42,9 @@ Every iOS app has exactly one instance of UIApplication \(or, very rarely, a sub
 
 While [universal links](https://developer.apple.com/documentation/uikit/core_app/allowing_apps_and_websites_to_link_to_your_content) and custom URLs are both acceptable forms of deep linking, universal links are strongly recommended as a best practice. Key benefits are \(1\) One URL works for both your website and your app, allowing your website to handle the link when your app is not installed. \(2\) iOS verifies the association through unforgeable URL like [https://www.google.com/apple-app-site-association](https://www.google.com/apple-app-site-association) on your website, eliminating the possibility that other apps might claim your scheme and redirect your URLs.
 
-{% hint style="danger" %}
+`appID`: The identifier of the application that will handle the links in the format [&lt;team identifier&gt;.&lt;bundle identifier&gt;](https://developer.apple.com/account/).
+
 Universal links offer a potential **attack** vector into your app, so make sure to validate all URL parameters and discard any malformed URLs.
-{% endhint %}
 
 UIKit apps can communicate through universal links. Supporting universal links allows **other apps** to send small amounts of data directly to your app without using a third-party server. Define the parameters that your app handles within the URL **query** string.
 
