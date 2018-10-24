@@ -44,6 +44,8 @@ While [universal links](https://developer.apple.com/documentation/uikit/core_app
 
 `appID`: The identifier of the application that will handle the links in the format [&lt;team identifier&gt;.&lt;bundle identifier&gt;](https://developer.apple.com/account/).
 
+Add the `applinks` key to the Apple App Site Association file: `applinks:example.com`.
+
 Universal links offer a potential **attack** vector into your app, so make sure to validate all URL parameters and discard any malformed URLs.
 
 UIKit apps can communicate through universal links. Supporting universal links allows **other apps** to send small amounts of data directly to your app without using a third-party server. Define the parameters that your app handles within the URL **query** string.
