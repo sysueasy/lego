@@ -1,4 +1,10 @@
-# Discussion
+# Basics
+
+## IDE
+
+Xcode auto indent: Control + I.
+
+VSCode auto indent: Shift + Option + F.
 
 ## Version Number
 
@@ -18,19 +24,9 @@ Ref: [https://semver.org/](https://semver.org/)
 
 Ref: [https://choosealicense.com/](https://choosealicense.com/)
 
-## Insights 2018
+## Trends
 
-**DevOps** and **machine learning** are important trends in the software industry today, and developers working in these areas command the highest salaries.
+The [TIOBE](https://www.tiobe.com/tiobe-index/) Programming Community index is an indicator of the popularity of programming languages.
 
-What's DevOps: [https://aws.amazon.com/devops/what-is-devops/](https://aws.amazon.com/devops/what-is-devops/)
 
-For the sixth year in a row, **JavaScript** is the most commonly used programming language.
-
-**Python** has a solid claim to being the fastest-growing major programming language.
-
-Like last year, MySQL and SQL Server are the most commonly used databases.
-
-**Visual Studio Code** just became the most popular developer environment tool in the survey.
-
-Ref: [https://insights.stackoverflow.com/survey/2018/](https://insights.stackoverflow.com/survey/2018/)
 

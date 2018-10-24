@@ -38,6 +38,8 @@ By `git clone`, you set up your local **master** branch to track the remote **ma
 
 To see more information about a particular remote, use `git remote show origin`.
 
+### Tag
+
 Git supports two types of tags: lightweight and annotated.
 
 A lightweight tag `git tag v1.4`,  is very much like a branch that doesn’t change — it’s just a pointer to a specific commit.
@@ -46,9 +48,21 @@ An annotated tag `git tag -a v1.4 -m "my version 1.4"` is checksummed; contain t
 
 You will have to explicitly push tags to a shared server after you have created them by `git push origin tagname`.
 
+If you want to view the versions of files a tag is pointing to, you can do a git checkout, though this puts your repository in “detached HEAD” state, which has some ill side effects:
+
+{% hint style="info" %}
+You are in 'detached HEAD' state. You can look around, make experimental changes and commit them, and you can discard any commits you make in this state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may do so \(now or later\) by using -b with the checkout command again. Example: git checkout -b &lt;new-branch&gt;
+{% endhint %}
+
+In “detached HEAD” state, if you make changes and then create a commit, the tag will stay the same, but your new commit won’t belong to any branch and will be unreachable, except by the exact commit hash.
+
 ## Git Branching
 
-Some people refer to Git’s branching model as its “killer feature”. Git encourages workflows that branch and merge often, even multiple times in a day. Because a branch in Git is actually a simple file that contains the 40 character SHA-1 checksum of the commit it points to, branches are cheap to create and destroy.
+Some people refer to Git’s branching model as its “killer feature”. Git encourages workflows that branch and merge often, even multiple times in a day.
+
+A branch in Git is simply a lightweight movable **pointer** to the commits. Because a branch in Git is actually a simple file that contains the 40 character SHA-1 checksum of the commit it points to, branches are cheap to create and destroy.
 
 ```c
 $ git checkout -b iss53
@@ -56,6 +70,8 @@ $ git checkout -b iss53
 ```
 
 **HEAD** is a pointer to the local branch you’re currently on.
+
+![](../.gitbook/assets/screen-shot-2018-10-24-at-4.28.48-pm.png)
 
 In this case, Git does a simple three-way merge, using the two snapshots pointed to by the branch tips and the common ancestor of the two. Git creates a new snapshot that results from this three-way merge and automatically creates a new commit that points to it.
 

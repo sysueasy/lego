@@ -2,9 +2,9 @@
 
 * [Welcome](README.md)
 * [General](general/README.md)
-  * [Discussion](general/general.md)
-  * [NFC](general/nfc.md)
+  * [Basics](general/general.md)
   * [Git](general/git.md)
+  * [NFC](general/nfc.md)
 * [The C Programming Language](the-c-programming-language/README.md)
   * [Basic](the-c-programming-language/2.-type-operators-expressions.md)
   * [Functions](the-c-programming-language/functions-and-program-structures.md)
