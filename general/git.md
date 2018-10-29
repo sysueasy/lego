@@ -30,7 +30,7 @@ The `git rm --cached FILE`  keeps the file in your working tree but remove it fr
 
 You can amend your last commit by `git commit --amend`.
 
-Use `git reset HEAD file` to unstage a staged file.
+Use `git reset file` to unstage a staged file.
 
 Use `git checkout file` to unmodify a modified file.
 
@@ -47,6 +47,8 @@ A lightweight tag `git tag v1.4`,  is very much like a branch that doesn’t cha
 An annotated tag `git tag -a v1.4 -m "my version 1.4"` is checksummed; contain the tagger name, email, and date; have a tagging message; and can be signed and verified with GNU Privacy Guard \(GPG\).
 
 You will have to explicitly push tags to a shared server after you have created them by `git push origin tagname`.
+
+### Detached HEAD
 
 If you want to view the versions of files a tag is pointing to, you can do a git checkout, though this puts your repository in “detached HEAD” state, which has some ill side effects:
 
@@ -111,6 +113,22 @@ Rebasing makes for a cleaner history. If you examine the log of a rebased branch
 Often, you’ll do this to make sure your commits apply cleanly on a remote branch — perhaps in a project to which you’re trying to contribute but that you don’t maintain. In this case, you’d do your work in a branch and then rebase your work onto _origin/master_ when you were ready to submit your patches to the main project. That way, the maintainer doesn’t have to do any integration work — just a fast-forward or a clean apply.
 
 The Perils of Rebasing can be summed up in a single line: **Do not rebase commits that exist outside your repository**. In general the right way is to rebase local changes you’ve made but haven’t shared yet before you push them in order to clean up your story, but never rebase anything you’ve pushed somewhere.
+
+### Reset
+
+An easier way to think about `reset` and `checkout` is through the mental frame of Git being a content manager of three different trees: **HEAD**, **Index** and **Working Directory**.
+
+`reset` does up to three basic operations:
+
+1. Move the **branch** HEAD points to \(stop here if --soft\)
+2. Make the Index look like HEAD \(stop here if --mixed, default\)
+3. Make the Working Directory look like the Index \(end here if --hard\) ❗️
+
+![HEAD~ is the parent of HEAD.](../.gitbook/assets/image.png)
+
+If you specify a **path**, reset will skip step 1, and limit the remainder of its actions to a specific file or set of files.
+
+`git reset file.txt`, shorthand for `git reset --mixed HEAD file.txt`: unstage a file.
 
 ## Git on the server
 
