@@ -12,7 +12,7 @@ Git thinks about its data more like a stream of **snapshots**. if files have not
 
 Everything in Git is check-summed \(SHA-1 hash\). It's very hard to make unredoable changes.
 
-## Git Basic
+## Git Basics
 
 In Git, all files has 3 states: committed, modified, staged.
 
@@ -26,7 +26,7 @@ The `git add` can be used to 1. tracking new files. 2. to stage files. 3. to do 
 
 The `git rm` stages the file’s removal and also remove it from your working tree.
 
-The `git rm --cached FILE`  keeps the file in your working tree but remove it from your staging area
+The `git rm --cached FILE`  keeps the file in your working tree but remove it from your staging area.
 
 You can amend your last commit by `git commit --amend`.
 
@@ -122,13 +122,13 @@ An easier way to think about `reset` and `checkout` is through the mental frame 
 
 1. Move the **branch** HEAD points to \(stop here if --soft\)
 2. Make the Index look like HEAD \(stop here if --mixed, default\)
-3. Make the Working Directory look like the Index \(end here if --hard\) ❗️
+3. Make the Working Directory look like the Index \(end here if --hard\) ❗
 
 ![HEAD~ is the parent of HEAD.](../.gitbook/assets/image.png)
 
 If you specify a **path**, reset will skip step 1, and limit the remainder of its actions to a specific file or set of files.
 
-`git reset file.txt`, shorthand for `git reset --mixed HEAD file.txt`: unstage a file.
+`git reset file.txt`, shorthand for `git reset --mixed HEAD file.txt`: this has the practical effect of unstaging the file.
 
 ## Git on the server
 
