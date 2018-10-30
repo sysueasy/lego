@@ -60,6 +60,10 @@ If you want to create a new branch to retain commits you create, you may do so \
 
 In “detached HEAD” state, if you make changes and then create a commit, the tag will stay the same, but your new commit won’t belong to any branch and will be unreachable, except by the exact commit hash.
 
+### RefLog
+
+Every time your branch tip is updated for any reason, Git stores information for you in this temporary history. It’s important to note that reflog information is strictly local — it’s a log only of what you’ve done in your repository.
+
 ## Git Branching
 
 Some people refer to Git’s branching model as its “killer feature”. Git encourages workflows that branch and merge often, even multiple times in a day.
@@ -124,7 +128,7 @@ An easier way to think about `reset` and `checkout` is through the mental frame 
 2. Make the Index look like HEAD \(stop here if --mixed, default\)
 3. Make the Working Directory look like the Index \(end here if --hard\) ❗
 
-![HEAD~ is the parent of HEAD.](../.gitbook/assets/image.png)
+![](../.gitbook/assets/image.png)
 
 If you specify a **path**, reset will skip step 1, and limit the remainder of its actions to a specific file or set of files.
 
