@@ -50,7 +50,7 @@ Universal links offer a potential **attack** vector into your app, so make sure 
 
 UIKit apps can communicate through universal links. Supporting universal links allows **other apps** to send small amounts of data directly to your app without using a third-party server. Define the parameters that your app handles within the URL **query** string.
 
-## UIScreen, UIWindow, UIView
+## UIScreen and UIWindow
 
 Every device has at least one [`UIScreen`](https://developer.apple.com/documentation/uikit/uiscreen) object representing the device’s main screen, and additional screen objects represent connected displays.
 
@@ -81,13 +81,13 @@ View controllers load their views **lazily**. Accessing the view property for th
 
 * Specify the view controller and its views in your app’s [Storyboard](https://developer.apple.com/library/archive/documentation/General/Conceptual/Devpedia-CocoaApp/Storyboard.html#//apple_ref/doc/uid/TP40009071-CH99). \(preferred\)
 * Specify the views for a view controller using a [Nib file](https://developer.apple.com/library/archive/documentation/General/Conceptual/DevPedia-CocoaCore/NibFile.html#//apple_ref/doc/uid/TP40008195-CH34).
-* Specify the views for a view controller using the [`loadView()`](https://developer.apple.com/documentation/uikit/uiviewcontroller/1621454-loadview) method. In that method, create your view hierarchy programmatically and assign the root view of that hierarchy to the view controller’s [`view`](https://developer.apple.com/documentation/uikit/uiviewcontroller/1621460-view) property.
+* Specify the views for a view controller using the [`loadView()`](https://developer.apple.com/documentation/uikit/uiviewcontroller/1621454-loadview) method.
 
 When using a storyboard to define your view controller and its associated views, you never initialize your view controller class directly. Instead, view controllers are instantiated by the storyboard either automatically when a segue is triggered or programmatically when your app calls the `instantiateViewController(withIdentifier:)` method. When instantiating a view controller from a storyboard, iOS initializes the new view controller by calling its `init(coder:)` method and sets the nibName property to a nib file stored inside the storyboard.
 
 ### Rotate
 
-As of iOS 8, **all rotation-related methods are deprecated**. Instead, **rotations** are treated as a change in the size of the view controller’s view and are therefore reported using the `viewWillTransition(to:with:)` method. When the interface orientation changes, UIKit calls this method on the window’s root view controller. That view controller then notifies its child view controllers, propagating the message throughout the view controller hierarchy. The `viewWillLayoutSubviews()` method is also called after the view is resized and positioned by its parent.
+As of iOS 8, **all rotation-related methods are deprecated**. Instead, [rotations](https://developer.apple.com/documentation/uikit/uiviewcontroller) are treated as a change in the size of the view controller’s view and are therefore reported using the `viewWillTransition(to:with:)` method. When the interface orientation changes, UIKit calls this method on the window’s root view controller. That view controller then notifies its child view controllers, propagating the message throughout the view controller hierarchy. The `viewWillLayoutSubviews()` method is also called after the view is resized and positioned by its parent.
 
 The system intersects the view controller's supported orientations with the **app's** supported orientations \(as determined by the Info.plist file or the app delegate's `application(_:supportedInterfaceOrientationsFor:)` method\) and the **device's** supported orientations to determine whether to rotate. For example, the `.portraitUpsideDown` orientation is not supported on iPhone X.
 
@@ -97,7 +97,7 @@ You can override the `preferredInterfaceOrientationForPresentation` for a view c
 
 ### Container View Controller
 
-A custom `UIViewController` subclass can also act as a **container** view controller. A container view controller manages the presentation of content of other view controllers it owns, also known as its **child** view controllers. Your container view controller must associate a child view controller with itself before adding the child's root view to the view hierarchy. This allows iOS to properly route events to child view controllers and the views those controllers manage. 
+A custom `UIViewController` subclass can also act as a **container** view controller. A container view controller manages the presentation of content of other view controllers it owns, also known as its **child** view controllers. Your container view controller must associate a child view controller with itself before adding the child's root view to the view hierarchy. This allows iOS to properly route events to child view controllers and the views those controllers manage.
 
 ### **State Preservation and Restoration**
 
@@ -107,19 +107,17 @@ During subsequent launches, UIKit asks your app for help in recreating the view 
 
 ## UIView
 
-A view object renders content within its bounds rectangle and handles any interactions with that content. A view is a subclass of UIResponder and can respond to touches and other types of events.
-
-Views can adjust the size and position of their subviews. Use Auto Layout to define the rules for resizing and repositioning your views in response to changes in the view hierarchy.
-
 By default, when a subview’s visible area extends outside of the bounds of its superview, no clipping of the subview's content occurs. Use the `clipsToBounds` property to change that behavior.
 
 The geometry of each view is defined by its **frame** and **bounds** properties. The frame property defines the origin and dimensions of the view in the **coordinate** system of its superview. The bounds property defines the internal dimensions of the view as it sees them and is used almost exclusively in custom drawing code.
 
+By default, the property `translatesAutoresizingMaskIntoConstraints` is set to true for any view you **programmatically** create. If you add views in Interface Builder, the system automatically sets this property to false. If this property’s value is true, the system creates a set of constraints that duplicate the behavior specified by the view’s autoresizing mask. This also lets you modify the view’s size and location using the view’s frame, bounds, or center properties, allowing you to create a static, frame-based layout within Auto Layout.
+
+If you want a given view to size itself to its parent view, you should add it to the parent view before calling `sizeToFit()`.
+
 ### The Render Loop
 
-> [High Performance Auto Layout](https://developer.apple.com/videos/play/wwdc2018/220/)
-
-The Render Loop is the process that runs potentially at 120 times every second. That makes sure that all the content is ready to go for each frame. It consists of three phases -- Update Constraints, Layout, and Display.
+The [Render Loop](https://developer.apple.com/videos/play/wwdc2018/220/) is the process that runs potentially at 120 times every second. That makes sure that all the content is ready to go for each frame. It consists of three phases -- Update Constraints, Layout, and Display.
 
 | Update Constraints | Layout | Display |
 | :--- | :--- | :--- |
@@ -139,25 +137,13 @@ Because this method does not force an immediate update, but instead waits for th
 
 If you want to update the layout of your views immediately, call the `layoutIfNeeded()` method. If no layout updates are pending, this method exits without modifying the layout or calling any layout-related callbacks.
 
-### Drawing
-
-The default implementation of `draw(_:)` does nothing. Subclasses that use technologies such as Core Graphics and UIKit to draw their view’s content should override this method and implement their drawing code there.
-
-UIKit creates and configures a graphics context for drawing and adjusts the transform of that context so that its origin matches the origin of your view’s bounds rectangle. You can get a reference to the graphics context using the [`UIGraphicsGetCurrentContext()`](https://developer.apple.com/documentation/uikit/1623918-uigraphicsgetcurrentcontext) function, but do not establish a strong reference to the graphics context because it can change between calls to the `draw(_:)` method.
-
-This method is called when a view is first displayed or when an event occurs that invalidates a visible part of the view. You should never call this method directly yourself. To invalidate part of your view, and thus cause that portion to be redrawn, call the `setNeedsDisplay()` instead.
-
 ### Subclass
 
-Although there are many good reasons to **subclass** `UIView`, it is recommended that you do so only when the basic `UIView` class or the standard system views do not provide the capabilities that you need. Subclassing requires more work on your part to implement the view and to tune its performance.
+Although there are many good reasons to subclass `UIView`, it is recommended that you do so only when the basic `UIView` class or the standard system views do not provide the capabilities that you need. Subclassing requires more work on your part to implement the view and to tune its performance.
 
 Image-based backgrounds - consider using a `UIImageView` object with gesture recognizers instead of subclassing and drawing the image yourself. Alternatively, you can also use a generic `UIView` object and assign your image as the content of the view’s `CALayer` object.
 
 Rather than draw your content using a `draw(_:)` method, embed image and label subviews with the content you want to present.
-
-### Resizing
-
-If you want a given view to size itself to its parent view, you should add it to the parent view before calling `sizeToFit()`.
 
 ## Touches, Presses, and Gestures
 
@@ -187,6 +173,9 @@ To handle a specific type of event, a responder must **override** the correspond
 
 UIKit compares the touch location to the bounds of view objects in the view hierarchy. The [`hitTest(_:with:)`](https://developer.apple.com/documentation/uikit/uiview/1622469-hittest) method of `UIView` traverses the view hierarchy, looking for the deepest subview that contains the specified touch, which becomes the first responder for the touch event. If a touch location is outside of a view’s bounds, the `hitTest(_:with:)` method ignores that view and all of its subviews.
 
-This method traverses the view hierarchy by calling the [`point(inside:with:)`](https://developer.apple.com/documentation/uikit/uiview/1622533-point) method of each subview to determine which subview should receive a touch event.  
+This method traverses the view hierarchy by calling the [`point(inside:with:)`](https://developer.apple.com/documentation/uikit/uiview/1622533-point) method of each subview to determine which subview should receive a touch event.
 
+## UIScrollView
+
+Constant [`contentInsetAdjustmentBehavior`](https://developer.apple.com/documentation/uikit/uiscrollview/contentinsetadjustmentbehavior) indicates how safe area insets are added to the adjusted content inset.
 
