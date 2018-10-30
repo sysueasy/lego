@@ -140,5 +140,15 @@ The [Media Player](https://developer.apple.com/documentation/mediaplayer) framew
 
 ## AVFoundation
 
+The [AVFoundation](https://developer.apple.com/documentation/avfoundation) framework combines four major technology areas.
+
+### Cameras and Media Capture
+
+To instead let the user capture media with the system camera UI within your app, see [UIImagePickerController](https://developer.apple.com/documentation/uikit/uiimagepickercontroller).
+
+The main parts of the capture architecture are [sessions](https://developer.apple.com/documentation/avfoundation/cameras_and_media_capture/setting_up_a_capture_session), inputs, and outputs. iOS offers several other ways to [select a camera device](https://developer.apple.com/documentation/avfoundation/cameras_and_media_capture/choosing_a_capture_device).
+
+![](../../.gitbook/assets/image%20%281%29.png)
+
 
 
