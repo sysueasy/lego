@@ -12,6 +12,8 @@ Git thinks about its data more like a stream of **snapshots**. if files have not
 
 Everything in Git is check-summed \(SHA-1 hash\). It's very hard to make unredoable changes.
 
+[Learn how to migrate from SVN to Git in no-time flat](https://www.atlassian.com/software/bitbucket/how-to-migrate-svn-to-git).
+
 ## Git Basics
 
 In Git, all files has 3 states: committed, modified, staged.
