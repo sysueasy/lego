@@ -4,6 +4,8 @@
 
 **Cocoa** is Apple's native API for operating system macOS. The original code for the Cocoa frameworks came from the **NeXTSTEP** libraries Foundation and AppKit \(those names are still used by Apple's Cocoa frameworks\), and the NextStep engineers chose to prefix their symbols with NS.
 
+iOS Deployment Reference, [Distribute in-house apps from a web server](https://help.apple.com/deployment/ios/?lang=en#/apda0e3426d7).
+
 ## Transparency Report
 
 Ref: [https://www.apple.com/privacy/transparency-reports/](https://www.apple.com/privacy/transparency-reports/)
