@@ -2,8 +2,6 @@
 
 The Java platform is designed from the ground up to support concurrent programming. Since version 5.0, the Java platform has also included high-level concurrency APIs in the `java.util.concurrent` packages.
 
-进程之间的交流用 IPC，线程之间的交流通过共享对数据的读写。
-
 ## Processes and Threads
 
 A **process** generally has a complete, private set of basic run-time resources; in particular, each process has its own memory space. Processes are often seen as synonymous with programs or applications.
