@@ -17,6 +17,7 @@
     * [Dispatch](ios-development/ios-application/dispatch.md)
     * [User Notifications](ios-development/ios-application/local-and-remote-notification.md)
     * [Virtual Memory System](ios-development/ios-application/virtual-memory-system.md)
+  * [Developer](ios-development/developer.md)
 * [Java](java/README.md)
   * [1. Fundamentals](java/1.-get-started.md)
   * [2. Object-oriented Programming](java/untitled.md)
