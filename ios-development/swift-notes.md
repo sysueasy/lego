@@ -251,7 +251,7 @@ Unlike subclasses in Objective-C, Swift subclasses do not **inherit** their supe
 
 Write the **required** modifier before the definition of a class initializer to indicate that every subclass of the class must implement that initializer. You do not have to provide an explicit implementation of a required initializer if you can satisfy the requirement with an inherited initializer.
 
-## Protocol
+## Protocols
 
 A _protocol_ defines a blueprint of **methods**, **properties**, and other requirements that suit a particular task or piece of functionality. The protocol can then be _adopted_ by a **class**, **structure**, or **enumeration** to provide an actual implementation of those requirements. Any type that satisfies the requirements of a protocol is said to _conform_ to that protocol.
 
@@ -264,6 +264,12 @@ To prevent strong reference cycles, delegates are declared as **weak** reference
 ```swift
 weak var delegate: DiceGameDelegate?
 ```
+
+## Generics
+
+_Generic functions_ can work with any type. The generic version of the function uses a placeholder type name \(called T, in this case, also called the _type parameter_\) instead of an actual type name \(such as Int, String, or Double\). The placeholder type name doesn’t say anything about what T must be, but it does say that both a and b must be of the same type T, whatever T represents. \(Swift is a _type-safe_ language\)
+
+Swift enables you to define your own _generic types_, in a similar way to `Array` and `Dictionary`.
 
 ## Auto Reference Counting
 
