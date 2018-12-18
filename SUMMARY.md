@@ -6,6 +6,7 @@
   * [Web](general/web.md)
   * [Git](general/git.md)
   * [NFC](general/nfc.md)
+  * [Elasticsearch](general/elasticsearch.md)
 * [Apple Inc](ios-development/README.md)
   * [Swift](ios-development/swift-notes.md)
   * [Objective-C](ios-development/j2objc.md)
