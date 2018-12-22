@@ -120,22 +120,6 @@ Often, you’ll do this to make sure your commits apply cleanly on a remote bran
 
 The Perils of Rebasing can be summed up in a single line: **Do not rebase commits that exist outside your repository**. In general the right way is to rebase local changes you’ve made but haven’t shared yet before you push them in order to clean up your story, but never rebase anything you’ve pushed somewhere.
 
-### Reset
-
-An easier way to think about `reset` and `checkout` is through the mental frame of Git being a content manager of three different trees: **HEAD**, **Index** and **Working Directory**.
-
-`reset` does up to three basic operations:
-
-1. Move the **branch** HEAD points to \(stop here if --soft\)
-2. Make the Index look like HEAD \(stop here if --mixed, default\)
-3. Make the Working Directory look like the Index \(end here if --hard\) ❗
-
-![](../.gitbook/assets/image.png)
-
-If you specify a **path**, reset will skip step 1, and limit the remainder of its actions to a specific file or set of files.
-
-`git reset file.txt`, shorthand for `git reset --mixed HEAD file.txt`: this has the practical effect of unstaging the file.
-
 ## Git on the server
 
 A remote repository is generally a **bare** repository — a Git repository that has no working directory. Because the repository is only used as a collaboration point, there is no reason to have a snapshot checked out on disk; it’s just the Git data. By convention, bare repository directory names end with the suffix .git.
@@ -167,4 +151,40 @@ A _Readme_ file serves typically illustrate the following things:
 * An example of how to use it or get it running.
 * The license that the project is offered under.
 * How to contribute to it.
+
+## Git Tools
+
+### Stashing and Cleaning
+
+Often, when you’ve been working on part of your project, things are in a messy state and you want to switch branches for a bit to work on something else. The problem is, you don’t want to do a commit of half-done work just so you can get back to this point later.
+
+To push a new stash onto your stack, run `git stash`. At this point, you can switch branches and do work elsewhere; your changes are stored on your stack.
+
+To see which stashes you’ve stored, you can use `git stash list`.
+
+You can reapply the one you just stashed by: `git stash apply`. To apply one of the older stashes, you can specify it by naming it: `git stash apply stash@{2}`.
+
+The apply option only tries to apply the stashed work — you continue to have it on your stack. To remove it: `git stash drop stash@{0}`.
+
+You’ll want to be pretty careful with `git clean` command, since it’s designed to remove files from your working directory that are not tracked. If you change your mind, there is often no retrieving the content of those files. A safer option is to run `git stash --all` to remove everything but save it in a stash.
+
+To remove all the untracked files in your working directory, you can run `git clean -f -d,`  \(-force, -directory\), which removes any files and also any subdirectories that become empty as a result.
+
+By default, the `git clean` command will only remove untracked files that are not ignored. Any file that matches a pattern in your .gitignore or other ignore files will not be removed.
+
+### Reset Demystified
+
+An easier way to think about `reset` and `checkout` is through the mental frame of Git being a content manager of three different trees: **HEAD**, **Index** and **Working Directory**.
+
+`reset` does up to three basic operations:
+
+1. Move the **branch** HEAD points to \(stop here if --soft\)
+2. Make the Index look like HEAD \(stop here if --mixed, default\)
+3. Make the Working Directory look like the Index \(end here if --hard\) ❗
+
+![](../.gitbook/assets/image.png)
+
+If you specify a **path**, reset will skip step 1, and limit the remainder of its actions to a specific file or set of files.
+
+`git reset file.txt`, shorthand for `git reset --mixed HEAD file.txt`: this has the practical effect of unstaging the file.
 
