@@ -188,3 +188,23 @@ If you specify a **path**, reset will skip step 1, and limit the remainder of it
 
 `git reset file.txt`, shorthand for `git reset --mixed HEAD file.txt`: this has the practical effect of unstaging the file.
 
+### Submodules
+
+It often happens that while working on one project, you need to use another project from within it. Submodules allow you to keep a Git repository as a subdirectory of another Git repository.
+
+To add a new submodule you use the git submodule add command with the absolute or relative URL of the project you would like to start tracking:
+
+```bash
+$ git submodule add https://github.com/chaconinc/DbConnector
+```
+
+You should notice the new .gitmodules file. This is a configuration file that stores the mapping between the project’s URL and the local subdirectory you’ve pulled it into.
+
+When you clone such a project, by default you get the directories that contain submodules, but none of the files within them yet. You must run two commands: `git submodule init` to initialize your local configuration file, and `git submodule update` to fetch all the data from that project and check out the appropriate commit listed in your superproject.
+
+There is another way to do this which is a little simpler, however. If you pass `--recurse-submodules` to the git clone command, it will automatically initialize and update each submodule in the repository.
+
+If you want to check for new work in a submodule, you can go into the directory and run `git fetch` and `git merge` the upstream branch to update the local code. Now if you go back into the main project and commit you will **lock** the submodule into having the new code when other people update.
+
+There is an easier way to do this as well, if you prefer to not manually fetch and merge in the subdirectory. If you run `git submodule update --remote`, Git will go into your submodules and fetch and update for you.
+
