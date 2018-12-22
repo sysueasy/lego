@@ -251,6 +251,68 @@ Unlike subclasses in Objective-C, Swift subclasses do not **inherit** their supe
 
 Write the **required** modifier before the definition of a class initializer to indicate that every subclass of the class must implement that initializer. You do not have to provide an explicit implementation of a required initializer if you can satisfy the requirement with an inherited initializer.
 
+## Error Handling
+
+Some operations aren’t guaranteed to always complete execution or produce a useful output. Optionals are used to represent the absence of a value, but when an operation fails, it’s often useful to understand what caused the failure, so that your code can respond accordingly.
+
+In Swift, errors are represented by values of types that conform to the [Error](https://developer.apple.com/documentation/swift/error) protocol. This empty protocol indicates that a type can be used for [error handling](https://docs.swift.org/swift-book/LanguageGuide/ErrorHandling.html).
+
+```swift
+enum VendingMachineError: Error {
+    case invalidSelection
+    case insufficientFunds(coinsNeeded: Int)
+    case outOfStock
+}
+```
+
+Throwing an error lets you indicate that something unexpected happened and the normal flow of execution can’t continue:
+
+```swift
+throw VendingMachineError.insufficientFunds(coinsNeeded: 5)
+```
+
+There are four ways to handle errors in Swift.
+
+1. Propagating Errors Using Throwing Functions
+
+```swift
+func canThrowErrors() throws -> String
+```
+
+Any code that calls this method must either handle the errors—using a do-catch statement, try?, or try!—or continue to propagate them.
+
+2. Handling Errors Using Do-Catch
+
+```swift
+do {
+    try buyFavoriteSnack(person: "Alice", vendingMachine: vendingMachine)
+    print("Success! Yum.")
+} catch VendingMachineError.invalidSelection {
+    print("Invalid Selection.")
+} catch VendingMachineError.outOfStock {
+    print("Out of Stock.")
+} catch VendingMachineError.insufficientFunds(let coinsNeeded) {
+    print("Insufficient funds. Please insert an additional \(coinsNeeded) coins.")
+} catch {
+    // the clause matches any error and binds the error to a local constant named error
+    print("Unexpected error: \(error).")
+}
+```
+
+3. Converting Errors to Optional Values
+
+```swift
+let x = try? someThrowingFunction()
+```
+
+4. Disabling Error Propagation
+
+Sometimes you know a throwing function or method won’t, in fact, throw an error at runtime.
+
+```swift
+let photo = try! loadImage(atPath: "./Resources/John Appleseed.jpg")
+```
+
 ## Protocols
 
 A _protocol_ defines a blueprint of **methods**, **properties**, and other requirements that suit a particular task or piece of functionality. The protocol can then be _adopted_ by a **class**, **structure**, or **enumeration** to provide an actual implementation of those requirements. Any type that satisfies the requirements of a protocol is said to _conform_ to that protocol.
