@@ -202,7 +202,7 @@ You should notice the new .gitmodules file. This is a configuration file that st
 
 When you clone such a project, by default you get the directories that contain submodules, but none of the files within them yet. You must run two commands: `git submodule init` to initialize your local configuration file, and `git submodule update` to fetch all the data from that project and check out the appropriate commit listed in your superproject.
 
-There is another way to do this which is a little simpler, however. If you pass `--recurse-submodules` to the git clone command, it will automatically initialize and update each submodule in the repository.
+There is another way to do this which is a little simpler, however. If you pass `--recurse-submodules` to the `git clone` command, it will automatically initialize and update each submodule in the repository.
 
 If you want to check for new work in a submodule, you can go into the directory and run `git fetch` and `git merge` the upstream branch to update the local code. Now if you go back into the main project and commit you will **lock** the submodule into having the new code when other people update.
 
