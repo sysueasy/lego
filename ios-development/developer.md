@@ -12,3 +12,13 @@ To manually generate a Certificate, you need a Certificate Signing Request \(CSR
 
 Provisioning profiles allow you to install apps onto your iOS devices. A provisioning profile includes signing certificates, device identifiers, and an App ID. Development provisioning profiles are used to build and install versions of your app during the development cycle, while distribution provisioning profiles are used to submit your apps to the App Store and distribute them to beta testers.
 
+## Symbolicating Crash Reports
+
+[Symbolication](https://developer.apple.com/library/archive/technotes/tn2151/_index.html) is the process of resolving backtrace addresses to source code method or function names, known as symbols. As the compiler translates your source code into machine code, it also generates debug symbols which map each machine instruction in the compiled binary back to the line of source code from which it originated.
+
+By default, debug builds of an application store the debug symbols inside the compiled binary while release builds of an application store the debug symbols in a companion **dSYM** file to reduce the binary size. The Debug Symbol file and application binary are tied together on a per-build-basis by the build UUID.
+
+Your users can retrieve crash reports from their device and send them to you via email by following [these instructions](https://developer.apple.com/library/archive/qa/qa1747/_index.html). If you have distributed your application via AdHoc or Enterprise distribution, this is the **only** way to acquire crash reports from your users.
+
+If the user has opted to share diagnostic data with Apple, or if the user has installed a beta version of your application through TestFlight, the crash report is uploaded to the App Store. The symbolicated crash reports are made available to you in Xcode's Crashes organizer.
+

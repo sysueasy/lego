@@ -200,6 +200,12 @@ $ git submodule add https://github.com/chaconinc/DbConnector
 
 You should notice the new .gitmodules file. This is a configuration file that stores the mapping between the project’s URL and the local subdirectory you’ve pulled it into.
 
+Since the URL in the .gitmodules file is what other people will first try to clone/fetch from, make sure to use a URL that they can access if possible. You can overwrite this value locally with git config submodule.DbConnector.url PRIVATE\_URL for your own use. When applicable, a relative URL can be helpful.
+
+```bash
+git config --file=.gitmodules submodule.yourSubmodule.url ssh://username@gerrit.com/path/to/submodule
+```
+
 When you clone such a project, by default you get the directories that contain submodules, but none of the files within them yet. You must run two commands: `git submodule init` to initialize your local configuration file, and `git submodule update` to fetch all the data from that project and check out the appropriate commit listed in your superproject.
 
 There is another way to do this which is a little simpler, however. If you pass `--recurse-submodules` to the `git clone` command, it will automatically initialize and update each submodule in the repository.
