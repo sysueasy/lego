@@ -97,6 +97,16 @@ print(flag.utf8.count) // Prints "8"
 
 To check whether a string is empty, use its `isEmpty` property instead of comparing the length of one of the **view**s to `0`.
 
+## Control Flow 
+
+A **switch** statement provides an alternative to the if statement for responding to multiple potential states.
+
+In contrast with switch statements in C and Objective-C, switch statements in Swift do not fall through the bottom of each case and into the next one by default. If you need C-style fallthrough behavior, you can opt in to this behavior on a case-by-case basis with the **fallthrough** keyword.
+
+{% hint style="warning" %}
+The fallthrough keyword does not check the case conditions for the switch case that it causes execution to fall into. The fallthrough keyword simply causes code execution to move directly to the statements inside the next case \(or default case\) block, as in C’s standard switch statement behavior.
+{% endhint %}
+
 ## Value and Reference Type
 
 [Types in Swift](https://developer.apple.com/swift/blog/?id=10) fall into one of two categories: first, “**value types**”, where each instance keeps a unique copy of its data, usually defined as a `struct`, `enum`, or `tuple`. The second, “**reference types**”, where instances share a single copy of the data, and the type is usually defined as a `class`.
