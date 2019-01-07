@@ -2,17 +2,15 @@
 
 Use [Core Data](https://developer.apple.com/documentation/coredata) to manage the **model** layer objects in your application. It provides generalized and automated solutions to common tasks associated with object lifecycle and object graph management, including persistence.
 
-Core Data reduces the complexity of creating and maintaining the model layer of your app. By using Core Data to define your data structures, you can remove most of the repetitive code that is typically required.
-
-You perform the initial integration of Core Data into your app by either creating the traditional Core Data stack \([`NSManagedObjectModel`](https://developer.apple.com/documentation/coredata/nsmanagedobjectmodel), [`NSPersistentStoreCoordinator`](https://developer.apple.com/documentation/coredata/nspersistentstorecoordinator), and at least one instance of [`NSManagedObjectContext`](https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext)\) or by initializing a `NSPersistentContainer`. 
+You perform the initial integration of Core Data into your app by either creating the traditional Core Data stack or by initializing a [`NSPersistentContainer`](https://developer.apple.com/documentation/coredata/nspersistentcontainer). 
 
 ```swift
 lazy var persistentContainer: NSPersistentContainer = {
-    let container = NSPersistentContainer(name: "whatsnew")
+    let container = NSPersistentContainer(name: "DataModel")
     container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-    if let error = error as NSError? {
-        fatalError("Unresolved error \(error), \(error.userInfo)")
-    }
+        if let error = error as NSError? {
+            fatalError("Unable to load persistent stores: \(error)")
+        }
     })
     return container
 }()
