@@ -128,27 +128,17 @@ A layer’s main job is to manage the visual content that you provide but the la
 
 If the layer object was created by a view, the view typically assigns itself as the layer’s **delegate** automatically, and you should not change that relationship.
 
-## AVKit
+![](../../.gitbook/assets/1yjo6.png)
+
+## Audio and Video
 
 The [AVKit](https://developer.apple.com/documentation/avkit) framework provides a high-level interface for playing video content. Using [AVPlayerViewController](https://developer.apple.com/documentation/avkit/avplayerviewcontroller) makes it easy for you to add media playback capabilities to your application matching the styling and features of the native system players.
 
 ![](../../.gitbook/assets/screen-shot-2018-10-30-at-11.59.54-am.png)
 
-## Media Player
-
 The [Media Player](https://developer.apple.com/documentation/mediaplayer) framework provides developers with several ways to play media. Add the ability to find and play songs, audio podcasts, audio books, and more from within your app.
 
-## AVFoundation
-
-The [AVFoundation](https://developer.apple.com/documentation/avfoundation) framework combines four major technology areas.
-
-### Cameras and Media Capture
-
-To instead let the user capture media with the system camera UI within your app, see [UIImagePickerController](https://developer.apple.com/documentation/uikit/uiimagepickercontroller).
-
-The main parts of the capture architecture are [sessions](https://developer.apple.com/documentation/avfoundation/cameras_and_media_capture/setting_up_a_capture_session), inputs, and outputs. iOS offers several other ways to [select a camera device](https://developer.apple.com/documentation/avfoundation/cameras_and_media_capture/choosing_a_capture_device).
-
-![](../../.gitbook/assets/image%20%281%29.png)
+The [AVFoundation](https://developer.apple.com/documentation/avfoundation) framework combines four major technology areas that together encompass a wide range of tasks for capturing, processing, synthesizing, controlling, importing and exporting audiovisual media on Apple platforms.
 
 
 
