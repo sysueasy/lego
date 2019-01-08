@@ -2,7 +2,7 @@
 
 Use [Core Data](https://developer.apple.com/documentation/coredata) to manage the **model** layer objects in your application. It provides generalized and automated solutions to common tasks associated with object lifecycle and object graph management, including persistence.
 
-You perform the initial integration of Core Data into your app by either creating the traditional Core Data stack or by initializing a [`NSPersistentContainer`](https://developer.apple.com/documentation/coredata/nspersistentcontainer). 
+You perform the initial integration of Core Data into your app by either creating the traditional Core Data stack or by initializing a [`NSPersistentContainer`](https://developer.apple.com/documentation/coredata/nspersistentcontainer), a container that encapsulates the Core Data stack in your application.
 
 ```swift
 lazy var persistentContainer: NSPersistentContainer = {
@@ -16,11 +16,15 @@ lazy var persistentContainer: NSPersistentContainer = {
 }()
 ```
 
-You use instances of [`NSManagedObject`](https://developer.apple.com/documentation/coredata/nsmanagedobject) as data structures, and you define the relationships between those objects using the data model.
+If you decide not to use an `NSPersistentContainer` object, you need to initialize an instance of `NSManagedObjectModel`, `NSPersistentStoreCoordinator`, and at least one instance of `NSManagedObjectContext`.
 
-A managed object is associated with an entity description \(an instance of `NSEntityDescription`\) and with a managed object context that tracks changes to the object graph. 
+The [`NSManagedObjectModel`](https://developer.apple.com/documentation/coredata/nsmanagedobjectmodel) is a programmatic representation of the managed object model that is created and maintained in the model editor of Xcode \(.xcdatamodeld\). The model contains one or more `NSEntityDescription` objects representing the entities in the schema.
 
-`NSManagedObject` provides support for a range of common types. Sometimes, however, you want to use types that are not supported directly. For example, in a graphics application you might want to define a Rectangle entity that has attributes color and bounds that are an instance of `NSColor` and an `NSRect` struct respectively. For some types you can use a transformable attribute, for others this may require you to create a subclass of `NSManagedObject`.
+If you want Core Data to persist your data model to disk, you will need to inform the [`NSPersistentStoreCoordinator`](https://developer.apple.com/documentation/coredata/nspersistentstorecoordinator) of where you want the file to reside and what format you want to use.
+
+[`NSManagedObjectContext`](https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext) is an object representing a single object space or scratch pad that you use to fetch, create, and save managed objects. Changes to managed objects are held in memory, in the associated context, until that context is saved to one or more persistent stores.
+
+You use instances of [`NSManagedObject`](https://developer.apple.com/documentation/coredata/nsmanagedobject) as data structures, and you define the relationships between those objects using the data model. A managed object is associated with an entity description \(an instance of `NSEntityDescription`\) and with a managed object context that tracks changes to the object graph. If you instantiate a managed object directly, you must call the designated initializer \([`init(entity:insertInto:)`](https://developer.apple.com/documentation/coredata/nsmanagedobject/1506357-init)\).
 
 Managed objects typically represent data held in a persistent store. In some situations a managed object may be a “**fault**”—an object whose property values have not yet been loaded from the external data store. When you access persistent property values, the fault “fires” and the data is retrieved from the store automatically. This can be a comparatively expensive process \(potentially requiring _a round trip to the persistent store_\), and you may wish to avoid unnecessarily **firing a fault**. For example, since `isEqual` and `hash` do not cause a fault to fire, managed objects can typically be placed in collections without firing a fault.
 
