@@ -12,7 +12,8 @@
   * [Functions](the-c-programming-language/functions-and-program-structures.md)
   * [Pointers](the-c-programming-language/pointers-and-arrays.md)
   * [Structures](the-c-programming-language/structures.md)
-* [Programming: C++](programming-c++.md)
+* [Programming: C++](programming-c++/README.md)
+  * [Basics](programming-c++/basics.md)
 * [Apple Inc](ios-development/README.md)
   * [Swift](ios-development/swift-notes.md)
   * [Objective-C](ios-development/j2objc.md)
@@ -78,4 +79,5 @@
   * [1. Introduction](operation-system/1.-introduction.md)
   * [2. Process Management](operation-system/2.-process-management.md)
   * [3. Memory Management](operation-system/4.-memory-management.md)
+* [Computer Graphics](computer-graphics.md)
 
