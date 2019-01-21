@@ -13,3 +13,5 @@ A key part of any graphics program is to have good classes or routines for geome
 
 Modern architecture suggests that keeping memory use down and maintaining coherent memory access are the keys to efficiency. For the foreseeable future, a good heuristic is that programmers should pay more attention to memory access patterns than to operation counts because the speed of memory has not kept pace with the speed of processors.
 
+Much of graphics is just translating **math** directly into code. The cleaner the math, the cleaner the resulting code.
+
