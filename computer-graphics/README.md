@@ -70,7 +70,7 @@ The basic tools of ray generation are the viewpoint \(or view direction, for par
 
 All of our ray-generation methods start from an orthonormal coordinate frame known as the **camera frame**. For an orthographic view 正视图, all the rays will have the direction −w. For a perspective view 透视图, all the rays have the same origin, at the viewpoint; it is the directions that are different for each pixel.
 
-![](.gitbook/assets/screen-shot-2019-01-24-at-9.10.52-pm.png)
+![](../.gitbook/assets/screen-shot-2019-01-24-at-9.10.52-pm.png)
 
 Once we’ve generated a ray $$e+td$$ , we next need to find the first intersection with any object where t &gt; 0. _\(Ray-Object Intersection\)_
 
@@ -78,7 +78,7 @@ Once the visible surface for a pixel is known, the pixel value is computed by ev
 
 Simple shading models are defined in terms of illumination from a point light source 点光源. The important variables in light reflection are the light direction _l_, which is a unit vector pointing toward the light source; the view direction _v_, which is a unit vector pointing toward the eye or camera; the surface normal _n_, which is a unit vector perpendicular to the surface at the point where reflection is taking place; and the characteristics of the surface—color, shininess, or other properties depending on the particular model.
 
-![](.gitbook/assets/screen-shot-2019-01-26-at-10.38.09.png)
+![](../.gitbook/assets/screen-shot-2019-01-26-at-10.38.09.png)
 
 The simplest shading model is based on an observation made by Lambert in the 18th century: the amount of energy from a light source that falls on an area of surface depends on the angle of the surface to the light. This leads to the Lambertian shading model:
 

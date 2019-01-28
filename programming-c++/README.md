@@ -1,4 +1,4 @@
-# Programming: C++
+# C++
 
 ## Getting Started
 
