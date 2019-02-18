@@ -57,7 +57,7 @@ Broadly speaking, image-order rendering is simpler to get working and more flexi
 Ray tracing is an image-order algorithm for making renderings of 3D scenes. A ray tracer works by computing one pixel at a time, and for each pixel the basic task is to find the object that is seen at that pixel’s position in the image. A basic ray tracer therefore has three parts: 
 
 1. Ray generation, which computes the origin and direction of each pixel’s **viewing ray** based on the camera geometry;
-2. Ray intersection, which finds the closest object intersecting the viewing ray; 视线交错的地方有两种可能，被光照或阴影
+2. Ray intersection, which finds the closest object intersecting the viewing ray;
 3. Shading, which computes the pixel color based on the results of ray intersection.
 
 The standard approach of representing a 3D object or **scene** with a 2D drawing or painting is linear **perspective** 线性透视, in which 3D objects are projected onto an image plane in such a way that straight lines in the scene become straight lines in the image. （相对于鱼眼相机等非常规方式）
@@ -66,7 +66,9 @@ The simplest type of projection is **parallel projection** 平行投影, in whic
 
 We can produce natural looking views using **perspective projection** 透视投影/中心投影: we simply project along lines that pass through a single point, the **viewpoint**, rather than along parallel lines.
 
-The basic tools of ray generation are the viewpoint \(or view direction, for parallel views\) and the image plane. In order to generate rays, we first need a mathematical representation for a ray. A ray is really just an origin point and a propagation direction. The 3D parametric line from the eye _e_ to a point _s_ on the image plane \(Figure 4.6\) is given by $$p(t) = e + t(s − e).$$ 
+The basic tools of ray generation are the viewpoint \(or view direction, for parallel views\) and the image plane. In order to generate rays, we first need a mathematical representation for a ray.
+
+A ray is really just an origin point and a propagation direction. The 3D parametric line from the eye _e_ to a point _s_ on the image plane \(Figure 4.6\) is given by $$p(t) = e + t(s − e).$$ 
 
 All of our ray-generation methods start from an orthonormal coordinate frame known as the **camera frame**. For an orthographic view 正视图, all the rays will have the direction −w. For a perspective view 透视图, all the rays have the same origin, at the viewpoint; it is the directions that are different for each pixel.
 
@@ -95,4 +97,26 @@ A very useful property of light is _superposition_—the effect caused by multip
 We now know how to generate a viewing ray for a given pixel, how to find the closest intersection with an object, and how to shade the resulting intersection. These are all the parts required for a program that produces shaded images with hidden surfaces removed.
 
 Once you have a basic ray tracing program, shadows can be added very easily. The rays that determine in or out of shadow are called **shadow rays** to distinguish them from viewing rays.
+
+![](../.gitbook/assets/screen-shot-2019-01-31-at-8.06.38-pm.png)
+
+## Viewing
+
+The **viewing transformation** has the job of mapping 3D locations, represented as \(x, y, z\) coordinates in the canonical coordinate system, to coordinates in the image, expressed in units of pixels. Most graphics systems do this by using a sequence of three transformations:
+
+* A camera transformation or eye transformation, which is a rigid body transformation that places the camera at the origin in a convenient orientation.
+* A projection transformation, which projects points from camera space so that all visible points fall in the range −1 to 1 in x and y.
+* A viewport transformation or windowing transformation, which maps this unit image rectangle to the desired rectangle in pixel coordinates.
+
+![](../.gitbook/assets/screen-shot-2019-02-18-at-3.09.37-pm.png)
+
+The canonical view volume（规则观察体） is also “**clip space**” or “normalized device coordinates".
+
+We assume that the geometry we want to view is in the canonical view volume, and we wish to view it with an orthographic camera looking in the −z direction. Our first step in generalizing the view will keep the view direction and orientation fixed looking along −z with +y up.
+
+![](../.gitbook/assets/screen-shot-2019-02-18-at-3.55.57-pm.png)
+
+![](../.gitbook/assets/screen-shot-2019-02-18-at-4.05.04-pm.png)
+
+
 
