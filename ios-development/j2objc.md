@@ -1,8 +1,14 @@
 # Objective-C
 
+## NSCopying
+
+`NSZone`: ❗️Zones are ignored on iOS and 64-bit runtime in macOS. You should not use zones in current development.
+
+`NSCopying` declares one method, `copyWithZone:`, but copying is commonly invoked with the convenience method `copy`. The `copy` method is defined for all objects inheriting from `NSObject` and simply invokes `copyWithZone:` with the default zone.
+
 ## NSObject
 
-​[NSObject](https://developer.apple.com/documentation/objectivec/nsobject?language=objc) is the root class of most Objective-C class hierarchies, from which subclasses inherit a basic interface to the runtime system and the ability to behave as Objective-C objects.
+​[`NSObject`](https://developer.apple.com/documentation/objectivec/nsobject?language=objc) is the root class of most Objective-C class hierarchies, from which subclasses inherit a basic interface to the runtime system and the ability to behave as Objective-C objects.
 
 An object that conforms to [NSObject protocol](https://developer.apple.com/documentation/objectivec/1418956-nsobject) can be considered a first-class object. Such an object can be asked about its: 
 
@@ -10,11 +16,11 @@ An object that conforms to [NSObject protocol](https://developer.apple.com/docum
 * Conformance to protocols;
 * Ability to respond to a particular message. 
 
-The Cocoa root class NSObject adopts this protocol. This protocol is imported into Swift with the name NSObjectProtocol.
-
-`-(BOOL)isKindOfClass:(Class)aClass;` Returns a Boolean value that indicates whether the receiver is an **instance** **of** **given class** or an instance of any class that **inherits** from that class.
+The Cocoa root class `NSObject` adopts this protocol. This protocol is imported into Swift with the name `NSObjectProtocol`.
 
 `-(BOOL)isMemberOfClass:(Class)aClass;` Returns a Boolean value that indicates whether the receiver is an **instance** **of** **a given class**.
+
+`-(BOOL)isKindOfClass:(Class)aClass;` Returns a Boolean value that indicates whether the receiver is an **instance** **of** **given class** or an instance of any class that **inherits** from that class.
 
 > objc.h
 
@@ -58,6 +64,12 @@ struct objc_class {
 The `super_class` pointer creates the hierarchy. The `isa` pointer describes the type of an instance.
 
 ![](../.gitbook/assets/screen-shot-2018-08-05-at-15.33.19.png)
+
+`+(instancetype)alloc;` Returns a new instance of the receiving class.
+
+`-(instancetype)init` Implemented by subclasses to initialize a new object \(the receiver\) immediately after memory for it has been allocated.
+
+`+(instancetype)new`; Allocates a new instance of the receiving class, sends it an init message, and returns the initialized object.
 
 ## J2ObjC
 

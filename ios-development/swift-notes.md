@@ -2,7 +2,7 @@
 
 ## String
 
-Swift [`String`](https://developer.apple.com/documentation/swift/string) is a [Unicode](https://www.unicode.org/standard/standard.html) string value that is a collection of characters.
+Swift structure[`String`](https://developer.apple.com/documentation/swift/string) is a [Unicode](https://www.unicode.org/standard/standard.html) string value that is a collection of characters.
 
 The `String` type bridges with the Objective-C class `NSString` and offers interoperability with C functions that works with strings.
 
@@ -14,11 +14,11 @@ otherGreeting += " Have a nice time!" // "Welcome! Have a nice time!"
 print(greeting) // "Welcome!"
 ```
 
-Although strings in Swift have value semantics, strings use a **copy-on-write** strategy to store their data in a buffer. This buffer can then be shared by different copies of a string. A string’s data is only copied lazily, upon mutation, when more than one string instance is using the same buffer. Therefore, the first in any sequence of mutating operations causes elements to be copied into unique, contiguous storage which may cost O\(n\) time and space, where _n_ is the length of the string’s encoded representation.
+Although strings in Swift have value semantics, strings use a **copy-on-write** strategy to store their data in a buffer. This buffer can then be shared by different copies of a string. A string’s data is only copied _lazily_, upon mutation, when more than one string instance is using the same buffer.
 
 ### Substring
 
-[`Substring`](https://developer.apple.com/documentation/swift/substring) is a type that represents substrings of a string while **sharing the original string’s storage**. Substrings present the same interface as strings.
+Swift structure[`Substring`](https://developer.apple.com/documentation/swift/substring) is a type that represents substrings of a string while **sharing the original string’s storage**. Substrings present the same interface as strings.
 
 ```swift
 let name = "Marie Curie"
@@ -85,7 +85,7 @@ print(cLength) // Prints "14"
 
 When you need to know the length of a string, you must first consider what you’ll use the length for. Are you measuring the number of characters that will be **displayed** on the screen, or are you measuring the amount of **storage** needed for the string in a particular encoding?
 
-For example, an emoji flag character is constructed from **a pair of** Unicode scalar values:
+For example, an emoji flag character is constructed from a pair of Unicode scalar values:
 
 ```swift
 let flag = "🇨🇳"
@@ -96,6 +96,20 @@ print(flag.utf8.count) // Prints "8"
 ```
 
 To check whether a string is empty, use its `isEmpty` property instead of comparing the length of one of the **view**s to `0`.
+
+## Hash
+
+To use your own custom type in a set or as the key type of a dictionary, add [`Hashable`](https://developer.apple.com/documentation/swift/hashable) conformance to your type. The `Hashable` protocol _inherits_ from the [`Equatable`](https://developer.apple.com/documentation/swift/equatable) protocol.
+
+Hashing a value means feeding its essential components into a hash function, represented by the [`Hasher`](https://developer.apple.com/documentation/swift/hasher) type. `Hasher` can be used to map an arbitrary sequence of bytes to an integer hash value. Essential components are those that contribute to the type’s implementation of `Equatable`. Two instances that are equal must feed the same values to `Hasher` in `hash(into:)`, in the same order.
+
+## Collections
+
+Every array reserves a specific amount of memory to hold its contents. When you add elements to an array and that array begins to exceed its reserved capacity, the array allocates a larger region of memory and copies its elements into the new storage. Append operations that trigger reallocation have a performance cost, but they occur less and less often as the array grows larger.
+
+Arrays, like all variable-size collections in the standard library, use copy-on-write optimization. This means that if an array is sharing storage with other copies, the first mutating operation on that array incurs the cost of copying the array. An array that is the sole owner of its storage can perform mutating operations in place.
+
+A dictionary is a type of hash table.
 
 ## Control Flow 
 
@@ -150,6 +164,22 @@ enum Barcode {
     case upc(Int, Int, Int, Int)
     case qrCode(String)
 }
+```
+
+### Optionals
+
+You use the Optional type whenever you use optional values, even if you never type the word Optional.
+
+```swift
+let shortForm: Int? = Int("42")
+let longForm: Optional<Int> = Int("42")
+```
+
+The Optional type is an enumeration with two cases. Optional.none is equivalent to the nil literal.
+
+```swift
+let number: Int? = Optional.some(42)
+let noNumber: Int? = Optional.none
 ```
 
 ## Structures and Classes
