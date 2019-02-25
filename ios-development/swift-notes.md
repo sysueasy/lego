@@ -111,6 +111,10 @@ Arrays, like all variable-size collections in the standard library, use copy-on-
 
 A dictionary is a type of hash table.
 
+[`map(_:)`](https://developer.apple.com/documentation/swift/array/3017522-map) Returns an array containing the results of mapping the given closure over the sequence’s elements.
+
+[`flatMap(_:)`](https://developer.apple.com/documentation/swift/array/3126947-flatmap) Returns an array containing the concatenated results of calling the given transformation with each element of this sequence.
+
 ## Control Flow 
 
 A **switch** statement provides an alternative to the if statement for responding to multiple potential states.
@@ -120,6 +124,8 @@ In contrast with switch statements in C and Objective-C, switch statements in Sw
 {% hint style="warning" %}
 The fallthrough keyword does not check the case conditions for the switch case that it causes execution to fall into. The fallthrough keyword simply causes code execution to move directly to the statements inside the next case \(or default case\) block, as in C’s standard switch statement behavior.
 {% endhint %}
+
+A **defer** statement is used for executing code just before transferring program control outside of the scope that the defer statement appears in.
 
 ## Value and Reference Type
 
