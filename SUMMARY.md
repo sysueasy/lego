@@ -6,7 +6,6 @@
   * [Web](general/web.md)
   * [Git](general/git.md)
   * [NFC](general/nfc.md)
-  * [Elasticsearch](general/elasticsearch.md)
 * [The C Programming Language](the-c-programming-language/README.md)
   * [Basic](the-c-programming-language/2.-type-operators-expressions.md)
   * [Functions](the-c-programming-language/functions-and-program-structures.md)
