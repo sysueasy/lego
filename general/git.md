@@ -182,7 +182,7 @@ An easier way to think about `reset` and `checkout` is through the mental frame 
 2. Make the Index look like HEAD \(stop here if --mixed, default\)
 3. Make the Working Directory look like the Index \(end here if --hard\) ❗
 
-![](../.gitbook/assets/image%20%285%29.png)
+![](../.gitbook/assets/image%20%287%29.png)
 
 If you specify a **path**, reset will skip step 1, and limit the remainder of its actions to a specific file or set of files.
 
