@@ -198,9 +198,9 @@ To add a new submodule you use the git submodule add command with the absolute o
 $ git submodule add https://github.com/chaconinc/DbConnector
 ```
 
-You should notice the new .gitmodules file. This is a configuration file that stores the mapping between the project’s URL and the local subdirectory you’ve pulled it into.
+You should notice the new `.gitmodules` file. This is a configuration file that stores the mapping between the project’s URL and the local subdirectory you’ve pulled it into.
 
-Since the URL in the .gitmodules file is what other people will first try to clone/fetch from, make sure to use a URL that they can access if possible. You can overwrite this value locally with git config submodule.DbConnector.url PRIVATE\_URL for your own use. When applicable, a relative URL can be helpful.
+Since the URL in the `.gitmodules` file is what other people will first try to clone/fetch from, make sure to use a URL that they can access if possible. You can overwrite this value locally with git config for your own use. When applicable, a relative URL can be helpful.
 
 ```bash
 git config --file=.gitmodules submodule.yourSubmodule.url ssh://username@gerrit.com/path/to/submodule
