@@ -83,21 +83,21 @@ View controllers load their views **lazily**. Accessing the view property for th
 * Specify the views for a view controller using a [Nib file](https://developer.apple.com/library/archive/documentation/General/Conceptual/DevPedia-CocoaCore/NibFile.html#//apple_ref/doc/uid/TP40008195-CH34).
 * Specify the views for a view controller using the [`loadView()`](https://developer.apple.com/documentation/uikit/uiviewcontroller/1621454-loadview) method.
 
-When using a storyboard to define your view controller and its associated views, you never initialize your view controller class directly. Instead, view controllers are instantiated by the storyboard either automatically when a segue is triggered or programmatically when your app calls the `instantiateViewController(withIdentifier:)` method. When instantiating a view controller from a storyboard, iOS initializes the new view controller by calling its `init(coder:)` method and sets the nibName property to a nib file stored inside the storyboard.
+When using a storyboard to define your view controller and its associated views, you never initialize your view controller class directly. Instead, view controllers are instantiated by the storyboard either automatically when a segue is triggered or programmatically when your app calls the `instantiateViewController(withIdentifier:)` method. When instantiating a view controller from a storyboard, iOS initializes the new view controller by calling its `init(coder:)` method and sets the nibName property to a nib file stored inside the storyboard.
 
 ### Rotate
 
 As of iOS 8, **all rotation-related methods are deprecated**. Instead, [rotations](https://developer.apple.com/documentation/uikit/uiviewcontroller) are treated as a change in the size of the view controller’s view and are therefore reported using the `viewWillTransition(to:with:)` method. When the interface orientation changes, UIKit calls this method on the window’s root view controller. That view controller then notifies its child view controllers, propagating the message throughout the view controller hierarchy. The `viewWillLayoutSubviews()` method is also called after the view is resized and positioned by its parent.
 
-The system intersects the view controller's supported orientations with the **app's** supported orientations \(as determined by the Info.plist file or the app delegate's `application(_:supportedInterfaceOrientationsFor:)` method\) and the **device's** supported orientations to determine whether to rotate. For example, the `.portraitUpsideDown` orientation is not supported on iPhone X.
+The system intersects the view controller's supported orientations with the **app's** supported orientations \(as determined by the Info.plist file or the app delegate's `application(_:supportedInterfaceOrientationsFor:)` method\) and the **device's** supported orientations to determine whether to rotate. For example, the `.portraitUpsideDown` orientation is not supported on iPhone X.
 
-When the user changes the device orientation, the system calls `supportedInterfaceOrientations` on the **root** view controller or the **topmost presented** view controller that fills the window. If the view controller supports the new orientation, the window and view controller are rotated to the new orientation. This method is only called if the view controller's `shouldAutorotate` method returns true.
+When the user changes the device orientation, the system calls `supportedInterfaceOrientations` on the **root** view controller or the **topmost presented** view controller that fills the window. If the view controller supports the new orientation, the window and view controller are rotated to the new orientation. This method is only called if the view controller's `shouldAutorotate` method returns true.
 
 You can override the `preferredInterfaceOrientationForPresentation` for a view controller that is intended to be presented full screen in a specific orientation.
 
 ### Container View Controller
 
-A custom `UIViewController` subclass can also act as a **container** view controller. A container view controller manages the presentation of content of other view controllers it owns, also known as its **child** view controllers. Your container view controller must associate a child view controller with itself before adding the child's root view to the view hierarchy. This allows iOS to properly route events to child view controllers and the views those controllers manage.
+A custom `UIViewController` subclass can also act as a **container** view controller. A container view controller manages the presentation of content of other view controllers it owns, also known as its **child** view controllers. Your container view controller must associate a child view controller with itself before adding the child's root view to the view hierarchy. This allows iOS to properly route events to child view controllers and the views those controllers manage.
 
 ### **State Preservation and Restoration**
 
@@ -109,7 +109,7 @@ During subsequent launches, UIKit asks your app for help in recreating the view 
 
 By default, when a subview’s visible area extends outside of the bounds of its superview, no clipping of the subview's content occurs. Use the `clipsToBounds` property to change that behavior.
 
-The geometry of each view is defined by its **frame** and **bounds** properties. The frame property defines the origin and dimensions of the view in the **coordinate** system of its superview. The bounds property defines the internal dimensions of the view as it sees them and is used almost exclusively in custom drawing code.
+The geometry of each view is defined by its **frame** and **bounds** properties. The frame property defines the origin and dimensions of the view in the coordinate system of its superview. The bounds property defines the internal dimensions of the view as it sees them and is used almost exclusively in custom drawing code.
 
 By default, the property `translatesAutoresizingMaskIntoConstraints` is set to true for any view you **programmatically** create. If you add views in Interface Builder, the system automatically sets this property to false. If this property’s value is true, the system creates a set of constraints that duplicate the behavior specified by the view’s autoresizing mask. This also lets you modify the view’s size and location using the view’s frame, bounds, or center properties, allowing you to create a static, frame-based layout within Auto Layout.
 
@@ -171,9 +171,7 @@ To handle a specific type of event, a responder must **override** the correspond
 
 [Gesture recognizers](https://developer.apple.com/documentation/uikit/uigesturerecognizer) receive touch and press events before their view does.
 
-UIKit compares the touch location to the bounds of view objects in the view hierarchy. The [`hitTest(_:with:)`](https://developer.apple.com/documentation/uikit/uiview/1622469-hittest) method of `UIView` traverses the view hierarchy, looking for the deepest subview that contains the specified touch, which becomes the first responder for the touch event. If a touch location is outside of a view’s bounds, the `hitTest(_:with:)` method ignores that view and all of its subviews.
-
-This method traverses the view hierarchy by calling the [`point(inside:with:)`](https://developer.apple.com/documentation/uikit/uiview/1622533-point) method of each subview to determine which subview should receive a touch event.
+UIKit compares the touch location to the bounds of view objects in the view hierarchy. The [`hitTest(_:with:)`](https://developer.apple.com/documentation/uikit/uiview/1622469-hittest) method of `UIView` traverses the view hierarchy, looking for the deepest subview that contains the specified touch, which becomes the first responder for the touch event. If a touch location is outside of a view’s bounds, the `hitTest(_:with:)` method ignores that view and all of its subviews. This method traverses the view hierarchy by calling the [`point(inside:with:)`](https://developer.apple.com/documentation/uikit/uiview/1622533-point) method of each subview to determine which subview should receive a touch event.
 
 ## UIScrollView
 
