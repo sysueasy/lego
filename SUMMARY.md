@@ -53,6 +53,8 @@
   * [4. Graphs](data-structure-and-algorithms/4.-graphs/README.md)
     * [4.1 Undirected Graphs](data-structure-and-algorithms/4.-graphs/4.1-undirected-graphs.md)
     * [4.2 Directed Graph](data-structure-and-algorithms/4.-graphs/4.2-directed-graph.md)
+    * [4.3 Minimum Spanning Tree](data-structure-and-algorithms/4.-graphs/4.3-minimum-spanning-tree.md)
+    * [4.4 Shortest Paths](data-structure-and-algorithms/4.-graphs/4.4-shortest-paths.md)
   * [5. String](data-structure-and-algorithms/5.-string/README.md)
     * [5.3 Substring Search](data-structure-and-algorithms/5.-string/5.3-substring-search.md)
 * [Database Systems](database/README.md)
