@@ -105,46 +105,6 @@ The property [`restorationIdentifier`](https://developer.apple.com/documentation
 
 During subsequent launches, UIKit asks your app for help in recreating the view controllers that were installed the last time your app ran. When it asks for a specific view controller, UIKit provides your app with this restoration identifier and the restoration identifiers of any parent view controllers in the view controller hierarchy. Your app must use this information to create or locate the appropriate view controller object.
 
-## UIView
-
-By default, when a subview’s visible area extends outside of the bounds of its superview, no clipping of the subview's content occurs. Use the `clipsToBounds` property to change that behavior.
-
-The geometry of each view is defined by its **frame** and **bounds** properties. The frame property defines the origin and dimensions of the view in the coordinate system of its superview. The bounds property defines the internal dimensions of the view as it sees them and is used almost exclusively in custom drawing code.
-
-By default, the property `translatesAutoresizingMaskIntoConstraints` is set to true for any view you **programmatically** create. If you add views in Interface Builder, the system automatically sets this property to false. If this property’s value is true, the system creates a set of constraints that duplicate the behavior specified by the view’s autoresizing mask. This also lets you modify the view’s size and location using the view’s frame, bounds, or center properties, allowing you to create a static, frame-based layout within Auto Layout.
-
-If you want a given view to size itself to its parent view, you should add it to the parent view before calling `sizeToFit()`.
-
-### The Render Loop
-
-The [Render Loop](https://developer.apple.com/videos/play/wwdc2018/220/) is the process that runs potentially at 120 times every second. That makes sure that all the content is ready to go for each frame. It consists of three phases -- Update Constraints, Layout, and Display.
-
-| Update Constraints | Layout | Display |
-| :--- | :--- | :--- |
-| updateConstraints\(\) | layoutSubViews\(\) | draw\(\_:\) |
-| setNeedsUpdateConstraints\(\) | setNeedsLayout\(\) | setNeedsDisplay\(\) |
-| updateConstraintsIfNeeded\(\) | layoutIfNeeded\(\) | - |
-
-First every view that needs it will receive `updateConstraints()`. And that runs from the leaf most views up to the view hierarchy towards the window. Next, every view receives `layoutSubViews()`. This runs the opposite direction starting from the window going down towards the leaves. Last, every view gets `draw(_:)` if it needs it also from the window towards the leaves.
-
-![](../../.gitbook/assets/screen-shot-2018-09-15-at-20.38.11.png)
-
-### LayoutSubviews
-
-You should not call `layoutSubviews()` directly. If you want to force a layout update, call the ****`setNeedsLayout()` method instead to do so. This method makes a note of the request and returns immediately.
-
-Because this method does not force an immediate update, but instead waits for the next update cycle, you can use it to invalidate the layout of multiple views before any of those views are updated. This behavior allows you to consolidate all of your layout updates to one update cycle, which is usually better for performance.
-
-If you want to update the layout of your views immediately, call the `layoutIfNeeded()` method. If no layout updates are pending, this method exits without modifying the layout or calling any layout-related callbacks.
-
-### Subclass
-
-Although there are many good reasons to subclass `UIView`, it is recommended that you do so only when the basic `UIView` class or the standard system views do not provide the capabilities that you need. Subclassing requires more work on your part to implement the view and to tune its performance.
-
-Image-based backgrounds - consider using a `UIImageView` object with gesture recognizers instead of subclassing and drawing the image yourself. Alternatively, you can also use a generic `UIView` object and assign your image as the content of the view’s `CALayer` object.
-
-Rather than draw your content using a `draw(_:)` method, embed image and label subviews with the content you want to present.
-
 ## Touches, Presses, and Gestures
 
 Apps receive and handle events using _responder objects_. A responder object is any instance of the `UIResponder` class, and common subclasses include `UIView`, `UIViewController`, `UIWindow`, and `UIApplication`. Responders receive the raw event data and must either handle the event or forward it to another responder object.
