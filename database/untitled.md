@@ -1,8 +1,14 @@
 # 3. Relational Model and Normalization
 
-The premise of Chapters 3 and 4 is that you have received one or more tables of data from some source that are to be stored in a new database.
+Designing database from existing data.
 
 A **relation** is a special case of a table. All relations are tables, but not all tables are relations.
+
+3 sets of terms are used to describe relation structure:
+
+* \(relation, attribute, tuple\)
+* \(table, column, row\)
+* \(file, field, record\)\(legacy\)
 
 Characteristics of Relations:
 
@@ -17,12 +23,6 @@ Characteristics of Relations:
 {% hint style="info" %}
 Some SQL statements do produce tables with duplicate rows. Such row duplication occurs only as a result of SQL manipulation. Tables that you design to be stored in the database should never contain duplicate rows.
 {% endhint %}
-
-3 sets of terms are used to describe relation structure:
-
-* \(relation, attribute, tuple\)
-* \(table, column, row\)
-* \(file, field, record\)\(legacy\)
 
 ## Functional Dependency
 
@@ -48,7 +48,7 @@ When designing a database, one of the candidate keys is selected to be the **pri
 
 A **surrogate key** is an artificial column that is added to a table to serve as the primary key.
 
-A **foreign key** is a column or composite of columns that is the primary key of a table otherthan the one in which it appears.
+A **foreign key** is a column or composite of columns that is the primary key of a table other than the one in which it appears.
 
 We have defined three constraints so far:
 
@@ -90,7 +90,7 @@ Instead of progressively testing a relation for 1NF, 2NF, 3NF, and BCNF, which r
 
 ### 4NF
 
-A **multivalued dependency** occurs when a determinant is matched with a particular set of values: If each value of A will be paired with more than one values of B then we can say that B is multivalue dependent upon A and it is written as A-&gt;-&gt;B.
+A **multivalued dependency** occurs when a determinant is matched with a particular set of values: If each value of A will be paired with more than one values of B then we can say that B is multi-value dependent upon A and it is written as A-&gt;-&gt;B.
 
 When you put multivalued dependencies into a table of their own, they disappear. The result is just a table with _two columns_; the primary key also the only candidate key is the composite of those two columns. When multivalued dependencies have been isolated in this way, the table is said to be in **4NF**.
 
@@ -111,7 +111,7 @@ On the negative side,
 
 ### Design a updatable database
 
-Choosing Not to Use BCNF: Although in most cases the tables in an updatable database should be placed in BCNF, in some situations BCNF is just _too pure_. If the data are never modified \(e.g ZIP Code for Cities\) and if data inconsistencies will be easily corrected viathe normal operation of business activity, then you may choose not to place the table into BCNF.
+Choosing Not to Use BCNF: Although in most cases the tables in an updatable database should be placed in BCNF, in some situations BCNF is just _too pure_. If the data are never modified \(e.g ZIP Code for Cities\) and if data inconsistencies will be easily corrected via the normal operation of business activity, then you may choose not to place the table into BCNF.
 
 Unlike functional dependencies, the anomalies from multivalued dependencies are so **serious** that multivalued dependencies should always be eliminated. Unlike BCNF, there is no gray area.
 
